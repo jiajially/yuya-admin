@@ -1,0 +1,5 @@
+Last login: Wed Jun 21 17:20:53 2017 from 192.168.31.173
+echo 888$PATH777
+GLius-MacBook-Pro:~ liugang$ echo 888$PATH777
+888
+GLius-MacBook-Pro:~ liugang$ 
