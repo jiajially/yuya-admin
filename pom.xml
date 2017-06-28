@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.liug</groupId>
-    <artifactId>black-eye-jsp</artifactId>
+    <artifactId>yuya-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
