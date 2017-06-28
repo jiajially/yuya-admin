@@ -9,6 +9,7 @@
         <module name="black-eye-jsp" />
         <module name="SpringBoot-jsp" />
         <module name="testJsp" />
+        <module name="yuya-admin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
