@@ -183,7 +183,7 @@
     <select id="selectAll" resultType="com.liug.black.model.entity.SshScript">
         SELECT *
         FROM ssh_script_host
-        WHERE status != 7
+        WHERE script_status != 7
         <if test="name != null and name.length() != 0">
             AND name LIKE concat('%', #{name},'%')
         </if>
@@ -203,6 +203,6 @@
     <select id="selectCounts" resultType="integer">
         SELECT count(*)
         FROM ssh_script_host
-        WHERE status != 7
+        WHERE script_status != 7
     </select>
 </mapper>
