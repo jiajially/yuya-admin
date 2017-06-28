@@ -1,444 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="67b48a47-6b6b-4bd7-8ddf-aa8c8f87a33b" name="Default" comment="删除package">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT.war" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT.war.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/application.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/banner.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/BlackEyeJspApplication.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/ssh/Commond.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/ssh/SelectContnet.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/ssh/Shell$MyUserInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/ssh/Shell.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/ssh/SshResult.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/ssh/test.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/util/DataStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/util/FileUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/util/PlatformCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/util/ResponseCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/util/Result.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/util/StringUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/common/util/SystemConstant.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SshHostMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SshScriptMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SshTaskMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysDataGroupMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysDataItemMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysIpForbiddenMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysLogMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysLoginStatusMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysOrganizationMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysPermissionGroupMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysPermissionMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysRoleMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysRoleOrganizationMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysRolePermissionMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysUserMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysUserPermissionMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/dao/SysUserRoleOrganizationMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/LoginInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/PageInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/SysDataItemDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/SysOrganizationTree.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/SysPermissionDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/SysRoleDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/SysRoleOrganizationTree.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/SysUserDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/dto/UserRoleOriganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SshHost.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SshScript.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SshTask.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysDataGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysDataItem.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysIpForbidden.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysLog.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysLoginStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysOrganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysPermission.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysPermissionGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysRole.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysRoleOrganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysRolePermission.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysUserPermission.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/model/entity/SysUserRoleOrganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/scheduler/Config.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/black/scheduler/Job.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/BaseController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/ErrorController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/HostController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/IndexController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/JobController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/OauthController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/OrganizationController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/PermissionController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/RoleController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/SshController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/SystemController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/controller/UserController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SshHostService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SshScriptService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SshTaskService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SysOrganizationService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SysPermissionService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SysRoleOrganizationService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SysRoleService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SysUserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/SystemService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SshHostServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SshScriptServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SshTaskServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SysOrganizationServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SysPermissionServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SysRoleOrganizationServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SysRoleServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SysUserServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/SystemServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/service/impl/UserServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/config/CorsConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/error/ErrorInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/exception/ForbiddenIpException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/log/LogAOP.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/geetest/GeetestConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/geetest/GeetestLib.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/ip/ForbiddenIpAOP.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/shiro/RedisCache.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/shiro/RedisCacheManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/shiro/RedisSessionDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/shiro/ShiroAuthenticationFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/shiro/ShiroAuthorizationFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/security/shiro/ShiroRealm.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/com/liug/white/system/swagger/SwaggerConfiguration.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/dev_log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SshHost.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SshScript.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SshTask.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysDataGroup.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysDataItem.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysIpForbidden.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysLog.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysLoginStatus.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysOrganization.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysPermission.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysPermissionGroup.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysRole.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysRoleOrganization.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysRolePermission.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysUser.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysUserPermission.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mapper/SysUserRoleOrganization.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/classes/mybatis/mybatis.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/login.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/ssh/host.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/ssh/script.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/ssh/task.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/404.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/500.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/data.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/ip.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/job.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/log.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/online.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/organization.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/permission.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/role.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/unAuthorization.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/jsp/system/user.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/aspectjrt-1.7.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/aspectjweaver-1.7.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/classmate-1.3.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/commons-beanutils-1.9.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/commons-codec-1.10.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/commons-collections-3.2.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/commons-io-2.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/commons-pool2-2.4.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/druid-1.0.26.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/ecj-4.5.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/ehcache-3.3.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/gson-2.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/guava-18.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-validator-5.2.4.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/httpclient-4.5.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/httpcore-4.4.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jackson-annotations-2.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jackson-core-2.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jackson-databind-2.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jboss-logging-3.3.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jcl-over-slf4j-1.7.21.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jedis-2.9.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/joda-time-2.9.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jsch-0.1.53.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jsqlparser-0.9.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/jul-to-slf4j-1.7.21.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/log4j-over-slf4j-1.7.21.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/logback-classic-1.1.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/logback-core-1.1.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/mapstruct-1.0.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/mybatis-3.4.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/mybatis-spring-1.3.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/mybatis-spring-boot-autoconfigure-1.2.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/mybatis-spring-boot-starter-1.2.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/mysql-connector-java-5.1.37.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/pagehelper-4.1.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/shiro-core-1.3.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/shiro-spring-1.3.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/shiro-web-1.3.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/slf4j-api-1.7.21.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/snakeyaml-1.17.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-aop-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-beans-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-boot-1.4.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-boot-autoconfigure-1.4.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-boot-starter-1.4.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-boot-starter-jdbc-1.4.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-boot-starter-logging-1.4.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-boot-starter-redis-1.4.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-boot-starter-web-1.4.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-context-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-context-support-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-core-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-data-commons-1.12.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-data-keyvalue-1.1.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-data-redis-1.7.4.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-expression-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-jdbc-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-oxm-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-plugin-core-1.2.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-plugin-metadata-1.2.0.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-tx-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-web-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/spring-webmvc-4.3.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-core-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-petstore-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-schema-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-spi-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-spring-web-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-swagger-common-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-swagger-ui-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/springfox-swagger2-2.6.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/swagger-annotations-1.5.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/swagger-models-1.5.10.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/tomcat-embed-core-8.5.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/tomcat-embed-el-8.5.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/tomcat-embed-jasper-8.5.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/tomcat-jdbc-8.5.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/tomcat-juli-8.5.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/WEB-INF/lib/validation-api-1.1.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/easyui.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icon.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/back.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/blank.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/cancel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/clear.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/cut.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/edit_add.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/edit_remove.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/filesave.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/filter.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/help.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/large_chart.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/large_clipart.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/large_picture.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/large_shapes.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/large_smartart.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/lock.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/man.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/mini_add.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/mini_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/mini_refresh.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/more.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/no.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/ok.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/pencil.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/print.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/redo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/reload.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/search.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/sum.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/tip.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/icons/undo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/accordion_arrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/blank.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/calendar_arrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/combo_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/datagrid_icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/datebox_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/layout_arrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/linkbutton_bg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/menu_arrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/messager_icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/pagination_icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/panel_tools.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/passwordbox_close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/passwordbox_open.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/searchbox_button.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/slider_handle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/spinner_arrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/tabs_icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/tree_icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/images/validatebox_warning.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/system/index.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/css/system/login.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/image/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/easyui/datagrid-groupview.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/easyui/easyui-lang-zh_CN.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/easyui/jquery.easyui.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/easyui/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/ssh/host.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/ssh/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/ssh/task.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/common.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/data.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/http_static.geetest.com_static_tools_gt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/ip.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/job.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/log.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/login.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/online.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/organization.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/permission.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/role.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/black-eye-jsp-0.0.1-SNAPSHOT/static/js/system/user.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/application.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/banner.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/BlackEyeJspApplication.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/ssh/Commond.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/ssh/SelectContnet.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/ssh/Shell$MyUserInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/ssh/Shell.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/ssh/SshResult.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/ssh/test.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/util/DataStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/util/FileUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/util/PlatformCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/util/ResponseCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/util/Result.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/util/StringUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/common/util/SystemConstant.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SshHostMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SshScriptMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SshTaskMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysDataGroupMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysDataItemMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysIpForbiddenMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysLogMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysLoginStatusMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysOrganizationMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysPermissionGroupMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysPermissionMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysRoleMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysRoleOrganizationMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysRolePermissionMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysUserMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysUserPermissionMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/dao/SysUserRoleOrganizationMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/LoginInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/PageInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/SysDataItemDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/SysOrganizationTree.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/SysPermissionDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/SysRoleDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/SysRoleOrganizationTree.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/SysUserDto.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/dto/UserRoleOriganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SshHost.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SshScript.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SshTask.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysDataGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysDataItem.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysIpForbidden.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysLog.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysLoginStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysOrganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysPermission.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysPermissionGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysRole.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysRoleOrganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysRolePermission.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysUserPermission.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/model/entity/SysUserRoleOrganization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/scheduler/Config.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/black/scheduler/Job.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/BaseController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/ErrorController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/HostController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/IndexController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/JobController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/OauthController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/OrganizationController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/PermissionController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/RoleController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/SshController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/SystemController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/controller/UserController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SshHostService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SshScriptService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SshTaskService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SysOrganizationService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SysPermissionService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SysRoleOrganizationService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SysRoleService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SysUserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/SystemService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SshHostServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SshScriptServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SshTaskServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SysOrganizationServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SysPermissionServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SysRoleOrganizationServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SysRoleServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SysUserServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/SystemServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/service/impl/UserServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/config/CorsConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/error/ErrorInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/exception/ForbiddenIpException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/log/LogAOP.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/geetest/GeetestConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/geetest/GeetestLib.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/ip/ForbiddenIpAOP.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/shiro/RedisCache.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/shiro/RedisCacheManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/shiro/RedisSessionDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/shiro/ShiroAuthenticationFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/shiro/ShiroAuthorizationFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/security/shiro/ShiroRealm.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/liug/white/system/swagger/SwaggerConfiguration.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/dev_log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SshHost.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SshScript.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SshTask.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysDataGroup.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysDataItem.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysIpForbidden.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysLog.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysLoginStatus.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysOrganization.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysPermission.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysPermissionGroup.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysRole.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysRoleOrganization.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysRolePermission.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysUser.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysUserPermission.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/SysUserRoleOrganization.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mybatis/mybatis.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/com/liug/DemoApplicationTests.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/com/liug/JobTest.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="67b48a47-6b6b-4bd7-8ddf-aa8c8f87a33b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -452,11 +17,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
               <caret line="6" column="26" lean-forward="false" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -479,6 +54,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
       </list>
     </option>
   </component>
@@ -587,6 +163,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="yuya-admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="yuya-admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1000,7 +598,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2267000" />
+    <option name="totallyTimeSpent" value="2295000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="38" y="23" width="2522" height="1057" extended-state="0" />
@@ -1082,6 +680,44 @@
         <state relative-caret-position="270">
           <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="26" lean-forward="false" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/liug/JobTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="43" lean-forward="false" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/liug/JobTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
         </state>
       </provider>
     </entry>
