@@ -6,16 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="black-eye-jsp" />
-        <module name="SpringBoot-jsp" />
-        <module name="testJsp" />
         <module name="yuya-admin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="black-eye-jsp" target="1.8" />
-      <module name="SpringBoot-jsp" target="1.8" />
-      <module name="testJsp" target="1.8" />
       <module name="yuya-admin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
