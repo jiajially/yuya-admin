@@ -227,7 +227,7 @@
     <select id="selectSshTask" resultType="com.liug.black.model.entity.SshScript">
         SELECT *
         FROM ssh_script_task
-        WHERE status = 1
+        WHERE status = 1 and script_status!=7
         <if test="sort!=''">
             ORDER BY #{sort}
         </if>
@@ -239,7 +239,7 @@
     <select id="selectSshTaskCounts" resultType="integer">
         SELECT count(*)
         FROM ssh_script_task
-        WHERE status = 1
+        WHERE status = 1 and script_status!=7
     </select>
     <select id="selectCounts" resultType="integer">
         SELECT count(*)
