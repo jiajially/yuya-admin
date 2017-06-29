@@ -1,5 +1,0 @@
-Last login: Mon Jun 19 13:14:22 2017
-echo $PATH
-GLius-MacBook-Pro:~ liugang$ echo $PATH
-/Users/liugang/Desktop/alogic-ketty/lib:/Users/liugang/Desktop/alogic-ketty/bin:/Users/liugang/Documents/protobuf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin
-GLius-MacBook-Pro:~ liugang$ 

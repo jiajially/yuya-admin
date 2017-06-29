@@ -1,5 +1,0 @@
-Last login: Wed Jun 21 17:23:30 2017 from 192.168.31.173
-echo 888+$PATH+777
-GLius-MacBook-Pro:~ liugang$ echo 888+$PATH+777
-888+/Users/liugang/Desktop/alogic-ketty/lib:/Users/liugang/Desktop/alogic-ketty/bin:/Users/liugang/Documents/protobuf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin+777
-GLius-MacBook-Pro:~ liugang$ 

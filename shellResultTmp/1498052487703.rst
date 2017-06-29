@@ -1,7 +1,0 @@
-Last failed login: Mon Jun 12 13:40:33 EDT 2017 from 192.168.31.173 on ssh:notty
-There was 1 failed login attempt since the last successful login.
-Last login: Mon Jun 12 13:31:10 2017 from 192.168.31.173
-echo 888+$PATH+777
-[root@redis ~]# echo 888+$PATH+777
-888+/home/runtime/monitor/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin:/root/bin+777
-[root@redis ~]# 

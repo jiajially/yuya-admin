@@ -1,5 +1,0 @@
-Last login: Thu Jun  8 14:55:40 2017
-echo 888+$PATH+777
-[liugang@redis ~]$ echo 888+$PATH+777
-888+/home/runtime/monitor/java/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin:/home/liugang/.local/bin:/home/liugang/bin+777
-[liugang@redis ~]$ 

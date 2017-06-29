@@ -1,5 +1,0 @@
-Last login: Sat May 27 13:30:02 2017 from 192.168.31.173
-pwd
-[liugang@redis ~]$ pwd
-/home/liugang
-[liugang@redis ~]$ 
