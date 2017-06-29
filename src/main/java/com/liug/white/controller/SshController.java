@@ -43,7 +43,7 @@ public class SshController extends BaseController {
     @ApiOperation(value = "跳转至SSH管理模块", httpMethod = "GET", produces = "text/html")
     @RequestMapping(value = "ssh", method = RequestMethod.GET)
     public String ssh() {
-        return "ssh/ssh";
+        return "ssh/host";
     }
 
     @ApiOperation(value = "跳转至SSH脚本配置管理模块", httpMethod = "GET", produces = "text/html")

@@ -17,7 +17,6 @@ import java.util.Map;
 public class IndexController {
     @RequestMapping("/")
     public String easyuiIndex(Map<String,Object> map){
-
         try {
             //File file = ResourceUtils.getFile("classpath:banner.txt");
             InputStream is = IndexController.class.getClassLoader().getResourceAsStream("dev_log.txt");
@@ -27,8 +26,5 @@ public class IndexController {
             e.printStackTrace();
         }
         return "system/index";
-
     }
-
-
 }
