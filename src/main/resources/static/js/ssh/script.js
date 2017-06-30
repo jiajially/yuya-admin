@@ -51,21 +51,21 @@ script_tool = {
                     date = new Date(value);
                     timeStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
                     return timeStr;
-                }, width: 200
+                }, width: 200, sortable: true
                 },
                 {
                     title: "开始时间", field: "startTime", formatter: function (value, row, index) {
                     date = new Date(value);
                     timeStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
                     return timeStr;
-                }, width: 200
+                }, width: 200, sortable: true
                 },
                 {
                     title: "结束时间", field: "endTime", formatter: function (value, row, index) {
                     date = new Date(value);
                     timeStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
                     return timeStr;
-                }, width: 200
+                }, width: 200, sortable: true
                 },
 
 

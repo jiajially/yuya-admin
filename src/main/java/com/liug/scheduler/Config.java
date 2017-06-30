@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @Configuration
-@EnableScheduling // 启用定时任务
+//@EnableScheduling // 启用定时任务
 public class Config {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

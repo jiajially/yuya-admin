@@ -48,9 +48,9 @@ task_tool = {
                 {
                     title: "执行时间", field: "execTime", formatter: function (value, row, index) {
                     return common_tool.timestampToDateTime(value);
-                }, width: 200
+                }, width: 200, sortable: true
                 },
-                {title: "备注", field: "mark", width: 124, sortable: true},
+                {title: "备注", field: "mark", width: 124},
 
             ]],
             onLoadSuccess: function (data) {

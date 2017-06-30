@@ -459,7 +459,7 @@ public class GeetestLib {
      */
     public void gtlog(String message) {
         if (debugCode) {
-            System.out.println("gtlog: " + message);
+            //System.out.println("gtlog: " + message);
         }
     }
 

@@ -117,10 +117,17 @@ public class SshHost {
     @Override
     public String toString() {
         return "SshHost{" +
-                "host='" + host + '\'' +
+                "id=" + id +
+                ", host='" + host + '\'' +
+                ", port=" + port +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", envPath='" + envPath + '\'' +
+                ", isValid=" + isValid +
+                ", isEnable=" + isEnable +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", status=" + status +
                 '}';
     }
 }

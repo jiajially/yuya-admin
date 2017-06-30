@@ -50,6 +50,10 @@ public class SshHostServiceImpl implements SshHostService {
         int counts = sshHostMapper.selectCounts();
         PageHelper.startPage(page, rows);
         List<SshHost> sshHosts = sshHostMapper.selectAll(sort, order, host, username, envPath);
+        for (SshHost sshHost: sshHosts
+             ) {
+            System.out.println(sshHost.toString());
+        }
         PageInfo pageInfo = new PageInfo(counts, sshHosts);
         return pageInfo;
     }
@@ -89,6 +93,7 @@ public class SshHostServiceImpl implements SshHostService {
         else {
             //通过SSH获取PATH参数
             sshResult = Commond.getEnvPath(sshHost);
+            logger.info(sshResult.toString());
             if (sshResult.getExitStatus() == 1) {
                 //验证成功,设置host参数
                 sshHost.setEnvPath(sshResult.getContent());

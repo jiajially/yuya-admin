@@ -118,17 +118,18 @@ public class HostController extends BaseController {
     @ApiOperation(value = "更新主机", httpMethod = "POST", produces = "application/json", response = Result.class)
     @ResponseBody
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public Result update(@RequestParam(required = true)String host,
+    public Result update(@RequestParam(required = true)Long id,
+                         @RequestParam(required = true)String host,
                          @RequestParam(required = true)Integer port,
                          @RequestParam(required = true)String username,
                          @RequestParam(required = true)String password) {
         SshHost sshHost = new SshHost();
+        sshHost.setId(id);
         sshHost.setHost(host);
         sshHost.setPort(port);
         sshHost.setUsername(username);
         sshHost.setPassword(password);
-        long id = sshHostService.updateHost(sshHost);
-        return Result.success(id);
+        return Result.success(sshHostService.updateHost(sshHost));
     }
 
     /**
