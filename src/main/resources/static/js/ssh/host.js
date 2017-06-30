@@ -66,14 +66,14 @@ host_tool = {
                     date = new Date(value);
                     timeStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
                     return timeStr;
-                }, width: 200
+                }, width: 200, sortable: true
                 },
                 {
                     title: "更新时间", field: "updateTime", formatter: function (value, row, index) {
                     date = new Date(value);
                     timeStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
                     return timeStr;
-                }, width: 200
+                }, width: 200, sortable: true
                 }
             ]],
             onLoadSuccess: function (data) {
@@ -280,7 +280,7 @@ host_tool = {
                 dataType: 'json',
                 success: function (result) {
                     if (result.code == 10000) {
-                        $("#user_edit_dialog").dialog("close");
+                        $("#host_edit_dialog").dialog("close");
                         host_tool.form_clear();
                         host_tool.init_main_view();
                         common_tool.messager_show(result.msg);

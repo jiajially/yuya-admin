@@ -173,7 +173,7 @@ public class SystemController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "forceLogout", method = RequestMethod.GET)
     public Result forceLogout(@RequestParam String userIds) {
-        System.out.println("userIds = [" + userIds + "]");
+        //System.out.println("userIds = [" + userIds + "]");
         String[] ids = userIds.split(",");
         for (String id : ids) {
             systemService.forceLogout(Long.parseLong(id));

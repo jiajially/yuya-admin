@@ -87,7 +87,7 @@ public class RoleController extends BaseController {
                          @RequestParam String name,
                          @RequestParam String description,
                          @RequestParam String permissionIds) {
-        System.out.println("id = [" + id + "], name = [" + name + "], description = [" + description + "], permissionIds = [" + permissionIds + "]");
+        //System.out.println("id = [" + id + "], name = [" + name + "], description = [" + description + "], permissionIds = [" + permissionIds + "]");
         boolean isExsitRoleNameExcludeId = sysRoleService.isExsitRoleNameExcludeId(id, name);
         if (isExsitRoleNameExcludeId) {
             return Result.error(ResponseCode.name_already_exist.getMsg());

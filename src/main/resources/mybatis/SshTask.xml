@@ -217,10 +217,10 @@
             AND name LIKE concat('%', #{name},'%')
         </if>
         <if test="sort!=''">
-            ORDER BY #{sort}
+            ORDER BY ${sort}
         </if>
         <if test="order!=''">
-            #{order}
+            ${order}
         </if>
     </select>
 
@@ -229,10 +229,10 @@
         FROM ssh_script_task
         WHERE status = 1 and script_status!=7
         <if test="sort!=''">
-            ORDER BY #{sort}
+            ORDER BY ${sort}
         </if>
         <if test="order!=''">
-            #{order}
+            ${order}
         </if>
     </select>
 

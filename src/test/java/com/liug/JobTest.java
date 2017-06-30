@@ -17,7 +17,7 @@ public class JobTest {
     private SshScriptMapper sshScriptMapper;
     @Test
     public void test() {
-        System.out.println(sshScriptMapper.selectCounts());
+        //System.out.println(sshScriptMapper.selectCounts());
     }
 
 

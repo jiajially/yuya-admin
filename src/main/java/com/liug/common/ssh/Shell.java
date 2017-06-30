@@ -18,9 +18,9 @@ public class Shell{
     String _fileName = FileUtil.getProjectPath()+"/shellResultTmp/"+System.currentTimeMillis()+"."+"rst";
     File tmp = new File(_fileName);
     if(!tmp.getParentFile().exists()) {
-      System.out.println("目标文件所在目录不存在，准备创建它！");
+      //System.out.println("目标文件所在目录不存在，准备创建它！");
       if(!tmp.getParentFile().mkdirs()) {
-        System.out.println("创建目标文件所在目录失败！");
+        //System.out.println("创建目标文件所在目录失败！");
       }
     }
     try{
@@ -74,6 +74,6 @@ public class Shell{
   }
 
   //public static void main(String args []){
-    //System.out.println(Shell.execToString("192.168.31.188","root","117700","docker"));
+    ////System.out.println(Shell.execToString("192.168.31.188","root","117700","docker"));
   //}
 }
