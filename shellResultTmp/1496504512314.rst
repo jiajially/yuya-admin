@@ -1,5 +1,0 @@
-Last login: Sat Jun  3 19:36:13 2017 from 192.168.31.173
-daocker
-[root@redis ~]# daocker
--bash: daocker: command not found
-[root@redis ~]# 

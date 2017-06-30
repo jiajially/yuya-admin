@@ -14,6 +14,7 @@ target/
 *.iws
 *.iml
 *.ipr
+*.rst
 
 ### NetBeans ###
 nbproject/private/
@@ -22,3 +23,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+shellResultTmp/

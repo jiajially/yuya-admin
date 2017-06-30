@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.SysUserRoleOrganizationMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.SysUserRoleOrganization">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sys_user_id" property="sysUserId" jdbcType="BIGINT"/>
+        <result column="sys_role_organization_id" property="sysRoleOrganizationId" jdbcType="BIGINT"/>
+        <result column="rank" property="rank" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="is_final" property="isFinal" jdbcType="TINYINT"/>
+    </resultMap>
+    <!--  -->
+    <sql id="sql_column">
+        id,
+        sysUserId,
+        sysRoleOrganizationId,
+        rank,
+        createTime,
+        updateTime,
+        createBy,
+        updateBy,
+        status,
+        isFinal
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="sysUserId !=null ">
+            AND sys_user_id = #{sysUserId}
+        </if>
+        <if test="sysRoleOrganizationId !=null ">
+            AND sys_role_organization_id = #{sysRoleOrganizationId}
+        </if>
+        <if test="rank !=null ">
+            AND rank = #{rank}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="updateTime !=null ">
+            AND update_time = #{updateTime}
+        </if>
+        <if test="createBy !=null ">
+            AND create_by = #{createBy}
+        </if>
+        <if test="updateBy !=null ">
+            AND update_by = #{updateBy}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+        <if test="isFinal !=null ">
+            AND is_final = #{isFinal}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.SysUserRoleOrganization" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user_role_organization
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUserId !=null">
+                sys_user_id,
+            </if>
+            <if test="sysRoleOrganizationId !=null">
+                sys_role_organization_id,
+            </if>
+            <if test="rank !=null">
+                rank,
+            </if>
+            <if test="createTime !=null">
+                create_time,
+            </if>
+            <if test="updateTime !=null">
+                update_time,
+            </if>
+            <if test="createBy !=null">
+                create_by,
+            </if>
+            <if test="updateBy !=null">
+                update_by,
+            </if>
+            <if test="status !=null">
+                status,
+            </if>
+            <if test="isFinal !=null">
+                is_final,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysUserId !=null">
+                #{sysUserId},
+            </if>
+            <if test="sysRoleOrganizationId !=null">
+                #{sysRoleOrganizationId},
+            </if>
+            <if test="rank !=null">
+                #{rank},
+            </if>
+            <if test="createTime !=null">
+                #{createTime},
+            </if>
+            <if test="updateTime !=null">
+                #{updateTime},
+            </if>
+            <if test="createBy !=null">
+                #{createBy},
+            </if>
+            <if test="updateBy !=null">
+                #{updateBy},
+            </if>
+            <if test="status !=null">
+                #{status},
+            </if>
+            <if test="isFinal !=null">
+                #{isFinal},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="com.liug.model.entity.SysUserRoleOrganization">
+        update sys_user_role_organization
+        <set>
+            <if test="id !=null">
+                id = #{id},
+            </if>
+            <if test="sysUserId !=null">
+                sys_user_id = #{sysUserId},
+            </if>
+            <if test="sysRoleOrganizationId !=null">
+                sys_role_organization_id = #{sysRoleOrganizationId},
+            </if>
+            <if test="rank !=null">
+                rank = #{rank},
+            </if>
+            <if test="createTime !=null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime !=null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createBy !=null">
+                create_by = #{createBy},
+            </if>
+            <if test="updateBy !=null">
+                update_by = #{updateBy},
+            </if>
+            <if test="status !=null">
+                status = #{status},
+            </if>
+            <if test="isFinal !=null">
+                is_final = #{isFinal},
+            </if>
+        </set>
+        where id =#{id} and status=1
+    </update>
+    <update id="deleteUserId">
+        UPDATE sys_user_role_organization
+        SET status = 2
+        WHERE sys_user_id = #{userId}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.SysUserRoleOrganization" resultType="com.liug.model.entity.SysUserRoleOrganization">
+        select * from sys_user_role_organization where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SysUserRoleOrganization">
+        SELECT *
+        FROM sys_user_role_organization
+        WHERE id = #{id} AND status = 1
+    </select>
+
+    <select id="selectAll" resultType="com.liug.model.entity.SysUserRoleOrganization">
+        SELECT *
+        FROM sys_user_role_organization
+        WHERE status = 1
+    </select>
+
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM sys_user_role_organization
+        WHERE status = 1
+    </select>
+    <select id="selectByUserId" resultType="com.liug.model.entity.SysUserRoleOrganization">
+        SELECT *
+        FROM sys_user_role_organization
+        WHERE status = 1 AND sys_user_id = #{userId}
+    </select>
+    <select id="selectByRoleOrganizationId" resultType="java.lang.Long">
+        SELECT sys_user_id
+        FROM sys_user_role_organization
+        WHERE status = 1 AND sys_role_organization_id = #{roleOrganizationId}
+    </select>
+
+
+</mapper>

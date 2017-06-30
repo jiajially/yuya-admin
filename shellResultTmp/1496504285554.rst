@@ -1,3 +1,0 @@
-docker
-Last login: Fri Jun  2 11:32:17 2017 from 192.168.31.173
-[root@redis ~]# docker
