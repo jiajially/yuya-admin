@@ -13,6 +13,7 @@ host_tool = {
     init_main_view: function () {
         var host = $("input[name='host-search-host']").val();
         var envPath = $("input[name='host-search-envPath']").val();
+        console.log("===========",getRootPath() + '/host/list');
         $("#host_grid").datagrid({
             url: getRootPath() + '/host/list',
             method: 'get',
@@ -73,20 +74,20 @@ host_tool = {
                     timeStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
                     return timeStr;
                 }, width: 200
-                },
+                }
             ]],
             onLoadSuccess: function (data) {
                 $(".isValid").switchbutton({
                     readonly: true,
                     onText: '有效',
                     offText: '失效',
-                    width: 60,
+                    width: 60
                 });
                 $(".isEnable").switchbutton({
                     readonly: true,
                     onText: '已启用',
                     offText: '已禁用',
-                    width: 80,
+                    width: 80
                 })
             },
             onDblClickRow: function (index, row) {
@@ -103,7 +104,7 @@ host_tool = {
                     "host-envPath": hosts[0].envPath,
                     "host-isValid": hosts[0].isValid,
                     "host-isEnable": hosts[0].isEnable,
-                    "host-password":hosts[0].password,
+                    "host-password":hosts[0].password
                 });
                 host_tool.init_edit_view(2);
             }
@@ -175,7 +176,7 @@ host_tool = {
                         $("#host_edit_dialog").dialog('close');
                     }
                 }
-            ],
+            ]
         })
     },
 
@@ -194,7 +195,7 @@ host_tool = {
                     host: host,
                     port: port,
                     username: username,
-                    password: password,
+                    password: password
                 },
                 traditional: true,
                 method: 'post',
@@ -212,7 +213,7 @@ host_tool = {
                     else {
                         common_tool.messager_show(result.msg);
                     }
-                },
+                }
             });
 
         }
@@ -233,7 +234,7 @@ host_tool = {
                 host: host,
                 port: port,
                 username: username,
-                password:password,
+                password:password
             },
             traditional: true,
             method: 'post',
@@ -251,7 +252,7 @@ host_tool = {
                 else {
                     common_tool.messager_show(result.msg);
                 }
-            },
+            }
         });
     },
     update: function (data) {
@@ -270,7 +271,7 @@ host_tool = {
                     host: host,
                     port: port,
                     username: username,
-                    password:password,
+                    password:password
                 },
                 traditional: true,
                 method: 'post',
@@ -288,7 +289,7 @@ host_tool = {
                     else {
                         common_tool.messager_show(result.msg);
                     }
-                },
+                }
             });
 
         }
@@ -296,7 +297,7 @@ host_tool = {
     delete: function (id) {
         $.ajax({
             data: {
-                id: id,
+                id: id
             },
             traditional: true,
             method: 'get',
@@ -313,14 +314,14 @@ host_tool = {
                 else {
                     common_tool.messager_show(result.msg);
                 }
-            },
+            }
         });
     },
 
     forbiddenHost: function (id) {
         $.ajax({
             data: {
-                id: id,
+                id: id
             },
             traditional: true,
             method: 'get',
@@ -337,13 +338,13 @@ host_tool = {
                 else {
                     common_tool.messager_show(result.msg);
                 }
-            },
+            }
         });
     },
     enableHost: function (id) {
         $.ajax({
             data: {
-                id: id,
+                id: id
             },
             traditional: true,
             method: 'get',
@@ -360,12 +361,15 @@ host_tool = {
                 else {
                     common_tool.messager_show(result.msg);
                 }
-            },
+            }
         });
-    },
+    }
 
 };
+
+
 $(document).ready(function () {
+    console.log("进来了。。。。");
     host_tool.init_main_view();
     $("#host-save-btn").click(function () {
         host_tool.init_edit_view(1);

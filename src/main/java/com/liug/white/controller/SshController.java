@@ -41,7 +41,7 @@ public class SshController extends BaseController {
     private SshScriptService sshScriptService;
 
     @ApiOperation(value = "跳转至SSH管理模块", httpMethod = "GET", produces = "text/html")
-    @RequestMapping(value = "ssh", method = RequestMethod.GET)
+    @RequestMapping(value = "host", method = RequestMethod.GET)
     public String ssh() {
         return "ssh/host";
     }
