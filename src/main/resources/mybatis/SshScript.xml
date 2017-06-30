@@ -194,10 +194,10 @@
             AND cmd LIKE concat('%', #{cmd},'%')
         </if>
         <if test="sort!=''">
-            ORDER BY #{sort}
+            ORDER BY ${sort}
         </if>
         <if test="order!=''">
-            #{order}
+            ${order}
         </if>
     </select>
     <select id="selectCounts" resultType="integer">

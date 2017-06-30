@@ -202,10 +202,10 @@
             AND env_path LIKE concat('%', #{envPath},'%')
         </if>
         <if test="sort!=''">
-            ORDER BY #{sort}
+            ORDER BY ${sort}
         </if>
         <if test="order!=''">
-            #{order}
+            ${order}
         </if>
     </select>
     <select id="selectCounts" resultType="integer">
