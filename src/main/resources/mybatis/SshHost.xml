@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.SshHostMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.SshHost">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="host" property="host" jdbcType="VARCHAR"/>
+        <result column="port" property="port" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="env_path" property="envPath" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="BOOLEAN"/>
+        <result column="is_enable" property="isEnable" jdbcType="BOOLEAN"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+        id,
+        host,
+        port,
+        username,
+        password,
+        envPath,
+        isValid,
+        isEnable,
+        createTime,
+        updateTime,
+        status
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="host !=null and host.length() != 0">
+            AND host = #{host}
+        </if>
+        <if test="port !=null">
+            AND port = #{port}
+        </if>
+        <if test="username !=null and username.length() != 0">
+            AND username = #{username}
+        </if>
+        <if test="password !=null and password.length() != 0">
+            AND password = #{password}
+        </if>
+        <if test="envPath !=null and envPath.length() != 0">
+            AND env_path = #{envPath}
+        </if>
+        <if test="isValid !=null">
+            AND is_valid = #{isValid}
+        </if>
+        <if test="isEnable !=null">
+            AND is_enable = #{isEnable}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="updateTime !=null ">
+            AND update_time = #{updateTime}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.SshHost" useGeneratedKeys="true" keyProperty="id">
+        insert into ssh_host
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="host !=null and host.length() !=0">
+                host,
+            </if>
+            <if test="port !=null">
+                port,
+            </if>
+            <if test="username !=null and username.length() !=0">
+                username,
+            </if>
+            <if test="password !=null and password.length() !=0">
+                password,
+            </if>
+            <if test="envPath !=null and envPath.length() != 0">
+                env_path,
+            </if>
+            <if test="isValid !=null">
+                is_valid,
+            </if>
+            <if test="isEnable !=null">
+                is_enable,
+            </if>
+            <if test="createTime !=null">
+                create_time,
+            </if>
+            <if test="updateTime !=null">
+                update_time,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="host !=null and host.length() !=0">
+                #{host},
+            </if>
+            <if test="port !=null">
+                #{port},
+            </if>
+            <if test="username !=null and username.length() !=0">
+                #{username},
+            </if>
+            <if test="password !=null and password.length() !=0">
+                #{password},
+            </if>
+            <if test="envPath !=null and envPath.length() != 0">
+                #{envPath},
+            </if>
+            <if test="isValid !=null">
+                #{isValid},
+            </if>
+            <if test="isEnable !=null">
+                #{isEnable},
+            </if>
+            <if test="createTime !=null">
+                #{createTime},
+            </if>
+            <if test="updateTime !=null">
+                #{updateTime},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="com.liug.model.entity.SshHost">
+        update ssh_host
+        <set>
+            <if test="host !=null and host.length() !=0">
+                host = #{host},
+            </if>
+            <if test="port !=null">
+                port = #{port},
+            </if>
+            <if test="username !=null and username.length() !=0">
+                username = #{username},
+            </if>
+            <if test="password !=null and password.length() !=0">
+                password = #{password},
+            </if>
+            <if test="envPath !=null and envPath.length() != 0">
+                env_path = #{envPath},
+            </if>
+            <if test="isValid !=null">
+                is_valid = #{isValid},
+            </if>
+            <if test="isEnable !=null">
+                is_enable = #{isEnable},
+            </if>
+            <if test="createTime !=null">
+                create_time = #{createTime},
+            </if>
+            <if test="true">
+                update_time = current_timestamp,
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE ssh_host
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.SshHost" resultType="com.liug.model.entity.SshHost">
+        select * from ssh_host where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SshHost">
+        SELECT *
+        FROM ssh_host
+        WHERE id = #{id} AND status != 7
+    </select>
+
+    <select id="selectAll" resultType="com.liug.model.entity.SshHost">
+        SELECT *
+        FROM ssh_host
+        WHERE status != 7
+        <if test="host != null and host.length() != 0">
+            AND host LIKE concat('%', #{host},'%')
+        </if>
+        <if test="username != null and username.length() != 0">
+            AND username LIKE concat('%', #{username},'%')
+        </if>
+        <if test="envPath != null and envPath.length() != 0">
+            AND env_path LIKE concat('%', #{envPath},'%')
+        </if>
+        <if test="sort!=''">
+            ORDER BY #{sort}
+        </if>
+        <if test="order!=''">
+            #{order}
+        </if>
+    </select>
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM ssh_host
+        WHERE status != 7
+    </select>
+    <select id="selectCountsExists" resultType="integer">
+        SELECT count(*)
+        FROM ssh_host
+        WHERE status != 7
+        <if test="host != null and host.length() != 0">
+        AND host LIKE concat('%', #{host},'%')
+        </if>
+        <if test="username != null and username.length() != 0">
+            AND username LIKE concat('%', #{username},'%')
+        </if>
+        <if test="port != null">
+            AND port LIKE concat('%', #{port},'%')
+        </if>
+    </select>
+</mapper>
