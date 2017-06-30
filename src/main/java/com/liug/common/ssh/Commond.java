@@ -77,13 +77,25 @@ public class Commond{
       result.setContent(_tmpResult);
     }
     catch (JSchException e) {
-      if (e.getMessage().indexOf("Auth")>=0);
-      result.setContent("账户用户名密码验证失败");
+      if (e.getMessage().indexOf("Auth")>=0) result.setContent("账户用户名密码验证失败");
+      else result.setContent(e.getMessage());
     }
     finally {
       return result;
     }
 
   }
+  public static void main(String [] args){
+    Commond commond = new Commond();
+    SshHost host = new SshHost();
+    host.setEnvPath("/home/runtime/monitor/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin:/root/bin");
+    host.setHost("192.168.31.188");
+    host.setPassword("117700");
+    host.setUsername("liugang");
+    host.setPort(22);
+
+    System.out.println(Commond.getEnvPath(host));
+  }
+
 
 }
