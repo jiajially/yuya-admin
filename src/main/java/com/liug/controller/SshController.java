@@ -69,8 +69,8 @@ public class SshController extends BaseController {
     @RequestMapping(value = "task/list", method = RequestMethod.GET)
     public PageInfo list(@RequestParam(defaultValue = "1") int page,
                          @RequestParam(defaultValue = "30") int rows,
-                         @RequestParam(defaultValue = "host") String sort,
-                         @RequestParam(defaultValue = "asc") String order,
+                         @RequestParam(defaultValue = "execTime") String sort,
+                         @RequestParam(defaultValue = "desc") String order,
                          @RequestParam(defaultValue = "", required = false) String name,
                          @RequestParam(defaultValue = "", required = false) String hostname,
                          @RequestParam(defaultValue = "", required = false) String cmd) {

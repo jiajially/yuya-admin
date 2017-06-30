@@ -77,7 +77,7 @@ public class UserController extends BaseController {
                          @RequestParam(defaultValue = "1") int isFinal,
                          @RequestParam String jobIds,
                          @RequestParam String permissionIds) {
-        System.out.println("111111111111111111");
+        //System.out.println("111111111111111111");
         boolean isExistLoginName = sysUserService.isExistLoginName(loginName);
         if (isExistLoginName) {
             return Result.error(ResponseCode.name_already_exist.getMsg());

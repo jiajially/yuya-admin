@@ -60,8 +60,8 @@ public class PermissionController extends BaseController {
                          @RequestParam(defaultValue = "1") int isFinal) {
         boolean isExistName = sysPermissionService.isExistName(groupId, name);
         boolean isExistCode = sysPermissionService.isExistCode(groupId, code);
-        System.out.println(isExistName);
-        System.out.println(isExistCode);
+        //System.out.println(isExistName);
+        //System.out.println(isExistCode);
         if (isExistName) {
             return Result.error("该分组下名称已存在1");
         }
