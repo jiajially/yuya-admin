@@ -1,4 +1,4 @@
-package com.liug.security.shiro;
+package com.liug.common.security.shiro;
 
 import com.google.gson.Gson;
 import com.liug.common.util.ResponseCode;

@@ -1,4 +1,4 @@
-package com.liug.security.shiro;
+package com.liug.common.security.shiro;
 
 import com.liug.common.util.SystemConstant;
 import org.apache.shiro.cache.Cache;

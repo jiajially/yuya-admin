@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.liug.common.util.ResponseCode;
 import com.liug.common.util.Result;
 import com.liug.common.util.StringUtil;
-import com.liug.security.geetest.GeetestLib;
+import com.liug.common.security.geetest.GeetestLib;
 import com.liug.service.SystemService;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;

@@ -1,4 +1,4 @@
-package com.liug.log;
+package com.liug.common.log;
 
 import com.liug.model.entity.SysLog;
 import com.liug.service.SystemService;

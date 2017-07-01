@@ -1,4 +1,4 @@
-package com.liug.exception;
+package com.liug.common.exception;
 
 /**
  * @Author liug

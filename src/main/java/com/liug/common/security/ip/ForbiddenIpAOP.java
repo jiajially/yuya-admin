@@ -1,7 +1,7 @@
-package com.liug.security.ip;
+package com.liug.common.security.ip;
 
 import com.liug.common.util.ResponseCode;
-import com.liug.exception.ForbiddenIpException;
+import com.liug.common.exception.ForbiddenIpException;
 import com.liug.service.SystemService;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

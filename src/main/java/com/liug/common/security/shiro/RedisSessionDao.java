@@ -1,4 +1,4 @@
-package com.liug.security.shiro;
+package com.liug.common.security.shiro;
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;

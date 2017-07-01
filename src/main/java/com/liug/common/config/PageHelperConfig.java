@@ -1,4 +1,4 @@
-package com.liug.config;
+package com.liug.common.config;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.context.annotation.Bean;

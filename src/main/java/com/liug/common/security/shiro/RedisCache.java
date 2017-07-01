@@ -1,4 +1,4 @@
-package com.liug.security.shiro;
+package com.liug.common.security.shiro;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;

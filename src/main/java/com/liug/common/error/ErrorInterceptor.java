@@ -1,4 +1,4 @@
-package com.liug.error;
+package com.liug.common.error;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

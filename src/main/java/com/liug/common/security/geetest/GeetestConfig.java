@@ -1,4 +1,4 @@
-package com.liug.security.geetest;
+package com.liug.common.security.geetest;
 
 /**
  * GeetestWeb配置文件
