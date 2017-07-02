@@ -1,0 +1,13 @@
+<script type="text/javascript" th:src="@{/js/system/common.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/richtext/wangEditor.min.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/dev/loadfile.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<div id="dashboard-tool-bar" style="padding: 10px 10px 0 10px">
+    <form id="dashboard-search-form">
+        <span style="line-height: 26px; ">主机:<input id="loadfile-host" name="dashboard-host" class="easyui-combobox" style="height: 26px; width: 300px"/></span>
+        <span style="line-height: 26px; ">文件路径:<input name="loadfile-file" class="easyui-textbox"  style="width: 300px;height: 26px" /></span>
+        <div class="easyui-linkbutton " id="loadfile-reload-btn" data-options="iconCls:'icon-reload'" style="width:70px">加载
+        </div>
+    </form>
+</div>
+<div id="loadfile" style="width: 800px;"></div>
+<div id="loadfile-result"></div>

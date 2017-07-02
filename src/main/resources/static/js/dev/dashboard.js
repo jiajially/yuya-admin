@@ -37,7 +37,6 @@ dashboard_tool = {
             var _tmp_data = randomData();
             data1.push(_tmp_data[0]);
             data2.push(_tmp_data[1]);
-            console.log(  _tmp_data);
         }
 
         var option = {
@@ -102,12 +101,10 @@ dashboard_tool = {
                 data2.shift();
                 data1.push(_tmp_data[0]);
                 data2.push(_tmp_data[1]);
-                console.log(_tmp_data);
 
             }
             chart_disk.setOption(option, true);
         }, 1000);
-        console.log(randomData());
     },
     load_combox: function () {
         $("#dashboard-host").combobox({

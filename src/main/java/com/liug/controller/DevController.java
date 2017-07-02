@@ -1,13 +1,11 @@
 package com.liug.controller;
 
-import com.liug.common.ssh.SelectContnet;
+import com.liug.common.ssh.Commond;
 import com.liug.common.ssh.SshResult;
 import com.liug.common.util.ResponseCode;
 import com.liug.common.util.Result;
-import com.liug.common.util.StringUtil;
-import com.liug.model.dto.PageInfo;
-import com.liug.model.entity.SshHost;
-import com.liug.service.SshHostService;
+import com.liug.model.entity.CharRecg;
+import com.liug.service.DevService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -33,13 +31,34 @@ import java.util.List;
 public class DevController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(DevController.class);
     @Autowired
-    private SshHostService sshHostService;
+    private DevService devService;
 
     @ApiOperation(value = "跳转至Dashboard", httpMethod = "GET", produces = "text/html")
     @RequestMapping(value = "dashboard", method = RequestMethod.GET)
-    public String host() {
+    public String dashboard() {
         return "dev/dashboard";
     }
 
+    @ApiOperation(value = "跳转至Loadfile", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "loadfile", method = RequestMethod.GET)
+    public String loadfile() {
+        return "dev/loadfile";
+    }
 
+
+    /**
+     * 读取服务器文件
+     *
+     * @param id          id
+     * @param file        文件路径
+     * @return
+     */
+    @ApiOperation(value = "读取服务器文件", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "cat", method = RequestMethod.GET)
+    public Result queryScriptById(@RequestParam long id,@RequestParam String file) {
+        CharRecg charRecg = devService.loadfile(id,file);
+        if(charRecg.getCount()!=-1)return Result.success(charRecg);
+        else return Result.instance(ResponseCode.error);
+    }
 }

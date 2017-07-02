@@ -1,9 +1,4 @@
 $(document).ready(function () {
-    var E = window.wangEditor;
-
-    var editor1 = new E('#richtext');
-    editor1.create();
-
     $("#logout-btn").click(function () {
         $.messager.confirm('确认对话框', "您确认退出系统吗?", function (r) {
             if (r) {
