@@ -3,7 +3,7 @@ dashboard_tool = {
     },
     load_cup_mem: function () {
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('disk'));
+        var chart_disk = echarts.init(document.getElementById('disk'));
 
         function randomData() {
             now = new Date(+now + fiveSeconds);
@@ -40,9 +40,15 @@ dashboard_tool = {
             console.log(  _tmp_data);
         }
 
-        option = {
+        var option = {
             title: {
                 text: '远程主机运行状态'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
             },
             tooltip: {
                 trigger: 'axis',
@@ -99,7 +105,7 @@ dashboard_tool = {
                 console.log(_tmp_data);
 
             }
-            myChart.setOption(option, true);
+            chart_disk.setOption(option, true);
         }, 1000);
         console.log(randomData());
     },
@@ -113,12 +119,88 @@ dashboard_tool = {
                 $("#dashboard-host").combobox('reload',getRootPath() + '/host/select');
             },
         });
+    },
+
+    load_task_log:function () {
+        // 基于准备好的dom，初始化echarts实例
+        var chart_task = echarts.init(document.getElementById('task'));
+        var option = {
+            title : {
+                text: 'SSH任务量',
+                subtext: '纯属虚构'
+            },
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                legend: {
+                    data:['成功数量','失败数量','总和']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis : [{
+                    type : 'category',
+                    data : ['2点','4点','6点','8点','10点','12点','14点','16点','18点','20点','22点','24点']
+                }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+
+                    {
+                        name:'成功数量',
+                        type:'bar',
+                        stack: '广告',
+                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                        itemStyle:{
+                            normal:{color:'green'}
+                        }
+                    },
+                    {
+                        name:'失败数量',
+                        type:'bar',
+                        stack: '广告',
+                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                        itemStyle:{
+                            normal:{color:'#CD3700'}
+                        }
+                    },
+                    {
+                        name: '总和',
+                        type:'bar',
+                        data:[4.6, 10.8,16, 49.6, 54.3, 147.4, 311.2, 344.4, 81.3, 38.8, 12.4, 4.6],
+                        markLine : {
+                            lineStyle: {
+                                normal: {
+                                    type: 'dashed'
+                                }
+                            },
+                            data : [
+                                [{type : 'min'}, {type : 'max'}]
+                            ]
+                        },
+                        itemStyle:{
+                            normal:{color:'#009ACD'}
+                        }
+                    }
+                ]
+            };
+        chart_task.setOption(option, true);
+
     }
-
-
 
 };
 $(document).ready(function () {
     dashboard_tool.load_cup_mem();
     dashboard_tool.load_combox();
+    dashboard_tool.load_task_log();
 });
