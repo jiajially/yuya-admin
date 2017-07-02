@@ -178,14 +178,10 @@ dashboard_tool = {
                         name: '总和',
                         type:'bar',
                         data:[4.6, 10.8,16, 49.6, 54.3, 147.4, 311.2, 344.4, 81.3, 38.8, 12.4, 4.6],
-                        markLine : {
-                            lineStyle: {
-                                normal: {
-                                    type: 'dashed'
-                                }
-                            },
+                        markPoint : {
                             data : [
-                                [{type : 'min'}, {type : 'max'}]
+                                {type : 'max', name: '最大值'},
+                                {type : 'min', name: '最小值'}
                             ]
                         },
                         itemStyle:{
