@@ -1,7 +1,5 @@
 package com.liug.controller;
 
-import com.liug.common.ssh.Commond;
-import com.liug.common.ssh.SshResult;
 import com.liug.common.util.ResponseCode;
 import com.liug.common.util.Result;
 import com.liug.model.entity.CharRecg;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 
 /**

@@ -39,7 +39,7 @@ loadfile_tool = {
 };
 $(document).ready(function () {
     $("#loadfile-host").combobox({
-        url:getRootPath() + '/host/select',
+        url:'',
         method:'GET',
         valueField:'id',
         textField:'text',
