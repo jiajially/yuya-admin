@@ -200,6 +200,7 @@
             ${order}
         </if>
     </select>
+
     <select id="selectCounts" resultType="integer">
         SELECT count(*)
         FROM ssh_script_host

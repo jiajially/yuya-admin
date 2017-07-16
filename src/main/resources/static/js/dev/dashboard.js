@@ -1,44 +1,70 @@
 dashboard_tool = {
     form_clear: function () {
     },
-    load_cup_mem: function () {
+    load_cup_mem: function (hostId) {
         // 基于准备好的dom，初始化echarts实例
         var chart_disk = echarts.init(document.getElementById('disk'));
 
-        function randomData() {
-            now = new Date(+now + fiveSeconds);
-            value = value + Math.random() * 21 - 10;
-            var tmp = [];
-            var tmp_data1 ={
-                name: now.toString(),
-                value: [
-                    now,
-                    Math.round(value/10)
-                ]
-            };
-            var tmp_data2 ={
-                name: now.toString(),
-                value: [
-                    now,
-                    100-Math.round(value/10)
-                ]
-            };
-            tmp.push(tmp_data1);
-            tmp.push(tmp_data2);
-            return tmp;
-        }
-
         var data1 = [];
         var data2 = [];
-        var now = +new Date(2017, 5, 29);
-        var fiveSeconds = 120 * 1000;
-        var value = Math.random() * 100;
-        for (var i = 0; i < 1000; i++) {
-            var _tmp_data = randomData();
-            data1.push(_tmp_data[0]);
-            data2.push(_tmp_data[1]);
-        }
+        var now = new Date(Date.now());
 
+        //MEM数据
+        $.ajax({
+            data: {
+                hostId: hostId,
+                type: 12
+            },
+            traditional: true,
+            method: 'get',
+            url: getRootPath() + '/dev/monitor/log',
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.code == 10000) {
+                    for(var i = 0 ; i<=result.data.length;i++){
+                        if(result.data[i]!=null) {
+                            var tmp_data1 = {
+                                name: new Date(result.data[i].recTime),
+                                value: [
+                                    new Date(result.data[i].recTime),
+                                    result.data[i].result * 100
+                                ]
+                            };
+                            data1.push(tmp_data1);
+                        }
+                    }
+                }
+            }
+        });
+        //CPU 数据
+        $.ajax({
+            data: {
+                hostId: hostId,
+                type: 11//11是CPU
+            },
+            traditional: true,
+            method: 'get',
+            url: getRootPath() + '/dev/monitor/log',
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.code == 10000) {
+                    for(var i = 0 ; i<=result.data.length;i++){
+                        if(result.data[i]!=null) {
+                            var tmp_data1 = {
+                                name: new Date(result.data[i].recTime),
+                                value: [
+                                    new Date(result.data[i].recTime),
+                                    result.data[i].result * 100
+                                ]
+                            };
+                            data2.push(tmp_data1);
+                        }
+                    }
+                }
+            }
+        });
         var option = {
             title: {
                 text: '远程主机运行状态'
@@ -90,21 +116,9 @@ dashboard_tool = {
                 data: data2
             }]
         };
-
-        setInterval(function () {
-
-            for (var i = 0; i < 5; i++) {
-
-
-                var _tmp_data = randomData();
-                data1.shift();
-                data2.shift();
-                data1.push(_tmp_data[0]);
-                data2.push(_tmp_data[1]);
-
-            }
-            chart_disk.setOption(option, true);
-        }, 1000);
+        console.log(data1);
+        console.log(data2);
+        chart_disk.setOption(option, true);
     },
     load_combox: function () {
         $("#dashboard-host").combobox({
@@ -118,9 +132,37 @@ dashboard_tool = {
         });
     },
 
-    load_task_log:function () {
+    load_task_log:function (hostId) {
         // 基于准备好的dom，初始化echarts实例
         var chart_task = echarts.init(document.getElementById('task'));
+        var data_x = [];
+        var data_fail = [];
+        var data_all = [];
+        //加载数据
+        $.ajax({
+            data: {
+                hostId: hostId
+            },
+            traditional: true,
+            method: 'get',
+            url: getRootPath() + '/dev/ssh/task/sum',
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.code == 10000) {
+                   for(var i=23;i>=0;i--){//倒序
+                       var tmp = result.data[i];
+                       data_x.push(tmp.dateRef.substring(4,8)+'-'+tmp.dateRef.substring(8,10)+'点');
+                       data_fail.push(tmp.failCount);
+                       data_all.push(tmp.allCount);
+
+                   }
+                   console.log(data_x);
+                }
+            }
+        });
+
+
         var option = {
             title : {
                 text: 'SSH任务量',
@@ -133,7 +175,7 @@ dashboard_tool = {
                     }
                 },
                 legend: {
-                    data:['成功数量','失败数量','总和']
+                    data:['总和','失败数量']
                 },
                 grid: {
                     left: '3%',
@@ -143,7 +185,7 @@ dashboard_tool = {
                 },
                 xAxis : [{
                     type : 'category',
-                    data : ['2点','4点','6点','8点','10点','12点','14点','16点','18点','20点','22点','24点']
+                    data : data_x
                 }
                 ],
                 yAxis : [
@@ -154,27 +196,9 @@ dashboard_tool = {
                 series : [
 
                     {
-                        name:'成功数量',
-                        type:'bar',
-                        stack: '广告',
-                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                        itemStyle:{
-                            normal:{color:'green'}
-                        }
-                    },
-                    {
-                        name:'失败数量',
-                        type:'bar',
-                        stack: '广告',
-                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-                        itemStyle:{
-                            normal:{color:'#CD3700'}
-                        }
-                    },
-                    {
                         name: '总和',
                         type:'bar',
-                        data:[4.6, 10.8,16, 49.6, 54.3, 147.4, 311.2, 344.4, 81.3, 38.8, 12.4, 4.6],
+                        data:data_all,
                         markPoint : {
                             data : [
                                 {type : 'max', name: '最大值'},
@@ -182,7 +206,16 @@ dashboard_tool = {
                             ]
                         },
                         itemStyle:{
-                            normal:{color:'#009ACD'}
+                            normal:{color:'#6CA6CD'}
+                        }
+                    },
+                    {
+                        name:'失败数量',
+                        type:'bar',
+                        barGap: '-100%',
+                        data:data_fail,
+                        itemStyle:{
+                            normal:{color:'#FF4040'}
                         }
                     }
                 ]
@@ -193,7 +226,12 @@ dashboard_tool = {
 
 };
 $(document).ready(function () {
-    dashboard_tool.load_cup_mem();
     dashboard_tool.load_combox();
-    dashboard_tool.load_task_log();
+    $("#dashboard-reload-btn").click(function () {
+        var hostId = $('#dashboard-host').combobox('getValue');
+        console.log(hostId);
+        dashboard_tool.load_cup_mem(hostId);
+        dashboard_tool.load_task_log(hostId);
+    });
+
 });

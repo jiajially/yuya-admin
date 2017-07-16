@@ -235,7 +235,15 @@
             ${order}
         </if>
     </select>
+    <select id="selectLogSumByHostID" resultType="com.liug.model.entity.SshTaskLogSum">
+        SELECT *
+        FROM ssh_task_log_sum
+        WHERE 1=1
+        <if test="hostId != null">
+            AND host_id =#{hostId}
+        </if>
 
+    </select>
     <select id="selectSshTaskCounts" resultType="integer">
         SELECT count(*)
         FROM ssh_script_task

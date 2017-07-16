@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.MonitorJobMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.MonitorJob">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="host_id" property="hostId" jdbcType="BIGINT"/>
+        <result column="rate" property="rate" jdbcType="INTEGER"/>
+        <result column="cmd" property="cmd" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+        id,
+        hostId,
+        rate,
+        cmd,
+        type,
+        status
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="hostId !=null">
+            AND host_id = #{hostId}
+        </if>
+        <if test="rate !=null ">
+            AND rate = #{rate}
+        </if>
+        <if test="cmd !=null and cmd.length() != 0">
+            AND cmd = #{cmd}
+        </if>
+        <if test="type !=null ">
+            AND type = #{type}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.MonitorJob" useGeneratedKeys="true" keyProperty="id">
+        insert into monitor_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hostId !=null">
+                host_id,
+            </if>
+            <if test="rate !=null">
+                rate,
+            </if>
+            <if test="cmd !=null and cmd.length() !=0">
+                cmd,
+            </if>
+            <if test="type !=null">
+                type,
+            </if>
+            <if test="status !=null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hostId !=null">
+                #{hostId},
+            </if>
+            <if test="rate !=null">
+                #{rate},
+            </if>
+            <if test="cmd !=null and cmd.length() !=0">
+                #{cmd},
+            </if>
+            <if test="type !=null">
+                #{type},
+            </if>
+            <if test="status !=null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="com.liug.model.entity.MonitorJob">
+        update monitor_job
+        <set>
+            <if test="hostId !=null">
+                host_id = #{hostId},
+            </if>
+            <if test="rate !=null">
+                rate = #{rate},
+            </if>
+            <if test="cmd !=null and cmd.length() !=0">
+                cmd = #{cmd},
+            </if>
+            <if test="type !=null">
+                type = #{type},
+            </if>
+            <if test="status !=null">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE monitor_job
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.MonitorJob" resultType="com.liug.model.entity.MonitorJob">
+        select * from monitor_job where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.MonitorJob">
+        SELECT *
+        FROM monitor_job
+        WHERE id = #{id} AND status != 7
+    </select>
+
+    <select id="selectJob" resultType="com.liug.model.entity.MonitorJob">
+        SELECT *
+        FROM monitor_job
+        WHERE 1=1
+        <if test="hostId != null">
+            AND host_id=#{hostId}
+        </if>
+        <if test="type != null">
+            AND type=#{type}
+        </if>
+    </select>
+    <select id="selectAll" resultType="com.liug.model.entity.MonitorJob">
+        SELECT *
+        FROM monitor_job
+        WHERE status != 7
+    </select>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.MonitorLogMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.MonitorLog">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="host_id" property="hostId" jdbcType="BIGINT"/>
+        <result column="job_id" property="jobId" jdbcType="BIGINT"/>
+        <result column="result" property="result" jdbcType="VARCHAR"/>
+        <result column="rec_time" property="recTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="sql_column">
+        id,
+        hostId,
+        jobId,
+        result,
+        recTime
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="hostId !=null">
+            AND host_id = #{hostId}
+        </if>
+        <if test="jobId !=null ">
+            AND job_id = #{jobId}
+        </if>
+        <if test="result !=null and result.length() != 0">
+            AND result = #{result}
+        </if>
+        <if test="recTime !=null ">
+            AND rec_time = #{recTime}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.MonitorLog" useGeneratedKeys="true" keyProperty="id">
+        insert into monitor_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hostId !=null">
+                host_id,
+            </if>
+            <if test="jobId !=null">
+                job_id,
+            </if>
+            <if test="result !=null and result.length() !=0">
+                result,
+            </if>
+            <if test="recTime==null||recTime!=null">
+                rec_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hostId !=null">
+                #{hostId},
+            </if>
+            <if test="jobId !=null">
+                #{jobId},
+            </if>
+            <if test="result !=null and result.length() !=0">
+                #{result},
+            </if>
+            <if test="recTime==null||recTime!=null">
+                CURRENT_TIMESTAMP,
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="select" parameterType="com.liug.model.entity.MonitorJob" resultType="com.liug.model.entity.MonitorLog">
+        select * from monitor_log where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectByJobId" parameterType="long" resultType="com.liug.model.entity.MonitorLog">
+        SELECT *
+        FROM monitor_log
+        WHERE job_id = #{jobId}
+        <if test="deadLine !=null">
+            AND rec_time >= #{deadLine}
+        </if>
+    </select>
+
+</mapper>

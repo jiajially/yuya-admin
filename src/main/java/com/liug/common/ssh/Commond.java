@@ -3,6 +3,9 @@ import com.jcraft.jsch.*;
 import com.liug.model.entity.SshHost;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Commond{
 
@@ -86,7 +89,7 @@ public class Commond{
 
   }
   public static void main(String [] args){
-    Commond commond = new Commond();
+    /*Commond commond = new Commond();
     SshHost host = new SshHost();
     host.setEnvPath("/home/runtime/monitor/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin:/root/bin");
     host.setHost("192.168.31.188");
@@ -94,7 +97,24 @@ public class Commond{
     host.setUsername("liugang");
     host.setPort(22);
 
-    System.out.println(Commond.getEnvPath(host));
+    System.out.println(Float.valueOf(Commond.execute(host,"free  | sed -n '2p' | awk '{print $3/$2}'").getContent()));
+    */
+    Date date = new Date();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
+    Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
+    //c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DATE),c.get(Calendar.HOUR_OF_DAY),0,0);
+
+    c.set(2017,6,13,20,0,0);
+
+    System.out.println(formatter.format(c.getTime()));
+    List<Date> dateList = new ArrayList<Date>();
+    for(int i=0;i<24;i++) {
+      c.add(Calendar.HOUR_OF_DAY,-1);
+      int hour = c.get(Calendar.HOUR_OF_DAY);
+      dateList.add(c.getTime());
+      System.out.println(c.getTime());
+    }
+
   }
 
 

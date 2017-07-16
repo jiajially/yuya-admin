@@ -1,5 +1,6 @@
 package com.liug.dao;
 
+import com.liug.model.entity.SshTaskLogSum;
 import com.liug.model.entity.SshScript;
 import com.liug.model.entity.SshTask;
 import org.apache.ibatis.annotations.Mapper;
@@ -33,4 +34,6 @@ public interface SshTaskMapper {
 
     //查询d待执行任务数量
     int selectSshTaskCounts();
+
+    List<SshTaskLogSum> selectLogSumByHostID(@Param("hostId")Long hostId);
 }
