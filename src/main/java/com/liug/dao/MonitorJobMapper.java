@@ -19,6 +19,12 @@ public interface MonitorJobMapper {
     //查询某个监控
     List<MonitorJob> selectJob(@Param("hostId") Long hostId, @Param("type") Integer type);
 
+    Long deleteById (@Param("id") Long id);
+
+    Long deleteByHostId (@Param("hostId") Long hostId);
+
+    Long insert(MonitorJob monitorJob);
+
 
 
 }

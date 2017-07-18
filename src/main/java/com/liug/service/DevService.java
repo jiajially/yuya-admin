@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface DevService {
 
-    CharRecg loadfile(long id, String path);
+    CharRecg loadfile(long id, String path,String word);
 
     List<MonitorLog> selectMonitorLog(long hostId, Integer type);
 

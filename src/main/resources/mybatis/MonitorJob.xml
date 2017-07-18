@@ -104,6 +104,11 @@
         SET status = 7
         WHERE id = #{id}
     </update>
+    <update id="deleteByHostId">
+        UPDATE monitor_job
+        SET status = 7
+        WHERE host_id = #{hostId}
+    </update>
 
     <select id="select" parameterType="com.liug.model.entity.MonitorJob" resultType="com.liug.model.entity.MonitorJob">
         select * from monitor_job where
@@ -121,7 +126,7 @@
     <select id="selectJob" resultType="com.liug.model.entity.MonitorJob">
         SELECT *
         FROM monitor_job
-        WHERE 1=1
+        WHERE status != 7
         <if test="hostId != null">
             AND host_id=#{hostId}
         </if>

@@ -222,16 +222,51 @@ dashboard_tool = {
             };
         chart_task.setOption(option, true);
 
-    }
+
+    },
+
+
+    monitor:function (hostId,type){
+        $.ajax({
+            data: {
+                hostId: hostId,
+                type: type,
+            },
+            traditional: true,
+            method: 'get',
+            url: getRootPath() + '/dev/ssh/host/monitor',
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.code == 10000) {
+                    common_tool.messager_show(result.msg);
+                    return false;
+                }
+                else {
+                    common_tool.messager_show(result.msg);
+                }
+            }
+        });
+    },
 
 };
 $(document).ready(function () {
     dashboard_tool.load_combox();
     $("#dashboard-reload-btn").click(function () {
         var hostId = $('#dashboard-host').combobox('getValue');
-        console.log(hostId);
+        //console.log(hostId);
         dashboard_tool.load_cup_mem(hostId);
         dashboard_tool.load_task_log(hostId);
+    });
+
+    $("#dashboard-start-btn").click(function () {
+        var hostId = $('#dashboard-host').combobox('getValue');
+        dashboard_tool.monitor(hostId,1);
+    });
+
+    $("#dashboard-stop-btn").click(function () {
+        var hostId = $('#dashboard-host').combobox('getValue');
+        dashboard_tool.monitor(hostId,2);
     });
 
 });

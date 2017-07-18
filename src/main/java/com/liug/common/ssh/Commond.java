@@ -88,8 +88,8 @@ public class Commond{
     }
 
   }
-  public static void main(String [] args){
-    /*Commond commond = new Commond();
+  /*public static void main(){
+    Commond commond = new Commond();
     SshHost host = new SshHost();
     host.setEnvPath("/home/runtime/monitor/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin:/root/bin");
     host.setHost("192.168.31.188");
@@ -98,7 +98,7 @@ public class Commond{
     host.setPort(22);
 
     System.out.println(Float.valueOf(Commond.execute(host,"free  | sed -n '2p' | awk '{print $3/$2}'").getContent()));
-    */
+
     Date date = new Date();
     SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
     Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
@@ -115,7 +115,7 @@ public class Commond{
       System.out.println(c.getTime());
     }
 
-  }
+  }*/
 
 
 }

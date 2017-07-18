@@ -42,7 +42,7 @@ public class MemScheduleJob extends ScheduleJob {
         //Step2 透过主机信息获取内存数据
         //内存占比获取脚本如下
         //free  | sed -n '2p' | awk '{print $3/$2}'
-        String result = Commond.execute(sshHost,"free  | sed -n '2p' | awk '{print $3/$2}'").getContent();
+        String result = String.valueOf(this.getMemPercent(sshHost,"free  | sed -n '2p' | awk '{print $3/$2}'"));
         MonitorLog monitorLog = new MonitorLog();
         monitorLog.setHostId(hostId);
         monitorLog.setJobId(jobId);

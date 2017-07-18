@@ -36,9 +36,9 @@ public class DevServiceImpl implements DevService {
     SshTaskMapper sshTaskMapper;
 
     @Override
-    public CharRecg loadfile(long id, String path) {
+    public CharRecg loadfile(long id, String path,String word) {
         CharRecg charRecg = new CharRecg();
-        charRecg.setCharacter("CREATE");
+        charRecg.setCharacter(word);
         charRecg.setCount(-1);
         //读取文件指令
         String cmd = "cat ";
@@ -58,7 +58,7 @@ public class DevServiceImpl implements DevService {
                 counter++;
                 content=content.substring(content.indexOf(charRecg.getCharacter())+charRecg.getCharacter().length());
             }
-            charRecg.setContent( sshResult.getContent().replace(charRecg.getCharacter(),"<font color=\"#c24f4a\">"+charRecg.getCharacter()+"</font>"));
+            charRecg.setContent( sshResult.getContent().replace(charRecg.getCharacter().trim(),"<font color=\"#FF0000\">"+charRecg.getCharacter()+"</font>"));
             charRecg.setCount(counter);
         }
         return charRecg;
@@ -111,11 +111,20 @@ public class DevServiceImpl implements DevService {
 
     @Override
     public String monitor(Long hostId,int type) {
+        //启用
         if(type==1){
-
-        }else if (type==2){
-
+            monitorJobMapper.deleteByHostId(hostId);
+            MonitorJob cpuJob = new MonitorJob(11);
+            MonitorJob memJob = new MonitorJob(12);
+            cpuJob.setHostId(hostId); memJob.setHostId(hostId);
+            cpuJob.setRate(60);memJob.setRate(60);
+            monitorJobMapper.insert(cpuJob);
+            monitorJobMapper.insert(memJob);
         }
-        return null;
+        //停止
+        else if (type==2){
+            monitorJobMapper.deleteByHostId(hostId);
+        }
+        return "success";
     }
 }

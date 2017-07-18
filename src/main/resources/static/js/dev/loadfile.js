@@ -4,10 +4,12 @@ loadfile_tool = {
     loadfile: function (editor) {
         var id = $('#loadfile-host').combobox('getValue');
         var file = $("input[name='loadfile-file']").val();
+        var word = $("input[name='loadfile-char']").val();
         $.ajax({
             data: {
                 id: id,
-                file: file
+                file: file,
+                word: word
             },
             traditional: true,
             method: 'get',

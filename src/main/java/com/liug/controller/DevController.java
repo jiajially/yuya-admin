@@ -60,8 +60,10 @@ public class DevController extends BaseController {
     @ApiOperation(value = "读取服务器文件", httpMethod = "GET", produces = "application/json", response = Result.class)
     @ResponseBody
     @RequestMapping(value = "cat", method = RequestMethod.GET)
-    public Result queryScriptById(@RequestParam long id,@RequestParam String file) {
-        CharRecg charRecg = devService.loadfile(id,file);
+    public Result queryScriptById(@RequestParam long id,@RequestParam String file,@RequestParam String word) {
+        CharRecg charRecg;
+        if (word==null || word.trim().length()==0)charRecg = devService.loadfile(id,file,"!2#4%6&8(0_=");
+        else charRecg = devService.loadfile(id,file,word);
         if(charRecg.getCount()!=-1)return Result.success(charRecg);
         else return Result.instance(ResponseCode.error);
     }
@@ -74,7 +76,7 @@ public class DevController extends BaseController {
      */
     @ApiOperation(value = "查询监控明细", httpMethod = "GET", produces = "application/json", response = Result.class)
     @ResponseBody
-    @RequestMapping(value = "/monitor/log", method = RequestMethod.GET)
+    @RequestMapping(value = "monitor/log", method = RequestMethod.GET)
     public Result list(@RequestParam(required = true) Long hostId,
                          @RequestParam(required = true) Integer type) {
         List<MonitorLog> monitorLogs = devService.selectMonitorLog(hostId,type);
@@ -91,7 +93,7 @@ public class DevController extends BaseController {
      */
     @ApiOperation(value = "获取主机SSH工作量信息", httpMethod = "GET", produces = "application/json", response = Result.class)
     @ResponseBody
-    @RequestMapping(value = "/ssh/task/sum", method = RequestMethod.GET)
+    @RequestMapping(value = "ssh/task/sum", method = RequestMethod.GET)
     public Result list(@RequestParam(required = true) Long hostId) {
         return Result.success(devService.getTaskLogSum(hostId));
     }
@@ -103,12 +105,11 @@ public class DevController extends BaseController {
      * @param type      启用/停用
      * @return
      */
-    @ApiOperation(value = "获取主机SSH工作量信息", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ApiOperation(value = "启停监控主机", httpMethod = "GET", produces = "application/json", response = Result.class)
     @ResponseBody
-    @RequestMapping(value = "/ssh/host/monitor", method = RequestMethod.GET)
-    public Result monitor(@RequestParam(required = true) Long hostId,
-                        @RequestParam(required = true) Integer type) {
-        return null;
+    @RequestMapping(value = "ssh/host/monitor", method = RequestMethod.GET)
+    public Result monitor(@RequestParam(required = true) Long hostId,  @RequestParam(required = true) Integer type) {
+        return Result.success(devService.monitor(hostId,type));
     }
 
 

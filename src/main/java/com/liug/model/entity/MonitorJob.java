@@ -17,6 +17,13 @@ public class MonitorJob {
     //监控状态 0-创建，1-开始监控，2-停止监控，7-删除
     int status;
 
+    public MonitorJob() {
+
+    }
+    public MonitorJob(int type) {
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }
