@@ -50,10 +50,6 @@ public class SshHostServiceImpl implements SshHostService {
         int counts = sshHostMapper.selectCounts();
         PageHelper.startPage(page, rows);
         List<SshHost> sshHosts = sshHostMapper.selectAll(sort, order, host, username, envPath);
-        for (SshHost sshHost: sshHosts
-             ) {
-            System.out.println(sshHost.toString());
-        }
         PageInfo pageInfo = new PageInfo(counts, sshHosts);
         return pageInfo;
     }
