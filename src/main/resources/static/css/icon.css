@@ -121,3 +121,11 @@
 .icon-large-chart {
     background: url('icons/large_chart.png') no-repeat center center;
 }
+
+.icon-greenlight {
+    background: url('icons/greenlight.png') no-repeat center center;
+}
+
+.icon-redlight {
+    background: url('icons/redlight.png') no-repeat center center;
+}

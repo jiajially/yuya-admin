@@ -2,9 +2,12 @@ package com.liug.scheduler;
 
 import com.liug.common.ssh.Commond;
 import com.liug.common.ssh.SshResult;
+import com.liug.common.util.ResponseCode;
 import com.liug.dao.MonitorJobMapper;
+import com.liug.dao.SshHostMapper;
 import com.liug.dao.SshTaskMapper;
 import com.liug.model.entity.MonitorJob;
+import com.liug.model.entity.SshHost;
 import com.liug.model.entity.SshScript;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +38,8 @@ public class Config {
     private MemScheduleJob memScheduleJob;
     @Autowired
     private CpuScheduleJob cpuScheduleJob;
+    @Autowired
+    private SshHostMapper sshHostMapper;
 
     @Scheduled(cron = "* * * * * ?") // 每秒执行一次
     public void scheduler() {
@@ -65,5 +70,29 @@ public class Config {
                 default:break;
             }
         }
+    }
+    //设置失效host
+    @Scheduled(cron = "0 * * * * ?") // 每秒执行一次
+    public void validHost() {
+        List<SshHost> sshHosts = sshHostMapper.selectAll("id","asc",null,null,null);
+        for (SshHost sshHost:sshHosts) {
+            SshResult sshResult = new SshResult();
+            //验证数据重复性
+            int _existsCounts = sshHostMapper.selectCountsExists(sshHost.getHost(),sshHost.getPort(),sshHost.getUsername());
+            if (sshHost.getId()<0&&_existsCounts > 0)sshResult.setExitStatus(ResponseCode.host_already_exist.getCode());
+            else {
+                //通过SSH获取PATH参数
+                sshResult = Commond.getEnvPath(sshHost);
+                if (sshResult.getExitStatus() == 0) {
+                    sshHost.setValid(false);
+                    sshHost.setEnable(false);
+                    if (sshHost.getId() >= 0) {
+                        sshHostMapper.update(sshHost);
+                    }
+                }
+            }
+            logger.debug(sshResult.toString());
+        }
+
     }
 }

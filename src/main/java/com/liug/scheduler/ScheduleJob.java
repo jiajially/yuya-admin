@@ -3,7 +3,9 @@ package com.liug.scheduler;
 
 import com.liug.common.ssh.Commond;
 import com.liug.model.entity.SshHost;
-import org.springframework.stereotype.Component;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,6 +17,8 @@ import java.util.Map;
  */
 public abstract class ScheduleJob {
 
+
+    private static final Logger logger = LoggerFactory.getLogger(ScheduleJob.class);
     //执行数据写入
     abstract void doJob(Long hostId,Long jobId);
     /**
@@ -50,7 +54,7 @@ public abstract class ScheduleJob {
 
     Map<String,Long> getCpuTime(SshHost sshHost,String command){
         Map<String,Long> time = new HashMap<String,Long>();
-        String res= Commond.execute(sshHost,command).getContent();
+        String res= Commond.execute(true,sshHost,command).getContent();
         long idleCpuTime = 0, totalCpuTime = 0;	//分别为系统启动后空闲的CPU时间和总的CPU时间
         String[] resArray = res.split("\n");
         //System.out.println(resArray.length);
@@ -78,7 +82,8 @@ public abstract class ScheduleJob {
      * @return float,CPU使用率,小于1
      */
     public float getMemPercent(SshHost sshHost, String command){
-        return Float.valueOf(Commond.execute(sshHost,command).getContent());
+        logger.debug(sshHost.toString());
+        return Float.valueOf(Commond.execute(true,sshHost,command).getContent());
     }
 
 }

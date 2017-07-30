@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <title>yuya-admin</title>
     <link type="image/x-icon" rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
     <link type="image/x-icon" rel="bookmark" th:href="@{/image/favicon.ico}"/>
@@ -33,6 +34,15 @@
 <div data-options="region:'west',border:true,split:true" style="text-align: center;width:160px;">
     <div class="easyui-accordion" data-options="border:false,fit:true,">
         <div title="系统管理" style="padding: 0 0 0 15px;">
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-print'" style="border: 0;"
+                             th:href="@{/dev/homepage}">HomePage
+                        </div>
+                    </li>
+                </div>
+            </ul>
             <ul style="list-style: none;padding: 0 0 0 0 ;">
                 <div style="padding: 5px 10px;">
                     <li class="nav-list">
@@ -78,6 +88,15 @@
                     </li>
                 </div>
             </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-sum'" style="border: 0;"
+                             th:href="@{/dev/console}">控制台
+                        </div>
+                    </li>
+                </div>
+            </ul>
         </div>
     </div>
 </div>
@@ -88,10 +107,11 @@
 </div>
 <div data-options="region:'center',border:false">
     <div id="tab" class="easyui-tabs" data-options="fit:true">
-        <div title="首页">
+        <!--<div title="首页">
             <pre th:text="${banner}">
             </pre>
-        </div>
+        </div>-->
+
     </div>
 </div>
 </body>

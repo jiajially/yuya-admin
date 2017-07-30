@@ -59,6 +59,7 @@ dashboard_tool = {
                                     result.data[i].result * 100
                                 ]
                             };
+                            console.log(new Date(result.data[i].recTime));
                             data2.push(tmp_data1);
                         }
                     }
@@ -80,7 +81,7 @@ dashboard_tool = {
                 formatter: function (params) {
                     params = params[0];
                     var date = new Date(params.name);
-                    return [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')+' '+ now.getHours()+':'+now.getMinutes()+':'+now.getSeconds() + ' : ' + params.value[1];
+                    return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('/')+' '+ date.getHours()+':'+date.getMinutes()+':'+date.getSeconds() + ' : ' + params.value[1];
                 },
                 axisPointer: {
                     animation: false
@@ -165,8 +166,7 @@ dashboard_tool = {
 
         var option = {
             title : {
-                text: 'SSH任务量',
-                subtext: '纯属虚构'
+                text: 'SSH任务量'
             },
                 tooltip : {
                     trigger: 'axis',

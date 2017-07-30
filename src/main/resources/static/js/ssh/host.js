@@ -41,21 +41,21 @@ host_tool = {
                 {title: "端口", field: "port", width: 124, sortable: true},
                 {title: "登录用户", field: "username", width: 124, sortable: true},
                 {
-                    title: "验证状态", field: "valid", align: 'center', width: 120, formatter: function (value, row, index) {
+                    title: "验证状态", field: "valid", align: 'center', width: 50, formatter: function (value, row, index) {
                     if (value == true) {
-                        return "<input class='easyui-switchbutton isValid' checked />";
+                        return "<img src='/css/icons/greenlight.png' />";
                     }else{
-                        return "<input class='easyui-switchbutton isValid' unchecked />";
+                        return "<img src='/css/icons/redlight.png' />";
                     }
 
                 }
                 },
                 {
-                    title: "启用状态", field: "enable", align: 'center', width: 150, formatter: function (value, row, index) {
+                    title: "启用状态", field: "enable", align: 'center', width: 50, formatter: function (value, row, index) {
                     if (value == true) {
-                        return "<input class='easyui-switchbutton isEnable' checked />";
+                        return "<img src='/css/icons/greenlight.png' />";
                     }else{
-                        return "<input class='easyui-switchbutton isEnable' unchecked />";
+                        return "<img src='/css/icons/redlight.png' />";
                     }
 
                 }

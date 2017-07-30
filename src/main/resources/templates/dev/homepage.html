@@ -1,0 +1,36 @@
+<script type="text/javascript" th:src="@{/js/system/common.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/dev/homepage.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<div id="homepage-tool-bar" style="padding: 10px 10px 0 10px">
+    <form id="homepage-search-form">
+        <div class="easyui-linkbutton " id="homepage-flash-btn" data-options="iconCls:'icon-reload'" style="width:70px">加载
+        </div>
+        <div class="easyui-linkbutton " id="homepage-add-btn" data-options="iconCls:'icon-add'" style="width:70px">新增
+        </div>
+    </form>
+</div>
+<div id="homepage_data"></div>
+<div id="homepage_edit_dialog" style="display: none">
+    <form id="homepage_form">
+        <input type="hidden" name="id" id="id"/>
+        <div style="float: left;height: 200px;">
+<p style="padding: 10px ;">标&nbsp;&nbsp;题:<input name="homepage-title" id="homepage-title"
+                                                             style="width: 300px;height: 35px"
+                                                             data-options="required:true"
+                                                             class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">描&nbsp;&nbsp;述:<input name="homepage-description" id="homepage-description"
+                                                             style="width: 300px;height: 35px"
+                                                             class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">单&nbsp;&nbsp;位:<input name="homepage-unit" id="homepage-unit"
+                                                             style="width: 300px;height: 35px"
+                                                             class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px;">主&nbsp;&nbsp;机:<input id="homepage-host" name="homepage-host" class="easyui-combobox" style="width: 300px;height: 35px"/></p>
+
+            <p style="padding: 10px ;">指&nbsp;&nbsp;令:<input name="homepage-cmd" id="homepage-cmd"
+                                                   style="width: 300px;height: 100px;"
+                                                   data-options="required:false"
+                                                   multiline="true"
+                                                   class="easyui-textbox easyui-validatebox"/></p>
+        </div>
+    </form>
+</div>
+

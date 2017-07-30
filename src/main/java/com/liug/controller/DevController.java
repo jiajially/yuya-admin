@@ -5,6 +5,7 @@ import com.liug.common.util.Result;
 import com.liug.dao.SshTaskMapper;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.CharRecg;
+import com.liug.model.entity.HomePage;
 import com.liug.model.entity.MonitorLog;
 import com.liug.service.DevService;
 import io.swagger.annotations.Api;
@@ -47,6 +48,18 @@ public class DevController extends BaseController {
     @RequestMapping(value = "loadfile", method = RequestMethod.GET)
     public String loadfile() {
         return "dev/loadfile";
+    }
+
+    @ApiOperation(value = "跳转至Webconsole", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "console", method = RequestMethod.GET)
+    public String console() {
+        return "dev/console";
+    }
+
+    @ApiOperation(value = "跳转至Homepage", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "homepage", method = RequestMethod.GET)
+    public String homepage() {
+        return "dev/homepage";
     }
 
 
@@ -112,5 +125,74 @@ public class DevController extends BaseController {
         return Result.success(devService.monitor(hostId,type));
     }
 
+    /**
+     * 新增Homepage unit
+     *
+     * @param host          主机
+     * @param title         标题
+     * @param description   描述
+     * @param unit          单位
+     * @param cmd           指令
+     * @return
+     */
+    @ApiOperation(value = "新增Homepage unit", httpMethod = "POST", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "homepage/insert", method = RequestMethod.POST)
+    public Result insert(@RequestParam(required = true)Long host,
+                         @RequestParam(required = true)String title,
+                         @RequestParam(required = false)String description,
+                         @RequestParam(required = false)String unit,
+                         @RequestParam(required = true)String cmd) {
+        HomePage homePage = new HomePage();
+        homePage.setCmd(cmd);
+        homePage.setDescription(description);
+        homePage.setHomepage("0");
+        homePage.setHostId(host);
+        homePage.setTitle(title);
+        homePage.setUnit(unit);
+        homePage.setStatus(1);
+        return devService.addHomePage(homePage);
+    }
+
+
+    /**
+     * 获取Homepage unit
+     *
+     * @return
+     */
+    @ApiOperation(value = "获取Homepage unit", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "homepage/select", method = RequestMethod.GET)
+    public Result select() {
+        return Result.success(devService.getHomePage());
+    }
+
+
+    /**
+     * Homepage toolbox
+     *
+     * @return
+     */
+    @ApiOperation(value = "Homepage toolbox", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "homepage/toolbox", method = RequestMethod.GET)
+    public Result toolbox(@RequestParam(required = true)Long id,
+                          @RequestParam(required = true)Integer type) {
+         //   return null;
+        return Result.success(devService.toolbox(id,type));
+    }
+
+    /**
+     * Homepage flash
+     *
+     * @return
+     */
+    @ApiOperation(value = "Homepage flash", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "homepage/flash", method = RequestMethod.GET)
+    public Result toolbox() {
+        //   return null;
+        return devService.flash();
+    }
 
 }

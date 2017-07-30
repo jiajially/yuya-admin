@@ -3,10 +3,8 @@ package com.liug.service.impl;
 import com.liug.common.ssh.Commond;
 import com.liug.common.ssh.SshChartResult;
 import com.liug.common.ssh.SshResult;
-import com.liug.dao.MonitorJobMapper;
-import com.liug.dao.MonitorLogMapper;
-import com.liug.dao.SshTaskMapper;
-import com.liug.model.dto.PageInfo;
+import com.liug.common.util.Result;
+import com.liug.dao.*;
 import com.liug.model.entity.*;
 import com.liug.service.DevService;
 import com.liug.service.SshHostService;
@@ -34,6 +32,8 @@ public class DevServiceImpl implements DevService {
     MonitorLogMapper monitorLogMapper;
     @Autowired
     SshTaskMapper sshTaskMapper;
+    @Autowired
+    HomePageMapper homePageMapper;
 
     @Override
     public CharRecg loadfile(long id, String path,String word) {
@@ -126,5 +126,50 @@ public class DevServiceImpl implements DevService {
             monitorJobMapper.deleteByHostId(hostId);
         }
         return "success";
+    }
+
+    @Override
+    public Result addHomePage(HomePage homePage) {
+        //首先执行一遍
+        SshHost sshHost  = sshHostService.selectById(homePage.getHostId());
+        SshResult sshResult= Commond.execute(sshHost,homePage.getCmd());
+        homePage.setResult(sshResult.getContent());
+        homePage.setUpdateTime(new Date(System.currentTimeMillis()));
+        //执行插入
+        return Result.success(homePageMapper.insert(homePage));
+    }
+    @Override
+    public List<HomePage> getHomePage(){
+        return  homePageMapper.selectAll("id","asc",null);
+    }
+
+    @Override
+    public Result toolbox(long id, int type) {
+        Result result=null;
+        HomePage homePage = homePageMapper.selectById(id);
+        //首先执行一遍
+        SshHost sshHost  = sshHostService.selectById(homePage.getHostId());
+        SshResult sshResult= Commond.execute(sshHost,homePage.getCmd());
+        homePage.setResult(sshResult.getContent());
+        homePage.setUpdateTime(new Date(System.currentTimeMillis()));
+        //执行插入
+        switch (type){
+            case 1:result = Result.success(homePageMapper.deleteById(id));break;
+            case 2:result = Result.success(homePageMapper.update(homePage));break;
+            default:break;
+        }
+        return result;
+    }
+    @Override
+    public Result flash(){
+        List<HomePage> homePages = homePageMapper.selectAll("id","asc",null);
+        for (HomePage homePage: homePages) {
+            SshHost sshHost  = sshHostService.selectById(homePage.getHostId());
+            SshResult sshResult= Commond.execute(sshHost,homePage.getCmd());
+            homePage.setResult(sshResult.getContent());
+            homePage.setUpdateTime(new Date(System.currentTimeMillis()));
+            homePageMapper.update(homePage);
+        }
+        return Result.success();
     }
 }

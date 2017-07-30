@@ -1,4 +1,39 @@
+index_tool = {
+
+    load_homepage: function (count) {
+        var data=[
+            {
+                title:"1",
+            }
+        ];
+        var html_data ='';
+        for (var i=1;i<=count;i++){
+            html_data+=
+                "<div style='margin-left: 10px;margin-top: 10px;float: left'>" +
+                    "<div id='p"+i+"' style='background:#fafafa;'>" +
+                        "<p>panel content.</p> " +
+                        "<p>panel content.</p> " +
+                    "</div>" +
+                "</div>"
+        };
+        $("#data").html(html_data);
+
+        for (var i=1;i<=count;i++){
+        $('#p'+i+'').panel({
+            width:300,
+            height:150,
+            title:'My Panel',
+            tools:[{
+                iconCls:'icon-add',
+                handler:function(){alert('new')}
+            }
+            ]
+        });
+        }
+    },
+};
 $(document).ready(function () {
+    index_tool.load_homepage(5);
     $("#logout-btn").click(function () {
         $.messager.confirm('确认对话框', "您确认退出系统吗?", function (r) {
             if (r) {

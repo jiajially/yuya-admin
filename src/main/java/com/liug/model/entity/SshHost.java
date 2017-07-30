@@ -9,6 +9,8 @@ public class SshHost {
 
     // id :
     private Long id;
+    // 描述 、 简介
+    //String  summary;
     String host;
     int port;
     String username;
@@ -16,6 +18,11 @@ public class SshHost {
     String envPath;
     boolean isValid;
     boolean isEnable;
+
+    //操作系统id
+    //long os_id;
+    //软件id
+    //long sw_id;
 
     // create_time :创建时间
     private Date createTime;
@@ -32,7 +39,15 @@ public class SshHost {
     public void setId(Long id) {
         this.id = id;
     }
+/*
+    public String getSummary() {
+        return summary;
+    }
 
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+*/
     public int getPort() {
         return port;
     }

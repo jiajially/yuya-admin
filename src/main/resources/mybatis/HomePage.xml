@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.HomePageMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.HomePage">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="result" property="result" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="homepage" property="homepage" jdbcType="VARCHAR"/>
+        <result column="host_id" property="hostId" jdbcType="BIGINT"/>
+        <result column="cmd" property="cmd" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+     id,
+     title,
+     description,
+     unit,
+     result,
+     updateTime,
+     homepage,
+     hostId,
+     cmd,
+     status
+
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="title !=null and title.length() != 0">
+            AND title = #{title}
+        </if>
+        <if test="description !=null and description.length() != 0">
+            AND description = #{description}
+        </if>
+        <if test="unit !=null and unit.length() != 0">
+            AND unit = #{unit}
+        </if>
+        <if test="result !=null and result.length() != 0">
+            AND result = #{result}
+        </if>
+        <if test="updateTime !=null">
+            AND update_time = #{updateTime}
+        </if>
+        <if test="homepage !=null and homepage.length() != 0">
+            AND homepage = #{homepage}
+        </if>
+        <if test="hostId !=null">
+            AND host_id = #{hostId}
+        </if>
+        <if test="cmd !=null and cmd.length() != 0">
+            AND cmd = #{cmd}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.HomePage" useGeneratedKeys="true" keyProperty="id">
+        insert into home_page
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null ">
+                 id,
+            </if>
+            <if test="title !=null and title.length() != 0">
+                 title,
+            </if>
+            <if test="description !=null and description.length() != 0">
+                 description,
+            </if>
+            <if test="unit !=null and unit.length() != 0">
+                 unit,
+            </if>
+            <if test="result !=null and result.length() != 0">
+                 result,
+            </if>
+            <if test="updateTime !=null">
+                 update_time,
+            </if>
+            <if test="homepage !=null and homepage.length() != 0">
+                 homepage,
+            </if>
+            <if test="hostId !=null">
+                 host_id,
+            </if>
+            <if test="cmd !=null and cmd.length() != 0">
+                 cmd,
+            </if>
+            <if test="status !=null ">
+                 status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id !=null ">
+                #{id},
+            </if>
+            <if test="title !=null and title.length() != 0">
+                #{title},
+            </if>
+            <if test="description !=null and description.length() != 0">
+                #{description},
+            </if>
+            <if test="unit !=null and unit.length() != 0">
+                #{unit},
+            </if>
+            <if test="result !=null and result.length() != 0">
+                #{result},
+            </if>
+            <if test="updateTime !=null">
+                #{updateTime},
+            </if>
+            <if test="homepage !=null and homepage.length() != 0">
+                #{homepage},
+            </if>
+            <if test="hostId !=null">
+                #{hostId},
+            </if>
+            <if test="cmd !=null and cmd.length() != 0">
+                #{cmd},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="com.liug.model.entity.HomePage">
+        update home_page
+        <set>
+            <if test="id !=null ">
+                id = #{id},
+            </if>
+            <if test="title !=null and title.length() != 0">
+                title = #{title},
+            </if>
+            <if test="description !=null and description.length() != 0">
+                description = #{description},
+            </if>
+            <if test="unit !=null and unit.length() != 0">
+                unit = #{unit},
+            </if>
+            <if test="result !=null and result.length() != 0">
+                result = #{result},
+            </if>
+            <if test="updateTime !=null">
+                update_time = #{updateTime},
+            </if>
+            <if test="homepage !=null and homepage.length() != 0">
+                homepage = #{homepage},
+            </if>
+            <if test="hostId !=null">
+                host_id = #{hostId},
+            </if>
+            <if test="cmd !=null and cmd.length() != 0">
+                cmd = #{cmd},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE home_page
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.HomePage" resultType="com.liug.model.entity.HomePage">
+        select * from home_page where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.HomePage">
+        SELECT *
+        FROM home_page
+        WHERE id = #{id} AND status != 7
+    </select>
+
+    <select id="selectHomePage" resultType="com.liug.model.entity.HomePage">
+        SELECT distinct homepage
+        FROM home_page
+        WHERE status != 7
+        <if test="homepage !=null and homepage.length() != 0">
+            AND homepage = #{homepage}
+        </if>
+    </select>
+
+    <select id="selectByHomePage" resultType="com.liug.model.entity.HomePage">
+        SELECT *
+        FROM home_page
+        WHERE status != 7
+        <if test="homepage !=null and homepage.length() != 0">
+            AND homepage = #{homepage}
+        </if>
+    </select>
+    <select id="selectAll" resultType="com.liug.model.entity.HomePage">
+        SELECT *
+        FROM home_page
+        WHERE status != 7
+        <if test="homepage !=null and homepage.length() != 0">
+            AND homepage = #{homepage}
+        </if>
+        <if test="sort!=''">
+            ORDER BY ${sort}
+        </if>
+        <if test="order!=''">
+            ${order}
+        </if>
+    </select>
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM home_page
+        WHERE status != 7
+    </select>
+    <select id="selectByHomePageCount" resultType="com.liug.model.entity.HomePage">
+        SELECT COUNT(*)
+        FROM home_page
+        WHERE status != 7
+        <if test="homepage !=null and homepage.length() != 0">
+            AND homepage = #{homepage}
+        </if>
+    </select>
+
+</mapper>

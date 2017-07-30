@@ -1,10 +1,7 @@
 package com.liug.scheduler;
 
-import com.liug.common.ssh.Commond;
-import com.liug.dao.MonitorJobMapper;
 import com.liug.dao.MonitorLogMapper;
 import com.liug.dao.SshHostMapper;
-import com.liug.model.entity.MonitorJob;
 import com.liug.model.entity.MonitorLog;
 import com.liug.model.entity.SshHost;
 import org.slf4j.Logger;
@@ -12,10 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * Created by liugang on 2017/7/10.
