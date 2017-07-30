@@ -1,7 +1,5 @@
 package com.liug.common.ssh;
 
-import java.util.List;
-
 /**
  * Created by liugang on 2017/7/14.
  */

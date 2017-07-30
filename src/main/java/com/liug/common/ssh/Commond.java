@@ -3,9 +3,8 @@ import com.jcraft.jsch.*;
 import com.liug.model.entity.SshHost;
 
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Commond{
 
@@ -88,16 +87,75 @@ public class Commond{
     }
 
   }
-  /*public static void main(){
-    Commond commond = new Commond();
+
+  /**
+   *采用连接池方式
+   */
+  public static SshResult execute(boolean isPool,SshHost host, String commond){
+    SshResult result = new SshResult();
+    try{
+      SshSessionManager manager = SshSessionManager.getInstance();
+      Session session = manager.getSession(host);
+
+
+      String _tempCommond="";
+      if(host.getEnvPath()==null||host.getEnvPath().trim().equals(""))
+        _tempCommond = commond;
+      else
+        _tempCommond = "export PATH=" + host.getEnvPath() + ";" + commond;
+
+      Channel channel=session.openChannel("exec");
+      ((ChannelExec)channel).setCommand(_tempCommond);
+      channel.setInputStream(null);
+      ((ChannelExec)channel).setErrStream(System.err);
+      InputStream in=channel.getInputStream();
+      channel.connect();
+
+      String _tempResultStr="";
+      int _tempExitStatusCode;
+      byte[] tmp=new byte[1024];
+      while(true){
+        while(in.available()>0){
+          int i=in.read(tmp, 0, 1024);
+          if(i<0)break;
+          //System.out.print(new String(tmp, 0, i));
+          _tempResultStr += new String(tmp, 0, i);
+        }
+        if(channel.isClosed()){
+          if(in.available()>0) continue;
+          //System.out.println("exit-status: "+channel.getExitStatus());
+          _tempExitStatusCode = channel.getExitStatus();
+          break;
+        }
+        try{Thread.sleep(1000);}catch(Exception ee){}
+      }
+      result.setContent(_tempResultStr);
+      result.setExitStatus(_tempExitStatusCode);
+
+      channel.disconnect();
+      manager.freeSession(host,session);
+    }
+    catch(Exception e){
+      System.out.println(e);
+      result.setContent(e.getMessage());
+      result.setExitStatus(-1);
+    }finally {
+      return result;
+    }
+  }
+
+  /*public static void main(String [] args){
+    List<SshHost> hosts = new ArrayList<SshHost>();
     SshHost host = new SshHost();
     host.setEnvPath("/home/runtime/monitor/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/home/runtime/maven/bin:/home/runtime/jdk7/bin:/bin:/root/bin");
     host.setHost("192.168.31.188");
     host.setPassword("117700");
     host.setUsername("liugang");
     host.setPort(22);
-
-    System.out.println(Float.valueOf(Commond.execute(host,"free  | sed -n '2p' | awk '{print $3/$2}'").getContent()));
+    hosts.add(host);
+    System.out.println(Float.valueOf(Commond.execute(true,host,"free  | sed -n '2p' | awk '{print $3/$2}'").getContent()));
+    System.out.println(Float.valueOf(Commond.execute(true,host,"free  | sed -n '2p' | awk '{print $3/$2}'").getContent()));
+    SshSessionManager.getInstance().release();
 
     Date date = new Date();
     SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
