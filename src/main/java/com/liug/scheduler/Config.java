@@ -72,7 +72,7 @@ public class Config {
         }
     }
     //设置失效host
-    @Scheduled(cron = "0 * * * * ?") // 每秒执行一次
+    //@Scheduled(cron = "0 * * * * ?") // 每秒执行一次
     public void validHost() {
         List<SshHost> sshHosts = sshHostMapper.selectAll("id","asc",null,null,null);
         for (SshHost sshHost:sshHosts) {
@@ -85,7 +85,11 @@ public class Config {
                 sshResult = Commond.getEnvPath(sshHost);
                 if (sshResult.getExitStatus() == 0) {
                     sshHost.setValid(false);
-                    sshHost.setEnable(false);
+                    if (sshHost.getId() >= 0) {
+                        sshHostMapper.update(sshHost);
+                    }
+                }else if (sshResult.getExitStatus() == 1) {
+                    sshHost.setValid(true);
                     if (sshHost.getId() >= 0) {
                         sshHostMapper.update(sshHost);
                     }

@@ -8,6 +8,9 @@ import com.liug.common.util.ResponseCode;
 import com.liug.dao.SshHostMapper;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.SshHost;
+import com.liug.model.entity.SshHostDetail;
+import com.liug.model.entity.SshHostOs;
+import com.liug.model.entity.SshHostSw;
 import com.liug.service.SshHostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,15 +34,29 @@ public class SshHostServiceImpl implements SshHostService {
 
 
     @Override
-    public long insertHost(SshHost sshHost) {
+    public long insertHost(SshHost sshHost, SshHostDetail sshHostDetail) {
         int _existsCounts = sshHostMapper.selectCountsExists(sshHost.getHost(),sshHost.getPort(),sshHost.getUsername());
         if (_existsCounts > 0)return ResponseCode.host_already_exist.getCode();
-        else sshHostMapper.insert(sshHost);
+        else {
+            sshHost.setOs(sshHostDetail.getOsName()+"("+sshHostDetail.getOsVersion()+")");
+            sshHost.setSw(sshHostDetail.getSwName()+"("+sshHostDetail.getSwVersion()+")");
+            sshHost.setOsId(sshHostDetail.getOsId());
+            sshHost.setSwId(sshHostDetail.getSwId());
+            sshHost.setOsVersion(sshHostDetail.getOsVersion());
+            sshHost.setSwVersion(sshHostDetail.getSwVersion());
+            sshHostMapper.insert(sshHost);
+        }
         return sshHost.getId();
     }
 
     @Override
-    public long updateHost(SshHost sshHost) {
+    public long updateHost(SshHost sshHost, SshHostDetail sshHostDetail) {
+        sshHost.setOs(sshHostDetail.getOsName()+"("+sshHostDetail.getOsVersion()+")");
+        sshHost.setSw(sshHostDetail.getSwName()+"("+sshHostDetail.getSwVersion()+")");
+        sshHost.setOsId(sshHostDetail.getOsId());
+        sshHost.setSwId(sshHostDetail.getSwId());
+        sshHost.setOsVersion(sshHostDetail.getOsVersion());
+        sshHost.setSwVersion(sshHostDetail.getSwVersion());
         sshHostMapper.update(sshHost);
         return sshHost.getId();
     }
@@ -61,7 +78,11 @@ public class SshHostServiceImpl implements SshHostService {
         for (SshHost sshHost:sshHosts) {
             SelectContnet selectContnet = new SelectContnet();
             selectContnet.setId(sshHost.getId());
-            selectContnet.setText(sshHost.getUsername()+"@"+sshHost.getHost()+":"+sshHost.getPort());
+            selectContnet.setText(
+                    sshHost.getSummary()+"("+
+                    sshHost.getUsername()+"@"+sshHost.getHost()+":"+sshHost.getPort()
+                    +")"
+            );
             if(sshHost.isEnable()&&sshHost.isValid()) selectContnets.add(selectContnet);
         }
         return selectContnets;
@@ -80,7 +101,7 @@ public class SshHostServiceImpl implements SshHostService {
 
 
     @Override
-    public SshResult validHost(SshHost sshHost) {
+    public SshResult validHost(SshHost sshHost,SshHostDetail sshHostDetail) {
 
         SshResult sshResult = new SshResult();
         //验证数据重复性
@@ -94,12 +115,19 @@ public class SshHostServiceImpl implements SshHostService {
                 //验证成功,设置host参数
                 sshHost.setEnvPath(sshResult.getContent());
                 sshHost.setValid(true);
+                sshHost.setOs(sshHostDetail.getOsName()+"("+sshHostDetail.getOsVersion()+")");
+                sshHost.setSw(sshHostDetail.getSwName()+"("+sshHostDetail.getSwVersion()+")");
+                sshHost.setOsId(sshHostDetail.getOsId());
+                sshHost.setSwId(sshHostDetail.getSwId());
+                sshHost.setOsVersion(sshHostDetail.getOsVersion());
+                sshHost.setSwVersion(sshHostDetail.getSwVersion());
+
                 if (sshHost.getId() >= 0) {
                     sshHostMapper.update(sshHost);
                 } else {
                     sshHostMapper.insert(sshHost);
                 }
-                logger.info(sshHost.toString());
+                logger.debug(sshHost.toString());
             }
         }
         return sshResult;
@@ -115,5 +143,33 @@ public class SshHostServiceImpl implements SshHostService {
             sshHostMapper.update(sshHost);
         }
         return _temp;
+    }
+
+    @Override
+    public List<SelectContnet> getOs() {
+        List<SshHostOs> sshHostOsList = sshHostMapper.selectOsType();
+        List<SelectContnet> selectContnets = new ArrayList<SelectContnet>();
+        for (SshHostOs os: sshHostOsList) {
+            SelectContnet selectContnet  =new SelectContnet();
+            selectContnet.setId(os.getId());
+            selectContnet.setText(os.getName());
+            selectContnets.add(selectContnet);
+        }
+
+        return selectContnets;
+    }
+
+    @Override
+    public List<SelectContnet> getSw() {
+        List<SshHostSw> SshHostSwList = sshHostMapper.selectSwType();
+        List<SelectContnet> selectContnets = new ArrayList<SelectContnet>();
+        for (SshHostSw sw : SshHostSwList) {
+            SelectContnet selectContnet  = new SelectContnet();
+            selectContnet.setId(sw.getId());
+            selectContnet.setText(sw.getName());
+            selectContnets.add(selectContnet);
+        }
+
+        return selectContnets;
     }
 }

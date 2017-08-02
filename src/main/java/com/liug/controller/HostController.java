@@ -7,6 +7,7 @@ import com.liug.common.util.Result;
 import com.liug.common.util.StringUtil;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.SshHost;
+import com.liug.model.entity.SshHostDetail;
 import com.liug.service.SshHostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -92,7 +93,14 @@ public class HostController extends BaseController {
     @ApiOperation(value = "新增主机", httpMethod = "POST", produces = "application/json", response = Result.class)
     @ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
-    public Result insert(@RequestParam(required = true)String host,
+    public Result insert(@RequestParam(required = true)String summary,
+                         @RequestParam(required = false)Integer osTypeId,
+                         @RequestParam(required = false)String osversion,
+                         @RequestParam(required = false)Integer swTypeId,
+                         @RequestParam(required = false)String swversion,
+                         @RequestParam(required = false)String osName,
+                         @RequestParam(required = false)String swName,
+                         @RequestParam(required = true)String host,
                          @RequestParam(required = true)Integer port,
                          @RequestParam(required = true)String username,
                          @RequestParam(required = true)String password) {
@@ -101,8 +109,17 @@ public class HostController extends BaseController {
         sshHost.setPort(port);
         sshHost.setUsername(username);
         sshHost.setPassword(password);
+        sshHost.setSummary(summary);
         sshHost.setStatus(0);
-        long id = sshHostService.insertHost(sshHost);
+
+        SshHostDetail sshHostDetail = new SshHostDetail();
+        sshHostDetail.setOsId(osTypeId);
+        sshHostDetail.setSwId(swTypeId);
+        sshHostDetail.setOsVersion(osversion);
+        sshHostDetail.setSwVersion(swversion);
+        sshHostDetail.setOsName(osName);
+        sshHostDetail.setSwName(swName);
+        long id = sshHostService.insertHost(sshHost,sshHostDetail);
         if(id == ResponseCode.host_already_exist.getCode())return Result.instance(ResponseCode.host_already_exist);
         else return Result.success(id);
     }
@@ -119,6 +136,13 @@ public class HostController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public Result update(@RequestParam(required = true)Long id,
+                         @RequestParam(required = true)String summary,
+                         @RequestParam(required = false)Integer osTypeId,
+                         @RequestParam(required = false)String osversion,
+                         @RequestParam(required = false)Integer swTypeId,
+                         @RequestParam(required = false)String swversion,
+                         @RequestParam(required = false)String osName,
+                         @RequestParam(required = false)String swName,
                          @RequestParam(required = true)String host,
                          @RequestParam(required = true)Integer port,
                          @RequestParam(required = true)String username,
@@ -129,7 +153,16 @@ public class HostController extends BaseController {
         sshHost.setPort(port);
         sshHost.setUsername(username);
         sshHost.setPassword(password);
-        return Result.success(sshHostService.updateHost(sshHost));
+        sshHost.setSummary(summary);
+
+        SshHostDetail sshHostDetail = new SshHostDetail();
+        sshHostDetail.setOsId(osTypeId);
+        sshHostDetail.setSwId(swTypeId);
+        sshHostDetail.setOsVersion(osversion);
+        sshHostDetail.setSwVersion(swversion);
+        sshHostDetail.setOsName(osName);
+        sshHostDetail.setSwName(swName);
+        return Result.success(sshHostService.updateHost(sshHost,sshHostDetail));
     }
 
     /**
@@ -172,7 +205,14 @@ public class HostController extends BaseController {
                             @RequestParam String host,
                             @RequestParam Integer port,
                             @RequestParam String username,
-                            @RequestParam String password) {
+                            @RequestParam String password,
+                            @RequestParam String summary,
+                            @RequestParam(required = false)Integer osTypeId,
+                            @RequestParam(required = false)String osversion,
+                            @RequestParam(required = false)Integer swTypeId,
+                            @RequestParam(required = false)String swversion,
+                            @RequestParam(required = false)String osName,
+                            @RequestParam(required = false)String swName) {
         Result result;
         SshResult sshResult;
         SshHost sshHost = new SshHost();
@@ -181,8 +221,17 @@ public class HostController extends BaseController {
         sshHost.setPort(port);
         sshHost.setPassword(password);
         sshHost.setUsername(username);
-        sshResult = sshHostService.validHost(sshHost);
+        sshHost.setSummary(summary);
 
+        SshHostDetail sshHostDetail = new SshHostDetail();
+        sshHostDetail.setOsId(osTypeId);
+        sshHostDetail.setSwId(swTypeId);
+        sshHostDetail.setOsVersion(osversion);
+        sshHostDetail.setSwVersion(swversion);
+        sshHostDetail.setOsName(osName);
+        sshHostDetail.setSwName(swName);
+
+        sshResult = sshHostService.validHost(sshHost,sshHostDetail);
         if (sshResult.getExitStatus() == 1) result=Result.success(sshResult);
         else if (sshResult.getExitStatus()==ResponseCode.host_already_exist.getCode())
             result = Result.instance(ResponseCode.host_already_exist);
@@ -227,6 +276,30 @@ public class HostController extends BaseController {
             result = Result.instance(ResponseCode.host_valid_enable_fail);
         }
         return result;
+    }
+
+
+    /**
+     * 查询主机系统列表-选择框
+     *
+     */
+    @ApiOperation(value = "查询主机系统列表-选择框", httpMethod = "GET", produces = "application/json", response = PageInfo.class)
+    @ResponseBody
+    @RequestMapping(value = "os/select", method = RequestMethod.GET)
+    public List<SelectContnet> osSelect() {
+
+        return sshHostService.getOs();
+    }
+    /**
+     * 查询主机软件列表-选择框
+     *
+     */
+    @ApiOperation(value = "查询主机软件列表-选择框", httpMethod = "GET", produces = "application/json", response = PageInfo.class)
+    @ResponseBody
+    @RequestMapping(value = "sw/select", method = RequestMethod.GET)
+    public List<SelectContnet> swSelect() {
+
+        return sshHostService.getSw();
     }
 
 }

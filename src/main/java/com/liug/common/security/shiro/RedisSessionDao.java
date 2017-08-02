@@ -6,7 +6,7 @@ import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.Serializable;
 import java.util.*;
@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @Date 2016/10/8/11:25
  * @Description session redis实现
  */
-public class RedisSessionDao extends AbstractSessionDAO {
-    private static final String sessionIdPrefix = "shiro-session-";
+/* public class RedisSessionDao extends AbstractSessionDAO {
+   private static final String sessionIdPrefix = "shiro-session-";
     private static final String sessionIdPrefix_keys = "shiro-session-*";
     private static final long timeout = 2592000;
     private transient static Logger log = LoggerFactory.getLogger(RedisSessionDao.class);
@@ -63,4 +63,4 @@ public class RedisSessionDao extends AbstractSessionDAO {
         List<Session> sessions = redisTemplate.opsForValue().multiGet(keys);
         return Collections.unmodifiableCollection(sessions);
     }
-}
+}*/

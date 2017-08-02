@@ -4,7 +4,7 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2016/10/9/13:55
  * @Description Cache   redis实现
  */
+/*
 public class RedisCache<K, V> implements Cache<K, V>, Serializable {
     public static final String shiro_cache_prefix = "shiro-cache-";
     public static final String shiro_cache_prefix_keys = "shiro-cache-*";
@@ -99,4 +100,7 @@ public class RedisCache<K, V> implements Cache<K, V>, Serializable {
     public void setRedisTemplate(RedisTemplate<K, V> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
+
+
 }
+*/

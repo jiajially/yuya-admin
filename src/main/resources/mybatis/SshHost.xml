@@ -3,7 +3,14 @@
 <mapper namespace="com.liug.dao.SshHostMapper">
     <resultMap id="baseResultMap" type="com.liug.model.entity.SshHost">
         <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="os_id" property="osId" jdbcType="BIGINT"/>
+        <result column="sw_id" property="swId" jdbcType="BIGINT"/>
+        <result column="os" property="os" jdbcType="VARCHAR"/>
+        <result column="sw" property="sw" jdbcType="VARCHAR"/>
+        <result column="os_version" property="osVersion" jdbcType="VARCHAR"/>
+        <result column="sw_version" property="swVersion" jdbcType="VARCHAR"/>
         <result column="host" property="host" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
         <result column="port" property="port" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
@@ -16,7 +23,14 @@
     </resultMap>
     <sql id="sql_column">
         id,
+        osId,
+        swId,
+        os,
+        sw,
+        osVersion,
+        swVersion,
         host,
+        summary,
         port,
         username,
         password,
@@ -32,8 +46,29 @@
         <if test="id !=null ">
             AND id = #{id}
         </if>
+        <if test="osId !=null ">
+            AND os_id = #{osId}
+        </if>
+        <if test="swId !=null ">
+            AND sw_id = #{swId}
+        </if>
+        <if test="os !=null and os.length() != 0">
+            AND os = #{os}
+        </if>
+        <if test="swVersion !=null and swVersion.length() != 0">
+            AND sw_version = #{swVersion}
+        </if>
+        <if test="os !=null and os.length() != 0">
+            AND os_version = #{swVersion}
+        </if>
+        <if test="sw !=null and sw.length() != 0">
+            AND sw = #{sw}
+        </if>
         <if test="host !=null and host.length() != 0">
             AND host = #{host}
+        </if>
+        <if test="summary !=null and summary.length() != 0">
+            AND summary = #{summary}
         </if>
         <if test="port !=null">
             AND port = #{port}
@@ -67,8 +102,30 @@
     <insert id="insert" parameterType="com.liug.model.entity.SshHost" useGeneratedKeys="true" keyProperty="id">
         insert into ssh_host
         <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="osId !=null ">
+                 os_id,
+            </if>
+            <if test="swId !=null ">
+                 sw_id,
+            </if>
+            <if test="os !=null and os.length() !=0">
+                os,
+            </if>
+            <if test="sw !=null and sw.length() !=0">
+                sw,
+            </if>
+            <if test="osVersion !=null and osVersion.length() !=0">
+                os_version,
+            </if>
+            <if test="swVersion !=null and swVersion.length() !=0">
+                sw_version,
+            </if>
             <if test="host !=null and host.length() !=0">
                 host,
+            </if>
+            <if test="summary !=null and summary.length() !=0">
+                summary,
             </if>
             <if test="port !=null">
                 port,
@@ -99,8 +156,29 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="osId !=null ">
+                #{osId},
+            </if>
+            <if test="swId !=null ">
+                #{swId},
+            </if>
+            <if test="os !=null and os.length() !=0">
+                #{os},
+            </if>
+            <if test="sw !=null and sw.length() !=0">
+                #{sw},
+            </if>
+            <if test="osVersion !=null and osVersion.length() !=0">
+                #{osVersion},
+            </if>
+            <if test="sw !=null and sw.length() !=0">
+                #{swVersion},
+            </if>
             <if test="host !=null and host.length() !=0">
                 #{host},
+            </if>
+            <if test="summary !=null and summary.length() !=0">
+                #{summary},
             </if>
             <if test="port !=null">
                 #{port},
@@ -136,8 +214,29 @@
     <update id="update" parameterType="com.liug.model.entity.SshHost">
         update ssh_host
         <set>
+            <if test="osId !=null ">
+                os_id = #{osId},
+            </if>
+            <if test="swId !=null ">
+                sw_id = #{swId},
+            </if>
+            <if test="os !=null and os.length() !=0">
+                os = #{os},
+            </if>
+            <if test="sw !=null and sw.length() !=0">
+                sw = #{sw},
+            </if>
+            <if test="osVersion !=null and osVersion.length() !=0">
+                os_version = #{osVersion},
+            </if>
+            <if test="swVersion !=null and swVersion.length() !=0">
+                sw_version = #{swVersion},
+            </if>
             <if test="host !=null and host.length() !=0">
                 host = #{host},
+            </if>
+            <if test="summary !=null and summary.length() !=0">
+                summary = #{summary},
             </if>
             <if test="port !=null">
                 port = #{port},
@@ -181,12 +280,32 @@
             <include refid="sql_column_where"/>
         </where>
     </select>
+    <select id="selectOsType" resultType="com.liug.model.entity.SshHostOs">
+        select * from type_os
+    </select>
+    <select id="selectSwType"  resultType="com.liug.model.entity.SshHostSw">
+        select * from type_sw
+    </select>
+
+
+
 
     <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SshHost">
         SELECT *
         FROM ssh_host
         WHERE id = #{id} AND status != 7
     </select>
+    <select id="selectOsTypeById" parameterType="long" resultType="com.liug.model.entity.SshHostOs">
+        SELECT *
+        FROM type_os
+        WHERE id = #{id} AND status != 7
+    </select>
+    <select id="selectSwTypeById" parameterType="long" resultType="com.liug.model.entity.SshHostSw">
+        SELECT *
+        FROM type_sw
+        WHERE id = #{id} AND status != 7
+    </select>
+
 
     <select id="selectAll" resultType="com.liug.model.entity.SshHost">
         SELECT *

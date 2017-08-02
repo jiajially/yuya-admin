@@ -10,7 +10,7 @@ public class SshHost {
     // id :
     private Long id;
     // 描述 、 简介
-    //String  summary;
+    String  summary;
     String host;
     int port;
     String username;
@@ -20,9 +20,18 @@ public class SshHost {
     boolean isEnable;
 
     //操作系统id
-    //long os_id;
+    long osId;
     //软件id
-    //long sw_id;
+    long swId;
+
+    //操作系统
+    String os;
+    //软件
+    String sw;
+    //操作系统版本
+    String osVersion;
+    //软件版本
+    String swVersion;
 
     // create_time :创建时间
     private Date createTime;
@@ -39,7 +48,7 @@ public class SshHost {
     public void setId(Long id) {
         this.id = id;
     }
-/*
+
     public String getSummary() {
         return summary;
     }
@@ -47,7 +56,7 @@ public class SshHost {
     public void setSummary(String summary) {
         this.summary = summary;
     }
-*/
+
     public int getPort() {
         return port;
     }
@@ -129,10 +138,60 @@ public class SshHost {
         this.status = status;
     }
 
+    public long getOsId() {
+        return osId;
+    }
+
+    public void setOsId(long osId) {
+        this.osId = osId;
+    }
+
+    public long getSwId() {
+        return swId;
+    }
+
+    public void setSwId(long swId) {
+        this.swId = swId;
+    }
+
+
+    public String getOs() {
+        return os;
+    }
+
+    public void setOs(String os) {
+        this.os = os;
+    }
+
+    public String getSw() {
+        return sw;
+    }
+
+    public void setSw(String sw) {
+        this.sw = sw;
+    }
+
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    public void setOsVersion(String osVersion) {
+        this.osVersion = osVersion;
+    }
+
+    public String getSwVersion() {
+        return swVersion;
+    }
+
+    public void setSwVersion(String swVersion) {
+        this.swVersion = swVersion;
+    }
+
     @Override
     public String toString() {
         return "SshHost{" +
                 "id=" + id +
+                ", summary='" + summary + '\'' +
                 ", host='" + host + '\'' +
                 ", port=" + port +
                 ", username='" + username + '\'' +
@@ -140,6 +199,12 @@ public class SshHost {
                 ", envPath='" + envPath + '\'' +
                 ", isValid=" + isValid +
                 ", isEnable=" + isEnable +
+                ", osId=" + osId +
+                ", swId=" + swId +
+                ", os='" + os + '\'' +
+                ", sw='" + sw + '\'' +
+                ", osVersion='" + osVersion + '\'' +
+                ", swVersion='" + swVersion + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", status=" + status +

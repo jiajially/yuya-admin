@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -39,8 +39,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysPermissionMapper sysPermissionMapper;
     @Autowired
     private SysLoginStatusMapper sysLoginStatusMapper;
-    @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+    //@Autowired
+    //private RedisTemplate<Object, Object> redisTemplate;
 
     @Override
     public long insertUser(SysUser user, String jobIds, String permissionIds) {
@@ -165,7 +165,7 @@ public class SysUserServiceImpl implements SysUserService {
         SysLoginStatus oldLoginStatus = sysLoginStatusMapper.selectByUserIdAndPlatform(user.getId(), platform);
         if (oldLoginStatus != null) {
             if (!oldLoginStatus.getSessionId().equals(id.toString())) {
-                redisTemplate.opsForValue().getOperations().delete(oldLoginStatus.getSessionId());
+                //redisTemplate.opsForValue().getOperations().delete(oldLoginStatus.getSessionId());
             }
             oldLoginStatus.setStatus(2);
             sysLoginStatusMapper.update(oldLoginStatus);

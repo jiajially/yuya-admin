@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +34,8 @@ public class SystemServiceImpl implements SystemService {
     private SysUserRoleOrganizationMapper sysUserRoleOrganizationMapper;
     @Autowired
     private SysLoginStatusMapper sysLoginStatusMapper;
-    @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+    //@Autowired
+    //private RedisTemplate<Object, Object> redisTemplate;
     @Autowired
     private SysRoleOrganizationMapper sysRoleOrganizationMapper;
     @Autowired
@@ -55,9 +55,9 @@ public class SystemServiceImpl implements SystemService {
             sysLoginStatus.setStatus(2);
             sysLoginStatusMapper.update(sysLoginStatus);
             //delete session
-            redisTemplate.opsForValue().getOperations().delete(sysLoginStatus.getSessionId());
+            //redisTemplate.opsForValue().getOperations().delete(sysLoginStatus.getSessionId());
             //delete authrization cache
-            redisTemplate.opsForValue().getOperations().delete(SystemConstant.shiro_cache_prefix + sysLoginStatus.getSysUserLoginName());
+            //redisTemplate.opsForValue().getOperations().delete(SystemConstant.shiro_cache_prefix + sysLoginStatus.getSysUserLoginName());
         }
         log.debug("force logout userId : {}", userId);
     }
@@ -66,18 +66,18 @@ public class SystemServiceImpl implements SystemService {
     public void clearAuthorizationInfoCacheByUserId(long userId) {
         SysUser sysUser = sysUserMapper.selectById(userId);
         if (sysUser != null) {
-            redisTemplate.opsForValue().getOperations().delete(SystemConstant.shiro_cache_prefix + sysUser.getLoginName());
+            //redisTemplate.opsForValue().getOperations().delete(SystemConstant.shiro_cache_prefix + sysUser.getLoginName());
         }
         log.debug("clear authorization info cache userId : {}", userId);
     }
 
     @Override
     public void clearAuthorizationInfoALL() {
-        Set<Object> keys = redisTemplate.keys(SystemConstant.shiro_cache_prefix_keys);
+        /*Set<Object> keys = redisTemplate.keys(SystemConstant.shiro_cache_prefix_keys);
         if (keys.size() > 0) {
             redisTemplate.opsForValue().getOperations().delete(keys);
             log.debug("clear authorization info cache key : {}", keys.toArray());
-        }
+        }*/
     }
 
     @Override
@@ -91,7 +91,7 @@ public class SystemServiceImpl implements SystemService {
                     for (Long userId : userIds) {
                         SysUser sysUser = sysUserMapper.selectById(userId);
                         if (sysUser != null) {
-                            redisTemplate.opsForValue().getOperations().delete(SystemConstant.shiro_cache_prefix + sysUser.getLoginName());
+                            //redisTemplate.opsForValue().getOperations().delete(SystemConstant.shiro_cache_prefix + sysUser.getLoginName());
                         }
                     }
                 }
@@ -151,7 +151,7 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public void deleteDataItemById(Long id) {
         SysDataItem sysDataItem = sysDataItemMapper.selectById(id);
-        redisTemplate.opsForValue().getOperations().delete(sysDataItem.getSysDataGroupId() + "-" + sysDataItem.getKeyName());
+        //redisTemplate.opsForValue().getOperations().delete(sysDataItem.getSysDataGroupId() + "-" + sysDataItem.getKeyName());
         sysDataItemMapper.deleteById(id);
     }
 
@@ -183,13 +183,14 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public String selectDataItemByKey(String key, Long groupId) {
-        String value = (String) redisTemplate.opsForValue().get(groupId + "-" + key);
+        /*String value = (String) redisTemplate.opsForValue().get(groupId + "-" + key);
         if (value == null) {
             log.debug("get groupId:{} key:{} value from DB", groupId, key);
             value = sysDataItemMapper.selectByKey(key, groupId);
             redisTemplate.opsForValue().set(groupId + "-" + key, value);
-        }
-        return value;
+        }*/
+        //return value;
+        return "";
     }
 
     @Override
@@ -228,15 +229,16 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public boolean isForbiddenIp(String remoteAddr) {
-        Boolean result = redisTemplate.opsForSet().isMember("ip_intercepter", remoteAddr);
+        //Boolean result = redisTemplate.opsForSet().isMember("ip_intercepter", remoteAddr);
+        Boolean result = true;
         log.debug("isForbiddenIp result : {}", result);
         return result;
     }
 
     @Override
     public void updateDateItem(SysDataItem sysDataItem) {
-        redisTemplate.opsForValue().getOperations().delete(sysDataItem.getSysDataGroupId() + "-" + sysDataItem.getKeyName());
-        sysDataItemMapper.update(sysDataItem);
+        //redisTemplate.opsForValue().getOperations().delete(sysDataItem.getSysDataGroupId() + "-" + sysDataItem.getKeyName());
+        //sysDataItemMapper.update(sysDataItem);
     }
 
     @Override
@@ -247,13 +249,13 @@ public class SystemServiceImpl implements SystemService {
         sysDataItem.setKeyValue("true");
         sysDataItemMapper.update(sysDataItem);
         //删除缓存
-        redisTemplate.opsForValue().getOperations().delete("3-ip_forbidden");
+        //redisTemplate.opsForValue().getOperations().delete("3-ip_forbidden");
         List<SysIpForbidden> sysIpForbiddens = sysIpForbiddenMapper.selectAll();
         for (SysIpForbidden sysIpForbidden : sysIpForbiddens) {
             long time = System.currentTimeMillis() - sysIpForbidden.getExpireTime().getTime();
             log.debug("time:{}", time);
             if (time < 0) {
-                redisTemplate.opsForSet().add("ip_intercepter", sysIpForbidden.getIp());
+                //redisTemplate.opsForSet().add("ip_intercepter", sysIpForbidden.getIp());
             }
         }
     }
@@ -266,8 +268,8 @@ public class SystemServiceImpl implements SystemService {
         sysDataItem.setKeyValue("false");
         sysDataItemMapper.update(sysDataItem);
         //删除缓存
-        redisTemplate.opsForValue().getOperations().delete("3-ip_forbidden");
-        redisTemplate.opsForSet().getOperations().delete("ip_intercepter");
+        //redisTemplate.opsForValue().getOperations().delete("3-ip_forbidden");
+        //redisTemplate.opsForSet().getOperations().delete("ip_intercepter");
     }
 
     @Override

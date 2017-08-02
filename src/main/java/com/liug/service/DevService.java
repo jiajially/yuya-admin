@@ -1,10 +1,12 @@
 package com.liug.service;
 
+import com.liug.common.ssh.SelectContnet;
 import com.liug.common.ssh.SshChartResult;
 import com.liug.common.util.Result;
 import com.liug.model.entity.CharRecg;
 import com.liug.model.entity.HomePage;
 import com.liug.model.entity.MonitorLog;
+import com.liug.model.entity.SshHostOs;
 
 import java.util.List;
 
@@ -28,4 +30,5 @@ public interface DevService {
     Result toolbox(long id,int type);
 
     public Result flash();
+
 }

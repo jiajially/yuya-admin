@@ -1,6 +1,8 @@
 package com.liug.dao;
 
 import com.liug.model.entity.SshHost;
+import com.liug.model.entity.SshHostOs;
+import com.liug.model.entity.SshHostSw;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -33,4 +35,11 @@ public interface SshHostMapper {
 
     //通过id进行查询
     SshHost selectById(@Param("id") Long id);
+
+    //获取所有OS类别
+    List<SshHostOs> selectOsType();
+
+    //获取所有软件类别
+    List<SshHostSw> selectSwType();
+
 }
