@@ -14,9 +14,13 @@ loadfile_tool = {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/dev/cat',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
+                common_tool.process_finish();
                 if (result.code == 10000) {
                     common_tool.messager_show(result.msg);
                     editor.txt.html('<pre>'+result.data.content+'</pre>')

@@ -2,13 +2,10 @@ dashboard_tool = {
     form_clear: function () {
     },
     load_cup_mem: function (hostId) {
-        // 基于准备好的dom，初始化echarts实例
-        var chart_disk = echarts.init(document.getElementById('disk'));
 
         var data1 = [];
         var data2 = [];
         var now = new Date(Date.now());
-
         //MEM数据
         $.ajax({
             data: {
@@ -18,8 +15,11 @@ dashboard_tool = {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/dev/monitor/log',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
                 if (result.code == 10000) {
                     for(var i = 0 ; i<=result.data.length;i++){
@@ -34,8 +34,10 @@ dashboard_tool = {
                             data1.push(tmp_data1);
                         }
                     }
+
                 }
-            }
+                dashboard_tool.set_option(data1,data2);
+            },
         });
         //CPU 数据
         $.ajax({
@@ -46,8 +48,11 @@ dashboard_tool = {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/dev/monitor/log',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
                 if (result.code == 10000) {
                     for(var i = 0 ; i<=result.data.length;i++){
@@ -59,13 +64,23 @@ dashboard_tool = {
                                     result.data[i].result * 100
                                 ]
                             };
-                            console.log(new Date(result.data[i].recTime));
+                            //console.log(new Date(result.data[i].recTime));
                             data2.push(tmp_data1);
                         }
                     }
                 }
+
+                dashboard_tool.set_option(data1,data2);
+                common_tool.process_finish();
             }
         });
+
+    },
+
+    set_option:function (data1,data2) {
+
+        // 基于准备好的dom，初始化echarts实例
+        var chart_disk = echarts.init(document.getElementById('disk'));
         var option = {
             title: {
                 text: '远程主机运行状态'
@@ -117,10 +132,14 @@ dashboard_tool = {
                 data: data2
             }]
         };
-        console.log(data1);
-        console.log(data2);
         chart_disk.setOption(option, true);
     },
+
+
+
+
+
+
     load_combox: function () {
         $("#dashboard-host").combobox({
             url:getRootPath() + '/host/select',
@@ -147,8 +166,11 @@ dashboard_tool = {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/dev/ssh/task/sum',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
                 if (result.code == 10000) {
                    for(var i=23;i>=0;i--){//倒序
@@ -158,69 +180,70 @@ dashboard_tool = {
                        data_all.push(tmp.allCount);
 
                    }
-                   console.log(data_x);
+                   //console.log(data_x);
                 }
+                var option = {
+                    title : {
+                        text: 'SSH任务量'
+                    },
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data:['总和','失败数量']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [{
+                        type : 'category',
+                        data : data_x
+                    }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+
+                        {
+                            name: '总和',
+                            type:'bar',
+                            data:data_all,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            itemStyle:{
+                                normal:{color:'#6CA6CD'}
+                            }
+                        },
+                        {
+                            name:'失败数量',
+                            type:'bar',
+                            barGap: '-100%',
+                            data:data_fail,
+                            itemStyle:{
+                                normal:{color:'#FF4040'}
+                            }
+                        }
+                    ]
+                };
+                chart_task.setOption(option, true);
+                common_tool.process_finish();
             }
         });
 
 
-        var option = {
-            title : {
-                text: 'SSH任务量'
-            },
-                tooltip : {
-                    trigger: 'axis',
-                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                legend: {
-                    data:['总和','失败数量']
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis : [{
-                    type : 'category',
-                    data : data_x
-                }
-                ],
-                yAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                series : [
-
-                    {
-                        name: '总和',
-                        type:'bar',
-                        data:data_all,
-                        markPoint : {
-                            data : [
-                                {type : 'max', name: '最大值'},
-                                {type : 'min', name: '最小值'}
-                            ]
-                        },
-                        itemStyle:{
-                            normal:{color:'#6CA6CD'}
-                        }
-                    },
-                    {
-                        name:'失败数量',
-                        type:'bar',
-                        barGap: '-100%',
-                        data:data_fail,
-                        itemStyle:{
-                            normal:{color:'#FF4040'}
-                        }
-                    }
-                ]
-            };
-        chart_task.setOption(option, true);
 
 
     },
@@ -248,6 +271,16 @@ dashboard_tool = {
             }
         });
     },
+
+    sleep:function (numberMillis) {
+    var now = new Date();
+    var exitTime = now.getTime() + numberMillis;
+    while (true) {
+        now = new Date();
+        if (now.getTime() > exitTime)
+            return;
+    }
+}
 
 };
 $(document).ready(function () {

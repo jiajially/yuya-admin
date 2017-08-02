@@ -177,9 +177,13 @@ script_tool = {
                 traditional: true,
                 method: 'post',
                 url: getRootPath() + '/ssh/script/insert',
-                async: false,
+                async: true,
                 dataType: 'json',
+                beforeSend:function () {
+                    common_tool.process_wait("加载中...")
+                },
                 success: function (result) {
+                    common_tool.process_finish();
                     if (result.code == 10000) {
                         $("#script_new_dialog").dialog("close");
                         script_tool.form_clear();
@@ -228,9 +232,13 @@ script_tool = {
                 traditional: true,
                 method: 'post',
                 url: getRootPath() + '/ssh/script/update',
-                async: false,
+                async: true,
                 dataType: 'json',
+                beforeSend:function () {
+                    common_tool.process_wait("加载中...")
+                },
                 success: function (result) {
+                    common_tool.process_finish();
                     if (result.code == 10000) {
                         $("#script_new_dialog").dialog("close");
                         script_tool.form_clear();
@@ -254,9 +262,13 @@ script_tool = {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/ssh/script/delete',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
+                common_tool.process_finish();
                 if (result.code == 10000) {
                     script_tool.form_clear();
                     script_tool.init_main_view();
@@ -277,9 +289,13 @@ script_tool = {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/ssh/script/stop',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
+                common_tool.process_finish();
                 if (result.code == 10000) {
                     script_tool.form_clear();
                     script_tool.init_main_view();

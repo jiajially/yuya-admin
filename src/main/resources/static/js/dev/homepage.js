@@ -12,64 +12,71 @@ homepage_tool = {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/dev/homepage/select',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
                 if (result.code == 10000) {
                     hp_tmp_data = result.data;
+                    var html_data ='';
+                    for (var i=0;i<hp_tmp_data.length;i++){
+                        var tmp_date = new Date(hp_tmp_data[i].updateTime);
+                        var formate_date = tmp_date.getFullYear()+"年"+
+                            (tmp_date.getMonth()+1)+"月"+
+                            tmp_date.getDate()+"日"+" "+
+                            tmp_date.getHours()+":"+tmp_date.getMinutes()+":"+tmp_date.getSeconds();
+                        html_data+=
+                            /*"<div style='margin-left: 20px;margin-top: 20px;margin-bottom:10px;float: left'>" +
+                             "<div id='homepage-p"+i+"' style='background:#fafafa;'>" +
+                             "<p style='margin-left: 10px' >描述："+hp_tmp_data[i].description+"</p> " +
+                             "<p style='margin-left: 10px' >结果："+hp_tmp_data[i].result+"</p> " +
+                             "<p style='margin-left: 10px' >单位："+hp_tmp_data[i].unit+"</p> " +
+                             "<p style='margin-left: 10px' >更新："+hp_tmp_data[i].update+"</p> " +
+                             "</div>" +
+                             "</div>"*/
+                            "<div style='margin-left: 20px;margin-top: 20px;margin-bottom:10px;float: left'>" +
+                            "<div id='homepage-p"+i+"' class=\"easyui-panel\" style=\"width:320px;height:160px\""+
+                            "title='"+hp_tmp_data[i].title+"' data-options=\"tools:'#tt"+i+"'\">"+
+                            "<p style='margin-left: 10px' >描述："+hp_tmp_data[i].description+"</p> " +
+                            "<p style='margin-left: 10px' >结果："+hp_tmp_data[i].result+"</p> " +
+                            "<p style='margin-left: 10px' >单位："+hp_tmp_data[i].unit+"</p> " +
+                            "<p style='margin-left: 10px' >更新："+formate_date+"</p> " +
+                            "</div>"+
+                            "<div id=\"tt"+i+"\">"+
+                            "<a href=\"#\" class=\"icon-cancel\" onclick=\"javascript:homepage_tool.toolbox('"+hp_tmp_data[i].id+"',1)\"></a>"+
+                            "<a href=\"#\" class=\"icon-reload\" onclick=\"javascript:homepage_tool.toolbox('"+hp_tmp_data[i].id+"',2)\"></a>"+
+                            "</div>" +
+                            "</div>";
+                    };
+                    $("#homepage_data").html(html_data);
+
+                    for (var i=0;i<hp_tmp_data.length;i++){
+                        $('#homepage-p'+i+'').panel({
+                            width:320,
+                            height:160,
+                            title:hp_tmp_data[i].title,
+                            /*tools:[{
+                             iconCls:'icon-reload',
+                             handler:function(){
+                             console.log( $("#homepage_data"));
+                             }
+                             },{
+                             iconCls:'icon-reload',
+                             handler:function(){alert('更新结果')}
+                             },
+                             ]*/
+                        });
+                    };
+
+                    common_tool.process_finish();
+
                 }
             }
         });
 
-        var html_data ='';
-        for (var i=0;i<hp_tmp_data.length;i++){
-            var tmp_date = new Date(hp_tmp_data[i].updateTime);
-            var formate_date = tmp_date.getFullYear()+"年"+
-                (tmp_date.getMonth()+1)+"月"+
-                tmp_date.getDate()+"日"+" "+
-                tmp_date.getHours()+":"+tmp_date.getMinutes()+":"+tmp_date.getSeconds();
-            html_data+=
-                /*"<div style='margin-left: 20px;margin-top: 20px;margin-bottom:10px;float: left'>" +
-                "<div id='homepage-p"+i+"' style='background:#fafafa;'>" +
-                "<p style='margin-left: 10px' >描述："+hp_tmp_data[i].description+"</p> " +
-                "<p style='margin-left: 10px' >结果："+hp_tmp_data[i].result+"</p> " +
-                "<p style='margin-left: 10px' >单位："+hp_tmp_data[i].unit+"</p> " +
-                "<p style='margin-left: 10px' >更新："+hp_tmp_data[i].update+"</p> " +
-                "</div>" +
-                "</div>"*/
-                "<div style='margin-left: 20px;margin-top: 20px;margin-bottom:10px;float: left'>" +
-                "<div id='homepage-p"+i+"' class=\"easyui-panel\" style=\"width:320px;height:160px\""+
-                "title='"+hp_tmp_data[i].title+"' data-options=\"tools:'#tt"+i+"'\">"+
-                "<p style='margin-left: 10px' >描述："+hp_tmp_data[i].description+"</p> " +
-                "<p style='margin-left: 10px' >结果："+hp_tmp_data[i].result+"</p> " +
-                "<p style='margin-left: 10px' >单位："+hp_tmp_data[i].unit+"</p> " +
-                "<p style='margin-left: 10px' >更新："+formate_date+"</p> " +
-                "</div>"+
-                "<div id=\"tt"+i+"\">"+
-                "<a href=\"#\" class=\"icon-cancel\" onclick=\"javascript:homepage_tool.toolbox('"+hp_tmp_data[i].id+"',1)\"></a>"+
-                "<a href=\"#\" class=\"icon-reload\" onclick=\"javascript:homepage_tool.toolbox('"+hp_tmp_data[i].id+"',2)\"></a>"+
-                "</div>" +
-                "</div>";
-        };
-        $("#homepage_data").html(html_data);
 
-        for (var i=0;i<hp_tmp_data.length;i++){
-            $('#homepage-p'+i+'').panel({
-                width:320,
-                height:160,
-                title:hp_tmp_data[i].title,
-                /*tools:[{
-                    iconCls:'icon-reload',
-                    handler:function(){
-                        console.log( $("#homepage_data"));
-                    }
-                },{
-                    iconCls:'icon-reload',
-                    handler:function(){alert('更新结果')}
-                },
-                ]*/
-            });
-        }
     },
     save: function () {
         var form_isValid = $("#homepage_form").form('validate');
@@ -93,10 +100,14 @@ homepage_tool = {
                 traditional: true,
                 method: 'post',
                 url: getRootPath() + '/dev/homepage/insert',
-                async: false,
+                async: true,
                 dataType: 'json',
+                beforeSend:function () {
+                    common_tool.process_wait("加载中...")
+                },
                 success: function (result) {
-                    console.log(result);
+                    //console.log(result);
+                    common_tool.process_finish();
                     if (result.code == 10000) {
                         $("#homepage_edit_dialog").dialog("close");
                         homepage_tool.form_clear();
@@ -108,6 +119,7 @@ homepage_tool = {
                     else {
                         common_tool.messager_show(result.msg);
                     }
+
                 }
             });
 
@@ -194,10 +206,14 @@ homepage_tool = {
                 traditional: true,
                 method: 'get',
                 url: getRootPath() + '/dev/homepage/toolbox',
-                async: false,
+                async: true,
                 dataType: 'json',
+                beforeSend:function () {
+                    common_tool.process_wait("加载中...")
+                },
                 success: function (result) {
-                    console.log(result);
+                    //console.log(result);
+                    common_tool.process_finish();
                     if (result.code == 10000) {
                         homepage_tool.form_clear();
                         $("#homepage_data").html('');
@@ -208,7 +224,8 @@ homepage_tool = {
                     else {
                         common_tool.messager_show(result.msg);
                     }
-                }
+
+                },
             });
 
 
@@ -230,9 +247,13 @@ $(document).ready(function () {
             traditional: true,
             method: 'get',
             url: getRootPath() + '/dev/homepage/flash',
-            async: false,
+            async: true,
             dataType: 'json',
+            beforeSend:function () {
+                common_tool.process_wait("加载中...")
+            },
             success: function (result) {
+                common_tool.l
                 if (result.code == 10000) {
                     common_tool.messager_show(result.msg);
                 }

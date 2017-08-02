@@ -29,10 +29,15 @@
 <div id="host_grid" style="padding: 10px">
 
 </div>
-<div id="host_edit_dialog">
+<div id="host_edit_dialog" class="easyui-tabs" style="width:100%;height:100%;">
+    <div title="基础信息" style="float: left;height: 100%;display:none;">
     <form id="host_form">
         <input type="hidden" name="id" id="id"/>
         <div style="float: left;height: 200px;">
+            <p style="padding: 10px;">描&nbsp;&nbsp;述:<input name="host-summary" id="host-summary"
+                                                            style="width: 300px;height: 35px"
+                                                            data-options="required:true"
+                                                            class="easyui-textbox easyui-validatebox"/></p>
             <p style="padding: 10px;">主&nbsp;&nbsp;机:<input name="host-host" id="host-host"
                                                             style="width: 300px;height: 35px"
                                                             data-options="required:true"
@@ -57,6 +62,31 @@
                                                    class="easyui-textbox easyui-validatebox"/></p>
         </div>
     </form>
+    </div>
+    <div title="详细信息" style="float: left;height: 100px;display:none;">
+        <form id="host_detail_form">
+            <div style="float: left;height: 100px;">
+                <p style="padding: 10px;">操作系统:
+                    <input id="host-os-name" name="host-os-name" class="easyui-combobox" style="width: 280px;height: 35px" />
+                </p>
+                <p style="padding: 10px ;">系统版本:
+                    <input name="host-os-version" id="host-os-version"
+                                                                 style="width: 280px;height: 35px"
+                                                                 class="easyui-textbox easyui-validatebox"/></p>
+
+                <p style="padding: 10px;">系统软件:
+                    <input id="host-sw-name" name="host-sw-name" class="easyui-combobox" style="width: 280px;height: 35px" />
+                </p>
+
+                <p style="padding: 10px ;">软件版本:
+                    <input name="host-sw-version" id="host-sw-version"
+                           style="width: 280px;height: 35px"
+                           class="easyui-textbox easyui-validatebox"/></p>
+
+            </div>
+        </form>
+    </div>
+
 </div>
 
 
