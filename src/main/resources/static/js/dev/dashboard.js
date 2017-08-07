@@ -135,11 +135,6 @@ dashboard_tool = {
         chart_disk.setOption(option, true);
     },
 
-
-
-
-
-
     load_combox: function () {
         $("#dashboard-host").combobox({
             url:getRootPath() + '/host/select',
@@ -248,7 +243,6 @@ dashboard_tool = {
 
     },
 
-
     monitor:function (hostId,type){
         $.ajax({
             data: {
@@ -288,18 +282,30 @@ $(document).ready(function () {
     $("#dashboard-reload-btn").click(function () {
         var hostId = $('#dashboard-host').combobox('getValue');
         //console.log(hostId);
-        dashboard_tool.load_cup_mem(hostId);
-        dashboard_tool.load_task_log(hostId);
+        if (hostId!=null&&hostId>0) {
+            dashboard_tool.load_cup_mem(hostId);
+            dashboard_tool.load_task_log(hostId);
+        }else {
+            common_tool.messager_show("请选择主机。")
+        }
     });
 
     $("#dashboard-start-btn").click(function () {
         var hostId = $('#dashboard-host').combobox('getValue');
+        if (hostId!=null&&hostId>0) {
         dashboard_tool.monitor(hostId,1);
+        }else {
+            common_tool.messager_show("请选择主机。")
+        }
     });
 
     $("#dashboard-stop-btn").click(function () {
         var hostId = $('#dashboard-host').combobox('getValue');
+        if (hostId!=null&&hostId>0) {
         dashboard_tool.monitor(hostId,2);
+        }else {
+            common_tool.messager_show("请选择主机。")
+        }
     });
 
 });

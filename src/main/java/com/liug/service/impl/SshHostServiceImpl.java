@@ -40,10 +40,10 @@ public class SshHostServiceImpl implements SshHostService {
         else {
             sshHost.setOs(sshHostDetail.getOsName()+"("+sshHostDetail.getOsVersion()+")");
             sshHost.setSw(sshHostDetail.getSwName()+"("+sshHostDetail.getSwVersion()+")");
-            sshHost.setOsId(sshHostDetail.getOsId());
-            sshHost.setSwId(sshHostDetail.getSwId());
-            sshHost.setOsVersion(sshHostDetail.getOsVersion());
-            sshHost.setSwVersion(sshHostDetail.getSwVersion());
+            if(sshHostDetail.getOsId()!=null)sshHost.setOsId(sshHostDetail.getOsId());
+            if(sshHostDetail.getSwId()!=null)sshHost.setSwId(sshHostDetail.getSwId());
+            if(sshHostDetail.getOsVersion()!=null)sshHost.setOsVersion(sshHostDetail.getOsVersion());
+            if(sshHostDetail.getSwVersion()!=null)sshHost.setSwVersion(sshHostDetail.getSwVersion());
             sshHostMapper.insert(sshHost);
         }
         return sshHost.getId();
@@ -53,10 +53,10 @@ public class SshHostServiceImpl implements SshHostService {
     public long updateHost(SshHost sshHost, SshHostDetail sshHostDetail) {
         sshHost.setOs(sshHostDetail.getOsName()+"("+sshHostDetail.getOsVersion()+")");
         sshHost.setSw(sshHostDetail.getSwName()+"("+sshHostDetail.getSwVersion()+")");
-        sshHost.setOsId(sshHostDetail.getOsId());
-        sshHost.setSwId(sshHostDetail.getSwId());
-        sshHost.setOsVersion(sshHostDetail.getOsVersion());
-        sshHost.setSwVersion(sshHostDetail.getSwVersion());
+        if(sshHostDetail.getOsId()!=null)sshHost.setOsId(sshHostDetail.getOsId());
+        if(sshHostDetail.getSwId()!=null)sshHost.setSwId(sshHostDetail.getSwId());
+        if(sshHostDetail.getOsVersion()!=null)sshHost.setOsVersion(sshHostDetail.getOsVersion());
+        if(sshHostDetail.getSwVersion()!=null)sshHost.setSwVersion(sshHostDetail.getSwVersion());
         sshHostMapper.update(sshHost);
         return sshHost.getId();
     }

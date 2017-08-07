@@ -36,8 +36,8 @@ public class DevServiceImpl implements DevService {
     @Autowired
     HomePageMapper homePageMapper;
 
-    @Override
-    public CharRecg loadfile(long id, String path,String word) {
+    //@Override
+    public CharRecg loadfile1(long id, String path,String word) {
         CharRecg charRecg = new CharRecg();
         charRecg.setCharacter(word);
         charRecg.setCount(-1);
@@ -59,7 +59,54 @@ public class DevServiceImpl implements DevService {
                 counter++;
                 content=content.substring(content.indexOf(charRecg.getCharacter())+charRecg.getCharacter().length());
             }
+
             charRecg.setContent( sshResult.getContent().replace(charRecg.getCharacter().trim(),"<font color=\"#FF0000\">"+charRecg.getCharacter()+"</font>"));
+            charRecg.setCount(counter);
+        }
+        return charRecg;
+    }
+
+    @Override
+    public CharRecg loadfile(long id, String path,String word) {
+        CharRecg charRecg = new CharRecg();
+        charRecg.setCharacter(word);
+        charRecg.setCount(-1);
+        //读取文件指令
+        String cmd = "cat ";
+        cmd += path;
+        SshResult sshResult;
+        SshHost sshHost = sshHostService.selectById(id);
+        if(sshHost!=null){
+            sshResult = Commond.execute(sshHost,cmd);//
+            //文字识别变色
+            String content= "";
+            //获取字符数量
+            int counter=0;
+            int index_line=0;
+
+
+            String [] contentLines = sshResult.getContent().split("\n");
+
+            for (String contentLine:contentLines) {
+                index_line++;
+                String lineResult = contentLine.replace(charRecg.getCharacter().trim(),"<font color=\"#FF0000\">"+charRecg.getCharacter()+"</font>");
+                String prefix=index_line+">>>  ";
+                int lineCounter = 0;
+
+                if (contentLine.indexOf(charRecg.getCharacter()) == -1) {
+                    lineCounter = 0;
+                }else{prefix = "<font color=\"#FF0000\">"+prefix+"</font>";}
+                while(contentLine.indexOf(charRecg.getCharacter())!=-1){
+                    counter++;
+                    lineCounter++;
+                    contentLine=contentLine.substring(contentLine.indexOf(charRecg.getCharacter())+charRecg.getCharacter().length());
+                }
+
+                content += prefix + lineResult+"\n";
+                
+            }
+
+            charRecg.setContent( content);
             charRecg.setCount(counter);
         }
         return charRecg;
