@@ -58,7 +58,7 @@
         <if test="swVersion !=null and swVersion.length() != 0">
             AND sw_version = #{swVersion}
         </if>
-        <if test="os !=null and os.length() != 0">
+        <if test="os_version !=null and os_version.length() != 0">
             AND os_version = #{swVersion}
         </if>
         <if test="sw !=null and sw.length() != 0">
@@ -171,7 +171,7 @@
             <if test="osVersion !=null and osVersion.length() !=0">
                 #{osVersion},
             </if>
-            <if test="sw !=null and sw.length() !=0">
+            <if test="swVersion !=null and swVersion.length() !=0">
                 #{swVersion},
             </if>
             <if test="host !=null and host.length() !=0">
