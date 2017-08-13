@@ -129,3 +129,47 @@
 .icon-redlight {
     background: url('icons/redlight.png') no-repeat center center;
 }
+
+.icon-check {
+    background: url('icons/check_list.png') no-repeat center center;
+}
+
+.icon-chart {
+    background: url('icons/chart.png') no-repeat center center;
+}
+.icon-monitor {
+    background: url('icons/monitor.png') no-repeat center center;
+}
+.icon-network {
+    background: url('icons/network.png') no-repeat center center;
+}
+.icon-manager {
+    background: url('icons/manager.png') no-repeat center center;
+}
+.icon-file {
+    background: url('icons/file.png') no-repeat center center;
+}
+
+.icon-tools {
+    background: url('icons/tools.png') no-repeat center center;
+}
+.icon-backup {
+    background: url('icons/backup.png') no-repeat center center;
+}
+.icon-database {
+    background: url('icons/database.png') no-repeat center center;
+}
+.icon-database-blue {
+    background: url('icons/database_blue.png') no-repeat center center;
+}
+
+.icon-report {
+    background: url('icons/report.png') no-repeat center center;
+}
+.icon-report-red {
+    background: url('icons/report_red.png') no-repeat center center;
+}
+
+.icon-folder—data {
+    background: url('icons/folder_data.png') no-repeat center center;
+}

@@ -565,5 +565,31 @@ $(document).ready(function () {
     $("#host-select-btn").click(function () {
         host_tool.init_main_view();
     });
+    $("#host-detail-btn").click(function () {
+        var hosts = $("#host_grid").datagrid('getChecked');
+        console.log(hosts);
+        if (hosts.length == 0) {
+            common_tool.messager_show("请至少选择一条记录");
+            return false;
+        }
+        $("#host_form").form('load', {
+            id: hosts[0].id,
+            "host-summary": hosts[0].summary,
+            "host-host": hosts[0].host,
+            "host-port": hosts[0].port,
+            "host-username": hosts[0].username,
+            "host-envPath": hosts[0].envPath,
+            "host-isValid": hosts[0].isValid,
+            "host-isEnable": hosts[0].isEnable,
+            "host-password":hosts[0].password
+        });
+        $("#host_detail_form").form('load', {
+            "host-os-name": hosts[0].osId,
+            "host-os-version": hosts[0].osVersion,
+            "host-sw-name": hosts[0].swId,
+            "host-sw-version": hosts[0].swVersion
+        });
+        host_tool.init_edit_view(2);
+    });
 
 });

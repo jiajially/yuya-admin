@@ -13,6 +13,7 @@
     <script type="text/javascript" th:src="@{/js/easyui/datagrid-groupview.js}"></script>
     <script type="text/javascript" th:src="@{/js/easyui/easyui-lang-zh_CN.js}"></script>
     <script type="text/javascript" th:src="@{/js/system/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/dev/homepage.js}"></script>
     <script type="text/javascript" th:src="@{/js/system/index.js}"></script>
 </head>
 <body class="easyui-layout">
@@ -33,11 +34,203 @@
 </div>
 <div data-options="region:'west',border:true,split:true" style="text-align: center;width:160px;">
     <div class="easyui-accordion" data-options="border:false,fit:true,">
-        <div title="系统管理" style="padding: 0 0 0 15px;">
+        <div title="例行检查" data-options="iconCls:'icon-check'" style="padding: 0 0 0 15px;">
             <ul style="list-style: none;padding: 0 0 0 0 ;">
                 <div style="padding: 5px 10px;">
                     <li class="nav-list">
-                        <div class="easyui-linkbutton" data-options="iconCls:'icon-print'" style="border: 0;"
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-backup'" style="border: 0;"
+                             th:href="@{/check/backup}">备份情况
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="border: 0;"
+                             th:href="@{/dev/homepage}">错误检查
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-database-blue'" style="border: 0;"
+                             th:href="@{/dev/homepage}">数据库空间
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="border: 0;"
+                             th:href="@{/dev/homepage}">空间查询
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-chart'" style="border: 0;"
+                             th:href="@{/dev/homepage}">系统性能
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-check'" style="border: 0;"
+                             th:href="@{/dev/homepage}">批处理检查
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-report'" style="border: 0;"
+                             th:href="@{/dev/homepage}">生成报告
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-report-red'" style="border: 0;"
+                             th:href="@{/dev/homepage}">综合报告
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+
+        <div title="实时监控" data-options="iconCls:'icon-monitor'" style="padding: 0 0 0 15px;">
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-file'" style="border: 0;"
+                             th:href="@{/dev/homepage}">文件系统
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-no'" style="border: 0;"
+                             th:href="@{/dev/homepage}">错误检查
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-chart'" style="border: 0;"
+                             th:href="@{/dev/homepage}">性能监控
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+
+ <!--       <div title="网络监控" data-options="iconCls:'icon-network'" style="padding: 0 0 0 15px;">
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-report'" style="border: 0;"
+                             th:href="@{/dev/homepage}">生成报告
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-report'" style="border: 0;"
+                             th:href="@{/dev/homepage}">病毒报告
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-report-red'" style="border: 0;"
+                             th:href="@{/dev/homepage}">综合报告
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+-->
+        <div title="管理工作" data-options="iconCls:'icon-manager'" style="padding: 0 0 0 15px;">
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-check'" style="border: 0;"
+                             th:href="@{/manager/problem}">问题处理
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+            <div style="padding: 5px 10px;">
+                <li class="nav-list">
+                    <div class="easyui-linkbutton" data-options="iconCls:'icon-file'" style="border: 0;"
+                         th:href="@{/dev/homepage}">工作记录
+                    </div>
+                </li>
+            </div>
+            </ul>
+        </div>
+
+        <div title="技术文档" data-options="iconCls:'icon-file'" style="padding: 0 0 0 15px;">
+
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-folder—data'" style="border: 0;"
+                             th:href="@{/dev/homepage}">系统资料
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-network'" style="border: 0;"
+                             th:href="@{/dev/homepage}">在线文档
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-folder—data'" style="border: 0;"
+                             th:href="@{/dev/homepage}">本地文档
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+
+        <div title="管理工具" style="padding: 0 0 0 15px;" data-options="iconCls:'icon-tools'" >
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-check'" style="border: 0;"
                              th:href="@{/dev/homepage}">HomePage
                         </div>
                     </li>
@@ -46,7 +239,7 @@
             <ul style="list-style: none;padding: 0 0 0 0 ;">
                 <div style="padding: 5px 10px;">
                     <li class="nav-list">
-                        <div class="easyui-linkbutton" data-options="iconCls:'icon-print'" style="border: 0;"
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-chart'" style="border: 0;"
                              th:href="@{/dev/dashboard}">Dashboard
                         </div>
                     </li>
@@ -55,7 +248,7 @@
             <ul style="list-style: none;padding: 0 0 0 0 ;">
                 <div style="padding: 5px 10px;">
                     <li class="nav-list">
-                        <div class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="border: 0;"
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-manager'" style="border: 0;"
                              th:href="@{/ssh/host}">主机维护
                         </div>
                     </li>
@@ -82,7 +275,7 @@
             <ul style="list-style: none;padding: 0 0 0 0 ;">
                 <div style="padding: 5px 10px;">
                     <li class="nav-list">
-                        <div class="easyui-linkbutton" data-options="iconCls:'icon-sum'" style="border: 0;"
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="border: 0;"
                              th:href="@{/dev/loadfile}">文字识别
                         </div>
                     </li>
@@ -98,6 +291,23 @@
                 </div>
             </ul>
         </div>
+
+        <div title="关于系统" data-options="iconCls:'icon-tip',selected:true" style="padding: 0 0 0 15px;">
+
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-tip'" style="border: 0;"
+                             th:href="@{/dev/homepage}">系统信息
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+
+
+
     </div>
 </div>
 <div data-options="region:'south',boder:true" style="height:26px;">
@@ -107,10 +317,64 @@
 </div>
 <div data-options="region:'center',border:false">
     <div id="tab" class="easyui-tabs" data-options="fit:true">
-        <!--<div title="首页">
-            <pre th:text="${banner}">
-            </pre>
-        </div>-->
+        <div title="首页">
+            <div style="margin-left: 20px;margin-top:10px;">
+                <strong style="font-size: large">系统基本信息</strong>
+                <hr style="height:2px;border:none;border-top:2px solid #999999;"  />
+                <div>
+                    <pre>
+系统名称：哇哈哈监控管理系统
+
+系统环境：Liunx 4.14
+
+系统架构：SpringBoot（JAVA后台架构）、MySql（数据库存储）、Mybatis(数据库访问架构)、Jsch（SSH访问协议框架）
+        HTML5（前端网页技术）、EasyUI（前端框架）、NodeJS（控制台前端技术）
+
+系统介绍：本系统基于原监控系统开发，整合最新技术...
+
+                    </pre>
+
+                </div>
+            </div>
+            <div id="homepage-tool-bar" style="margin-top: 10px" align="right">
+                <form id="homepage-search-form">
+                    <div class="easyui-linkbutton " id="homepage-flash-btn" data-options="iconCls:'icon-reload'" style="width:70px">加载
+                    </div>
+                    <div class="easyui-linkbutton " id="homepage-add-btn" data-options="iconCls:'icon-add'" style="width:70px">新增
+                    </div>
+                </form>
+            </div>
+            <div style="margin-left: 20px;margin-top: -40px">
+                <strong style="font-size: large">自定义脚本展示</strong>
+                <hr style="height:2px;border:none;border-top:2px solid #999999;" />
+            </div>
+            <div id="homepage_data"></div>
+            <div id="homepage_edit_dialog" style="display: none">
+                <form id="homepage_form">
+                    <input type="hidden" name="id" id="id"/>
+                    <div style="float: left;height: 200px;">
+                        <p style="padding: 10px ;">标&nbsp;&nbsp;题:<input name="homepage-title" id="homepage-title"
+                                                                         style="width: 300px;height: 35px"
+                                                                         data-options="required:true"
+                                                                         class="easyui-textbox easyui-validatebox"/></p>
+                        <p style="padding: 10px ;">描&nbsp;&nbsp;述:<input name="homepage-description" id="homepage-description"
+                                                                         style="width: 300px;height: 35px"
+                                                                         class="easyui-textbox easyui-validatebox"/></p>
+                        <p style="padding: 10px ;">单&nbsp;&nbsp;位:<input name="homepage-unit" id="homepage-unit"
+                                                                         style="width: 300px;height: 35px"
+                                                                         class="easyui-textbox easyui-validatebox"/></p>
+                        <p style="padding: 10px;">主&nbsp;&nbsp;机:<input id="homepage-host" name="homepage-host" class="easyui-combobox" style="width: 300px;height: 35px"/></p>
+
+                        <p style="padding: 10px ;">指&nbsp;&nbsp;令:<input name="homepage-cmd" id="homepage-cmd"
+                                                                         style="width: 300px;height: 100px;"
+                                                                         data-options="required:false"
+                                                                         multiline="true"
+                                                                         class="easyui-textbox easyui-validatebox"/></p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
 
     </div>
 </div>

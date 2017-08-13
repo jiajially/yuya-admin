@@ -36,7 +36,7 @@ homepage_tool = {
                              "<p style='margin-left: 10px' >更新："+hp_tmp_data[i].update+"</p> " +
                              "</div>" +
                              "</div>"*/
-                            "<div style='margin-left: 20px;margin-top: 20px;margin-bottom:10px;float: left'>" +
+                            "<div style='margin-left: 20px;margin-top: 10px;margin-bottom:10px;float: left'>" +
                             "<div id='homepage-p"+i+"' class=\"easyui-panel\" style=\"width:320px;height:160px\""+
                             "title='"+hp_tmp_data[i].title+"' data-options=\"tools:'#tt"+i+"'\">"+
                             "<p style='margin-left: 10px' >描述："+hp_tmp_data[i].description+"</p> " +
@@ -253,13 +253,13 @@ $(document).ready(function () {
                 common_tool.process_wait("加载中...")
             },
             success: function (result) {
-                common_tool.l
                 if (result.code == 10000) {
                     common_tool.messager_show(result.msg);
+                    common_tool.process_finish();
+                    homepage_tool.load_homepage();
                 }
             }
         });
-        homepage_tool.load_homepage();
     });
 
 });

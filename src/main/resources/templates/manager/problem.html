@@ -1,0 +1,174 @@
+<script type="text/javascript" th:src="@{/js/system/common.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/manager/problem.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<div id="problem-tool-bar" style="padding: 10px 10px 0 10px">
+    <form id="problem-search-form">
+        <div class="easyui-linkbutton " id="problem-flash-btn" data-options="iconCls:'icon-reload'" style="width:70px">刷新
+        </div>
+        <div class="easyui-linkbutton " id="problem-add-btn" data-options="iconCls:'icon-add'" style="width:70px">新增</div>
+        <div class="easyui-linkbutton " id="problem-deal-btn" data-options="iconCls:'icon-edit'" style="width:70px">处理
+        </div>
+        <div class="easyui-linkbutton " id="problem-delete-btn" data-options="iconCls:'icon-remove'" style="width:70px">删除
+        </div>
+
+        <div class="easyui-linkbutton " id="problem-detail-btn" data-options="iconCls:'icon-edit'" style="width:90px">
+            查看详情
+        </div>
+        <span style="line-height: 26px; ">开始:<input name="problem-search-begin" id="problem-search-begin"
+                                                    class="easyui-datetimebox" style="width:150px"/></span>
+        <span style="line-height: 26px; ">结束:<input name="problem-search-end" id="problem-search-end"
+                                                    class="easyui-datetimebox" style="width:150px"/></span>
+        <div class="easyui-linkbutton " id="problem-select-btn" data-options="iconCls:'icon-search'" style="width:70px">搜索
+        </div>
+    </form>
+</div>
+<div id="problem_grid" style="padding: 10px">
+</div>
+<div id="problem_add_dialog"  class="easyui-tabs" style="width:100%;height:100%;">
+    <div title="问题上报" id="problem" style="float: left;height: 100%;display:none;">
+        <form id="problem_form">
+            <input type="hidden" name="id" id="id"/>
+            <div style="float: left;height: 200px;">
+                <p style="padding: 10px;">问题简述:<input name="problem-summary" id="problem-summary"
+                                                      style="width: 300px;height: 100px"
+                                                      data-options="required:true"
+                                                      multiline="true"
+                                                      class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px;">上报日期:<input name="problem-date" id="problem-date"
+                                                      style="width: 300px;height: 35px"
+                                                      data-options="required:false"
+                                                      disabled="disabled"
+                                                      class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px;">上报渠道:<input name="problem-channel" id="problem-channel"
+                                                      style="width: 300px;height: 35px"
+                                                      data-options="required:true"
+                                                      class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px;">上&nbsp;报&nbsp;人&nbsp;:<input name="problem-informer" id="problem-informer"
+                                                                       style="width: 300px;height: 35px"
+                                                                       data-options="required:true"
+                                                                       class="easyui-textbox easyui-validatebox"/></p>
+       </div>
+        </form>
+    </div>
+
+</div>
+<div id="problem_deal_dialog"  class="easyui-tabs" style="width:100%;height:100%;">
+    <div title="问题概要" id="problem_info" style="float: left;height: 100%;display:none;">
+        <form id="problem_info_form">
+            <input type="hidden" name="problemId" id="problemId"/>
+            <div style="float: left;height: 200px;">
+                <p style="padding: 10px;">问题简述:<input name="problem-info-summary" id="problem-info-summary"
+                                                      style="width: 300px;height: 35px"
+                                                      disabled="disabled"
+                                                      class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px;">上报日期:<input name="problem-info-date" id="problem-info-date"
+                                                      style="width: 300px;height: 35px"
+                                                      disabled="disabled"
+                                                      class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px;">上报渠道:<input name="problem-info-channel" id="problem-info-channel"
+                                                      style="width: 300px;height: 35px"
+                                                      disabled="disabled"
+                                                      class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px;">上&nbsp;报&nbsp;人&nbsp;:<input name="problem-info-informer" id="problem-info-informer"
+                                                                       style="width: 300px;height: 35px"
+                                                                       disabled="disabled"
+                                                                       class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px ;">处理情况:<input name="problem-info-status" id="problem-info-status"
+                                                       style="width: 300px;height: 35px"
+                                                       disabled="disabled"
+                                                       class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px ;">完成日期:<input name="problem-finishdate" id="problem-info-finishdate"
+                                                       style="width: 300px;height: 35px"
+                                                       disabled="disabled"
+                                                       class="easyui-textbox easyui-validatebox"/></p>
+                <!--          <p style="padding: 10px ;">密&nbsp;&nbsp;码:<input name="problem-password" id="problem-password"
+                                                                           style="width: 300px;height: 35px"
+                                                                           data-options="required:true"
+                                                                           class="easyui-textbox easyui-validatebox"/></p>
+
+                          <p style="padding: 10px ;">PATH:<input name="problem-envPath" id="problem-envPath"
+                                                                 style="width: 300px;height: 100px;"
+                                                                 data-options="required:false,disabled:true"
+                                                                 multiline="true"
+                                                                 class="easyui-textbox easyui-validatebox"/></p>
+               -->       </div>
+        </form>
+    </div>
+
+    <div title="问题定位" id="problem_locate" style="float: left;height: 100px;display:none;">
+        <form id="problem_locate_form">
+            <div style="float: left;height: 100px;">
+                <p style="padding: 10px ;">问题描述:<input name="problem-detail" id="problem-detail"
+                                                       style="width: 300px;height: 150px;"
+                                                       data-options="required:false,disabled:false"
+                                                       multiline="true"
+                                                       class="easyui-textbox easyui-validatebox"/></p>
+
+                <p style="padding: 10px;">问题性质:<input id="problem-type" name="problem-type" class="easyui-combobox"
+                                                      data-options="
+                                                      valueField: 'id',
+                                                      textField: 'text',
+                                                      data: [{id: '1',text: '硬件'},{id: '2',text: '软件'},{id: '0',text: '其他'}]"
+
+                                                      style="width: 300px;height: 35px" />
+                </p><p style="padding: 10px;">优&nbsp;先&nbsp;级&nbsp;:<input id="problem-level" name="problem-level" class="easyui-combobox"
+                                                                           data-options="
+                                                      valueField: 'id',
+                                                      textField: 'text',
+                                                      data: [{id: '1',text: '高'},{id: '2',text: '中'},{id: '3',text: '低'}]"
+
+                                                                           style="width: 300px;height: 35px" />
+            </p>
+
+                <p style="padding: 10px ;">问题系统:<input name="problem-system" id="problem-system"
+                                                       style="width: 300px;height: 80px"
+                                                       multiline="true"
+                                                       class="easyui-textbox easyui-validatebox"/></p>
+
+            </div>
+        </form>
+    </div>
+    <div title="问题处理" id="problem_deal" style="float: left;height: 100px;display:none;" >
+        <form id="problem_deal_form">
+            <div style="float: left;height: 100px;">
+                <p style="padding: 10px;">所需时间:
+                    <input id="problem-needtime" name="problem-needtime" class="easyui-textbox easyui-validatebox" style="width: 300px;height: 35px" />
+                </p>
+                <p style="padding: 10px ;">所需资源:
+                    <input name="problem-needresources" id="problem-needresources"
+                           style="width: 300px;height: 35px"
+                           class="easyui-textbox easyui-validatebox"/></p>
+
+                <p style="padding: 10px;">处理结果:
+                    <input id="problem-result" name="problem-result" class="easyui-textbox easyui-validatebox" style="width: 300px;height: 35px" />
+                </p>
+
+                <p style="padding: 10px ;">处理人员:
+                    <input name="problem-dealer" id="problem-dealer"
+                           style="width: 300px;height: 35px"
+                           class="easyui-textbox easyui-validatebox"/></p>
+                <p style="padding: 10px ;">记录人员:
+                    <input name="problem-recorder" id="problem-recorder"
+                           style="width: 300px;height: 35px"
+                           class="easyui-textbox easyui-validatebox"/></p>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
