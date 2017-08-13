@@ -55,7 +55,7 @@ public class FileUtil {
         List<FileStruct> fileList = new ArrayList<FileStruct>();
         try {
 
-            File file = ResourceUtils.getFile("classpath:"+filepath);
+            File file = ResourceUtils.getFile(filepath);
             if (!file.isDirectory()) {
                 System.out.println("文件");
                 System.out.println("path=" + file.getPath());

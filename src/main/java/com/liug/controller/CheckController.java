@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -63,7 +64,7 @@ public class CheckController extends BaseController {
                          @RequestParam(defaultValue = "host") String sort,
                          @RequestParam(defaultValue = "asc") String order,
                          @RequestParam(defaultValue = "", required = false) String path) {
-        PageInfo pageInfo = checkService.selectBackupPage(page,rows,sort,order,path);
+        PageInfo pageInfo = checkService.selectBackupPage(page,rows,sort,order, FileUtil.getProjectPath()+"/file/"+path);
         return pageInfo;
     }
 
@@ -81,7 +82,7 @@ public class CheckController extends BaseController {
         String tmp = "";
         System.out.println(path);
         try {
-            InputStream is = IndexController.class.getClassLoader().getResourceAsStream(path);
+            InputStream is =new FileInputStream(new File(path));
             tmp = IOUtils.toString(is,"GB2312");
         } catch (IOException e) {
             e.printStackTrace();

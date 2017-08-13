@@ -34,7 +34,7 @@ check_bu_tool = {
             pageSize: 15,
             pageList: [15, 30, 45, 60],
             queryParams: {
-                path: "file/bu"
+                path: "bu"
             },
             columns: [[
                 {title: "选择", field: "ck", checkbox: true},
@@ -75,7 +75,7 @@ check_bu_tool = {
 
         $.ajax({
             data: {
-                path:backups[0].path
+                path:backups[0].absolutePath
             },
             traditional: true,
             method: 'GET',
