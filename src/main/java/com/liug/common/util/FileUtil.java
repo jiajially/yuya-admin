@@ -3,6 +3,7 @@ package com.liug.common.util;
 import com.liug.YuYaAdminApplication;
 import com.liug.controller.IndexController;
 import org.springframework.util.ResourceUtils;
+import sun.jvm.hotspot.memory.Dictionary;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -92,7 +93,13 @@ public class FileUtil {
         return fileList;
     }
 
-
+    //初始化文件目录
+    public static void initDictionary(){
+        File file_document = new File(getProjectPath()+"/document/local/");
+        if (!file_document.exists()) file_document.mkdirs();
+        file_document = new File(getProjectPath()+"/document/sys/");
+        if (!file_document.exists()) file_document.mkdirs();
+    }
 
     public static void main(){
         try {

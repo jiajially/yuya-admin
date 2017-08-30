@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.DocumentMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.Document">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="suffix" property="suffix" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+     id,
+     summary,
+     type,
+     suffix,
+     url,
+     createtime,
+     status
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="summary !=null and summary.length() != 0">
+            AND summary = #{summary}
+        </if>
+        <if test="type !=null">
+            AND type = #{type}
+        </if>
+        <if test="suffix !=null and suffix.length() != 0">
+            AND suffix = #{suffix}
+        </if>
+        <if test="url !=null and url.length() != 0">
+            AND url = #{url}
+        </if>
+        <if test="createtime !=null">
+            AND createtime = #{createtime}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.Document" useGeneratedKeys="true" keyProperty="id">
+        insert into document
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="summary !=null and summary.length() != 0">
+                summary,
+            </if>
+            <if test="type !=null">
+                type,
+            </if>
+            <if test="suffix !=null and suffix.length() != 0">
+                suffix,
+            </if>
+            <if test="url !=null and url.length() != 0">
+                url,
+            </if>
+            <if test="createtime !=null">
+                createtime,
+            </if>
+            <if test="status !=null ">
+                 status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="summary !=null and summary.length() != 0">
+                #{summary},
+            </if>
+            <if test="type !=null">
+                #{type},
+            </if>
+            <if test="suffix !=null and suffix.length() != 0">
+                #{suffix},
+            </if>
+            <if test="url !=null and url.length() != 0">
+                #{url},
+            </if>
+            <if test="createtime !=null">
+                #{createtime},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="com.liug.model.entity.Document">
+        update document
+        <set>
+            <if test="summary !=null and summary.length() != 0">
+                summary = #{summary},
+            </if>
+            <if test="type !=null">
+                type = #{type},
+            </if>
+            <if test="suffix !=null and suffix.length() != 0">
+                suffix = #{suffix},
+            </if>
+            <if test="url !=null and url.length() != 0">
+                url = #{url},
+            </if>
+            <if test="createtime !=null">
+                createtime = #{createtime},
+            </if>
+            <if test="status !=null">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE document
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.Document" resultType="com.liug.model.entity.Document">
+        select * from document where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.Document">
+        SELECT *
+        FROM document
+        WHERE id = #{id} AND status != 7
+    </select>
+
+    <select id="selectAll" resultType="com.liug.model.entity.Document">
+        SELECT *
+        FROM document
+        WHERE status != 7
+        <if test="type !=null and type.length() != 0">
+            AND type = #{type}
+        </if>
+        <if test="begin != null">
+            AND createtime >= #{begin}
+        </if>
+        <if test="end != null">
+            AND  #{end} >= createtime
+        </if>
+        <if test="sort!=''">
+            ORDER BY ${sort}
+        </if>
+        <if test="order!=''">
+            ${order}
+        </if>
+    </select>
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM document
+        WHERE status != 7
+        <if test="type !=null and type.length() != 0">
+            AND type = #{type}
+        </if>
+        <if test="begin != null">
+            AND createtime >= #{begin}
+        </if>
+        <if test="end != null">
+            AND  #{end} >= createtime
+        </if>
+    </select>
+
+
+    <select id="fileCount" resultType="integer">
+        SELECT count(*)
+        FROM document
+        WHERE status != 7
+        <if test="type !=null and type.length() != 0">
+            AND type = #{type}
+        </if>
+        <if test="summary !=null and summary.length() != 0">
+            AND summary = #{summary}
+        </if>
+    </select>
+
+
+</mapper>

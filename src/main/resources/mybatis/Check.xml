@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.CheckMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.Check">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="host" property="host" jdbcType="BIGINT"/>
+        <result column="hostname" property="hostname" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="result" property="result" jdbcType="VARCHAR"/>
+        <result column="exectime" property="exectime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+     id,
+     summary,
+     host,
+     hostname,
+     type,
+     result,
+     exectime,
+     status
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="summary !=null and summary.length() != 0">
+            AND summary = #{summary}
+        </if>
+        <if test="host !=null">
+            AND host = #{host}
+        </if>
+        <if test="hostname !=null and hostname.length() != 0">
+            AND hostname = #{hostname}
+        </if>
+        <if test="type !=null">
+            AND type = #{type}
+        </if>
+        <if test="result !=null and result.length() != 0">
+            AND result = #{result}
+        </if>
+        <if test="exectime !=null">
+            AND exectime = #{exectime}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.Check" useGeneratedKeys="true" keyProperty="id">
+        insert into check_result
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="summary !=null and summary.length() != 0">
+                summary,
+            </if>
+            <if test="type !=null">
+                type,
+            </if>
+            <if test="hostname !=null and hostname.length() != 0">
+                hostname,
+            </if>
+            <if test="host !=null">
+                host,
+            </if>
+            <if test="result !=null and result.length() != 0">
+                result,
+            </if>
+            <if test="exectime !=null">
+                exectime,
+            </if>
+            <if test="status !=null ">
+                 status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="summary !=null and summary.length() != 0">
+                #{summary},
+            </if>
+            <if test="type !=null">
+                #{type},
+            </if>
+            <if test="hostname !=null and hostname.length() != 0">
+                #{hostname},
+            </if>
+            <if test="host !=null">
+                #{host},
+            </if>
+            <if test="result !=null and result.length() != 0">
+                #{result},
+            </if>
+            <if test="exectime !=null">
+                #{exectime},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="com.liug.model.entity.Check">
+        update check_result
+        <set>
+            <if test="summary !=null and summary.length() != 0">
+                summary = #{summary},
+            </if>
+            <if test="type !=null">
+                type = #{type},
+            </if>
+            <if test="hostname !=null and hostname.length() != 0">
+                hostname = #{hostname},
+            </if>
+            <if test="host !=null">
+                host = #{host},
+            </if>
+            <if test="result !=null and result.length() != 0">
+                result = #{result},
+            </if>
+            <if test="exectime !=null">
+                exectime = #{exectime},
+            </if>
+            <if test="status !=null">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE check_result
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.Check" resultType="com.liug.model.entity.Check">
+        select * from check_result where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.Check">
+        SELECT *
+        FROM check_result
+        WHERE id = #{id} AND status != 7
+    </select>
+
+    <select id="selectAll" resultType="com.liug.model.entity.Check">
+        SELECT id,
+        summary,
+        host,
+        hostname,
+        type,
+        exectime,
+        status
+        FROM check_result
+        WHERE status != 7
+        <if test="type !=null and type.length() != 0">
+            AND type = #{type}
+        </if>
+        <if test="begin != null">
+            AND exectime >= #{begin}
+        </if>
+        <if test="end != null">
+            AND  #{end} >= exectime
+        </if>
+        <if test="sort!=''">
+            ORDER BY ${sort}
+        </if>
+        <if test="order!=''">
+            ${order}
+        </if>
+    </select>
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM check_result
+        WHERE status != 7
+        <if test="type !=null and type.length() != 0">
+            AND type = #{type}
+        </if>
+        <if test="begin != null">
+            AND exectime >= #{begin}
+        </if>
+        <if test="end != null">
+            AND  #{end} >= exectime
+        </if>
+    </select>
+
+
+</mapper>

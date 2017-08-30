@@ -2,13 +2,16 @@ package com.liug.scheduler;
 
 
 import com.liug.common.ssh.Commond;
+import com.liug.common.util.FileUtil;
 import com.liug.model.entity.SshHost;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,5 +88,8 @@ public abstract class ScheduleJob {
         logger.debug(sshHost.toString());
         return Float.valueOf(Commond.execute(true,sshHost,command).getContent());
     }
+
+
+
 
 }

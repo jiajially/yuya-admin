@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    var type = "backup";
+    var type = "performance";
 
     check_tool.init_main_view(null,null,type);
 

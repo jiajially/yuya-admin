@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.ManagerWorkMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.ManagerWork">
+
+
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="createdate" property="createdate" jdbcType="TIMESTAMP"/>
+        <result column="finishdate" property="finishdate" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="sql_column">
+        id,
+        summary,
+        createdate,
+        finishdate,
+        status,
+        type,
+        level,
+
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="summary !=null and summary.length() != 0">
+            AND summary = #{summary}
+        </if>
+        <if test="createdate !=null ">
+            AND createdate = #{createdate}
+        </if>
+
+        <if test="finishdate !=null ">
+            AND finishdate = #{finishdate}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+
+        <if test="type !=null and type.length() != 0">
+            AND type = #{type}
+        </if>
+        <if test="level !=null and level.length() != 0">
+            AND level = #{level}
+        </if>
+
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.ManagerWork" useGeneratedKeys="true" keyProperty="id">
+        insert into manager_work
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="summary !=null and summary.length() != 0">
+                summary,
+            </if>
+            <if test="createdate !=null ">
+                createdate,
+            </if>
+
+            <if test="finishdate !=null ">
+                finishdate,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+
+            <if test="type !=null and type.length() != 0">
+                type,
+            </if>
+            <if test="level !=null and level.length() != 0">
+                level,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="summary !=null and summary.length() != 0">
+                #{summary},
+            </if>
+            <if test="createdate !=null ">
+                #{createdate},
+            </if>
+
+            <if test="finishdate !=null ">
+                #{finishdate},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+
+            <if test="type !=null and type.length() != 0">
+                #{type},
+            </if>
+            <if test="level !=null and level.length() != 0">
+                #{level},
+            </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="com.liug.model.entity.ManagerWork">
+        update manager_work
+        <set>
+            <if test="summary !=null and summary.length() != 0">
+                summary = #{summary},
+            </if>
+            <if test="createdate !=null ">
+                createdate = #{createdate},
+            </if>
+
+            <if test="finishdate !=null ">
+                finishdate = #{finishdate},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+
+            <if test="type !=null and type.length() != 0">
+                type = #{type},
+            </if>
+            <if test="level !=null and level.length() != 0">
+                level = #{level},
+            </if>
+
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE manager_work
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.ManagerWork" resultType="com.liug.model.entity.ManagerWork">
+        select * from manager_work where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.ManagerWork">
+        SELECT *
+        FROM manager_work
+        WHERE id = #{id} AND status != 7
+    </select>
+
+
+    <select id="selectAll"    resultType="com.liug.model.entity.ManagerWork">
+        SELECT *
+        FROM manager_work
+        WHERE status != 7
+        <if test="begin != null">
+            AND createdate >= #{begin}
+        </if>
+        <if test="end != null">
+            AND  #{end} >= createdate
+        </if>
+        <if test="sort!=''">
+            ORDER BY ${sort}
+        </if>
+        <if test="order!=''">
+            ${order}
+        </if>
+    </select>
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM manager_work
+        WHERE status != 7
+        <if test="begin != null">
+            AND createdate >= #{begin}
+        </if>
+        <if test="end != null">
+            AND  #{end} >= createdate
+        </if>
+    </select>
+
+</mapper>

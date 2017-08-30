@@ -2,8 +2,10 @@ package com.liug.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.liug.dao.ManagerProblemMapper;
+import com.liug.dao.ManagerWorkMapper;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
+import com.liug.model.entity.ManagerWork;
 import com.liug.service.ManagerService;
 import com.liug.service.SshHostService;
 import org.slf4j.Logger;
@@ -25,14 +27,16 @@ public class ManagerServiceImpl implements ManagerService {
     private static final Logger logger = LoggerFactory.getLogger(ManagerService.class);
     @Autowired
     private ManagerProblemMapper managerProblemMapper;
+    @Autowired
+    private ManagerWorkMapper managerWorkMapper;
 
     @Override
     public PageInfo selectProblemPage(int page, int rows, String sort,  String order ,Date begin, Date end) {
         logger.info("page = [" + page + "], rows = [" + rows + "], sort = [" + sort + "], order = [" + order + "], begin = [" + begin + "], end = [" + end + "]");
         int counts = managerProblemMapper.selectCounts();
         PageHelper.startPage(page, rows);
-        List<ManagerProblem> sshHosts = managerProblemMapper.selectAll(sort, order, begin, end);
-        PageInfo pageInfo = new PageInfo(counts, sshHosts);
+        List<ManagerProblem> problems = managerProblemMapper.selectAll(sort, order, begin, end);
+        PageInfo pageInfo = new PageInfo(counts, problems);
         return pageInfo;
     }
 
@@ -54,5 +58,30 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ManagerProblem getProblemById(long id) {
         return managerProblemMapper.selectById(id);
+    }
+
+    @Override
+    public PageInfo selectWorkPage(int page, int rows, String sort, String order, Date begin, Date end) {
+        logger.info("page = [" + page + "], rows = [" + rows + "], sort = [" + sort + "], order = [" + order + "], begin = [" + begin + "], end = [" + end + "]");
+        int counts = managerWorkMapper.selectCounts();
+        PageHelper.startPage(page, rows);
+        List<ManagerWork> works = managerWorkMapper.selectAll(sort, order, begin, end);
+        PageInfo pageInfo = new PageInfo(counts, works);
+        return pageInfo;
+    }
+
+    @Override
+    public long addWork(String summary, String level, String type) {
+        return 0;
+    }
+
+    @Override
+    public long dealWork(ManagerWork managerWork) {
+        return 0;
+    }
+
+    @Override
+    public ManagerWork getWorkById(long id) {
+        return null;
     }
 }

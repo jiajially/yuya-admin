@@ -62,6 +62,12 @@ public class DevController extends BaseController {
         return "dev/homepage";
     }
 
+    @ApiOperation(value = "跳转至vbtest1", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "vbtest1", method = RequestMethod.GET)
+    public String vbtestdemo1() {
+        return "vbtest/demo1";
+    }
+
 
     /**
      * 读取服务器文件

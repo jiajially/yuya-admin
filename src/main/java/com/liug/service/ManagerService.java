@@ -2,6 +2,7 @@ package com.liug.service;
 
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
+import com.liug.model.entity.ManagerWork;
 
 import java.util.Date;
 
@@ -17,5 +18,13 @@ public interface ManagerService {
     long dealProblem(ManagerProblem managerProblem);
 
     ManagerProblem getProblemById(long id);
+
+    PageInfo selectWorkPage(int page, int rows, String sort,  String order, Date begin,Date end);
+
+    long addWork(String summary,String level,String type);
+
+    long dealWork(ManagerWork managerWork);
+
+    ManagerWork getWorkById(long id);
 
 }

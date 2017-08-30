@@ -37,8 +37,13 @@ public class ManagerController extends BaseController {
 
     @ApiOperation(value = "problem", httpMethod = "GET", produces = "text/html")
     @RequestMapping(value = "problem", method = RequestMethod.GET)
-    public String dashboard() {
+    public String problem() {
         return "manager/problem";
+    }
+    @ApiOperation(value = "work", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "work", method = RequestMethod.GET)
+    public String work() {
+        return "manager/work";
     }
 
 
@@ -149,4 +154,43 @@ public class ManagerController extends BaseController {
         else return Result.error();
     }
 
+
+
+    /**
+     * 查询工作记录列表
+     *
+     * @param page      起始页码
+     * @param rows      分页大小
+     * @param sort      排序字段
+     * @param order     排序规则
+     * @param begin     开始
+     * @param end       结束
+     * @return
+     */
+    @ApiOperation(value = "查询工作记录列表", httpMethod = "GET", produces = "application/json", response = PageInfo.class)
+    @ResponseBody
+    @RequestMapping(value = "work/list", method = RequestMethod.GET)
+    public PageInfo workList(@RequestParam(defaultValue = "1") int page,
+                                @RequestParam(defaultValue = "30") int rows,
+                                @RequestParam(defaultValue = "id") String sort,
+                                @RequestParam(defaultValue = "asc") String order,
+                                @RequestParam(required = false) String begin,
+                                @RequestParam(required = false) String end) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date_begin, date_end;
+        try {
+            date_begin = sdf.parse(begin);
+        } catch (ParseException e) {
+            date_begin = new Date();
+            date_begin.setTime(0);
+        }
+        try {
+            date_end = sdf.parse(end);
+        } catch (ParseException e) {
+            date_end = new Date(System.currentTimeMillis());
+        }
+
+        PageInfo pageInfo = managerService.selectWorkPage(page,rows,sort,order,date_begin,date_end);
+        return pageInfo;
+    }
 }

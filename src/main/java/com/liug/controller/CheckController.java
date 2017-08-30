@@ -4,6 +4,7 @@ import com.liug.common.util.FileUtil;
 import com.liug.common.util.Result;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
+import com.liug.scheduler.CheckScheduleJob;
 import com.liug.service.CheckService;
 import com.liug.service.ManagerService;
 import io.swagger.annotations.Api;
@@ -32,13 +33,16 @@ import java.util.Date;
  * @Date 2016/10/8/13:37
  * @Description
  */
-@Api(value = "管理工作")
+@Api(value = "例行检查")
 @Controller
 @RequestMapping("check")
 public class CheckController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(CheckController.class);
     @Autowired
     private CheckService checkService;
+
+    @Autowired
+    private CheckScheduleJob job;
 
 
     @ApiOperation(value = "backup", httpMethod = "GET", produces = "text/html")
@@ -47,8 +51,38 @@ public class CheckController extends BaseController {
         return "check/backup";
     }
 
+    @ApiOperation(value = "error", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "error", method = RequestMethod.GET)
+    public String error() {
+        return "check/error";
+    }
+
+    @ApiOperation(value = "database", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "database", method = RequestMethod.GET)
+    public String database() {
+        return "check/database";
+    }
+
+    @ApiOperation(value = "space", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "space", method = RequestMethod.GET)
+    public String space() {
+        return "check/space";
+    }
+
+    @ApiOperation(value = "performance", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "performance", method = RequestMethod.GET)
+    public String prformaence() {
+        return "check/performance";
+    }
+
+    @ApiOperation(value = "batch", httpMethod = "GET", produces = "text/html")
+    @RequestMapping(value = "batch", method = RequestMethod.GET)
+    public String batch() {
+        return "check/batch";
+    }
+
     /**
-     * 查询主机列表
+     * 查询文件列表
      *
      * @param page      起始页码
      * @param rows      分页大小
@@ -58,7 +92,7 @@ public class CheckController extends BaseController {
      */
     @ApiOperation(value = "查询文件列表", httpMethod = "GET", produces = "application/json", response = PageInfo.class)
     @ResponseBody
-    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @RequestMapping(value = "list1", method = RequestMethod.GET)
     public PageInfo list(@RequestParam(defaultValue = "1") int page,
                          @RequestParam(defaultValue = "30") int rows,
                          @RequestParam(defaultValue = "host") String sort,
@@ -70,25 +104,68 @@ public class CheckController extends BaseController {
 
 
     /**
-     * 读取指定路径文件
+     * 读取例行检查数据
      *
-     * @param path        文件路径
+     * @param id        读取id
      * @return
      */
-    @ApiOperation(value = "读取指定路径文件", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ApiOperation(value = "读取例行检查数据", httpMethod = "GET", produces = "application/json", response = Result.class)
     @ResponseBody
-    @RequestMapping(value = "backup/detail", method = RequestMethod.GET)
-    public Result queryScriptById(@RequestParam String path) {
-        String tmp = "";
-        System.out.println(path);
+    @RequestMapping(value = "detail", method = RequestMethod.GET)
+    public Result queryScriptById(@RequestParam long id) {
+        return Result.success(checkService.selectById(id));
+
+    }
+
+
+    /**
+     * 查询例行检查列表
+     *
+     * @param page      起始页码
+     * @param rows      分页大小
+     * @param sort      排序字段
+     * @param order     排序规则
+     * @param type      类型
+     * @return
+     */
+    @ApiOperation(value = "查询例行检查列表", httpMethod = "GET", produces = "application/json", response = PageInfo.class)
+    @ResponseBody
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public PageInfo checklist(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "30") int rows,
+            @RequestParam(defaultValue = "exectime") String sort,
+            @RequestParam(defaultValue = "desc") String order,
+            @RequestParam(defaultValue = "1970-01-01") String begin,
+            @RequestParam(defaultValue = "2099-01-01") String end,
+            @RequestParam(required = true) String type)  {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+        PageInfo pageInfo = null;
         try {
-            InputStream is =new FileInputStream(new File(path));
-            tmp = IOUtils.toString(is,"GB2312");
-        } catch (IOException e) {
+            pageInfo = checkService.selectPage(page,rows,sort,order,type, sdf.parse(begin),sdf.parse(end));
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        return Result.success(tmp);
+        return pageInfo;
+    }
 
+
+    /**
+     * 读取例行检查详情
+     *
+     * @return
+     */
+    @ApiOperation(value = "数据初始化", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "init", method = RequestMethod.GET)
+    public Result checkDetail() {
+        try {
+            job.initFileData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return Result.success();
     }
 
 }

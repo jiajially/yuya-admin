@@ -1,0 +1,74 @@
+<script type="text/javascript" th:src="@{/js/system/common.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/document/document.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/document/online.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<div id="document-online-tool-bar" style="padding: 10px 10px 0 10px">
+    <form id="document-online-search-form">
+        <div class="easyui-linkbutton " id="document-online-flash-btn" data-options="iconCls:'icon-reload'" style="width:70px">刷新
+        </div>
+        <div class="easyui-linkbutton " id="document-online-add-btn" data-options="iconCls:'icon-add'" style="width:70px">新增
+        </div>
+
+        <div class="easyui-linkbutton " id="document-online-delete-btn" data-options="iconCls:'icon-no'" style="width:70px">
+            删除
+        </div>
+        <div class="easyui-linkbutton " id="document-online-detail-btn" data-options="iconCls:'icon-edit'" style="width:90px">
+            查看详情
+        </div>
+        <span style="line-height: 26px; ">开始:<input name="documentonline-search-begin" id="document-online-search-begin"
+                                                    class="easyui-datebox" style="width:150px"/></span>
+        <span style="line-height: 26px; ">结束:<input name="document-online-search-end" id="document-online-search-end"
+                                                    class="easyui-datebox" style="width:150px"/></span>
+        <div class="easyui-linkbutton " id="document-online-select-btn" data-options="iconCls:'icon-search'" style="width:70px">搜索
+        </div>
+    </form>
+</div>
+<div id="document_online_grid" style="padding: 10px">
+</div>
+<div id="document_online_result_dialog"></div>
+
+
+<div id="document_online_add_dialog">
+    <form id="document_online_form" style="padding: 20px 0 0 0;">
+        <input type="hidden" name="id" id="id"/>
+        <div style="float: left;height: 200px;">
+            <p style="padding: 10px;">描&nbsp;&nbsp;述:<input name="document-online-summary" id="document-online-summary"
+                                                            style="width: 300px;height: 35px"
+                                                            data-options="required:true"
+                                                            class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px;">路&nbsp;&nbsp;径:<input name="document-online-url" id="document-online-url"
+                                                            style="width: 300px;height: 35px"
+                                                            data-options="required:true"
+                                                            class="easyui-textbox easyui-validatebox"/></p>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

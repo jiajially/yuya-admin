@@ -1,19 +1,25 @@
 <script type="text/javascript" th:src="@{/js/system/common.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/check/check.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
 <script type="text/javascript" th:src="@{/js/check/backup.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
-<div id="check-bu-tool-bar" style="padding: 10px 10px 0 10px">
-    <form id="check-bu-search-form">
-        <div class="easyui-linkbutton " id="check-bu-flash-btn" data-options="iconCls:'icon-reload'" style="width:70px">刷新
+<div id="check-backup-tool-bar" style="padding: 10px 10px 0 10px">
+    <form id="check-backup-search-form">
+        <div class="easyui-linkbutton " id="check-backup-flash-btn" data-options="iconCls:'icon-reload'" style="width:70px">刷新
         </div>
 
-        <div class="easyui-linkbutton " id="check-bu-detail-btn" data-options="iconCls:'icon-edit'" style="width:90px">
+        <div class="easyui-linkbutton " id="check-backup-detail-btn" data-options="iconCls:'icon-edit'" style="width:90px">
             查看详情
         </div>
-
+        <span style="line-height: 26px; ">开始:<input name="checkbackup-search-begin" id="check-backup-search-begin"
+                                                    class="easyui-datebox" style="width:150px"/></span>
+        <span style="line-height: 26px; ">结束:<input name="check-backup-search-end" id="check-backup-search-end"
+                                                    class="easyui-datebox" style="width:150px"/></span>
+        <div class="easyui-linkbutton " id="check-backup-select-btn" data-options="iconCls:'icon-search'" style="width:70px">搜索
+        </div>
     </form>
 </div>
-<div id="check_bu_grid" style="padding: 10px">
+<div id="check_backup_grid" style="padding: 10px">
 </div>
-<div id="check_bu_result_dialog"></div>
+<div id="check_backup_result_dialog"></div>
 
 
 

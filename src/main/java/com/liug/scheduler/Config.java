@@ -39,6 +39,8 @@ public class Config {
     @Autowired
     private CpuScheduleJob cpuScheduleJob;
     @Autowired
+    private CheckScheduleJob checkScheduleJob;
+    @Autowired
     private SshHostMapper sshHostMapper;
 
     @Scheduled(cron = "* * * * * ?") // 每秒执行一次
@@ -71,6 +73,14 @@ public class Config {
             }
         }
     }
+
+
+    @Scheduled(cron = "0 * * * * ?") // 每分钟执行一次
+    public void schedulerCheck() {
+        checkScheduleJob.doJob();
+    }
+
+
     //设置失效host
     //@Scheduled(cron = "0 * * * * ?") // 每秒执行一次
     public void validHost() {
