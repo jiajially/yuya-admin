@@ -3,6 +3,7 @@ package com.liug.controller;
 import com.liug.common.util.Result;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
+import com.liug.model.entity.ManagerWork;
 import com.liug.service.ManagerService;
 import com.sun.org.apache.regexp.internal.RE;
 import io.swagger.annotations.Api;
@@ -108,7 +109,7 @@ public class ManagerController extends BaseController {
     @ApiOperation(value = "添加问题", httpMethod = "POST", produces = "application/json", response = Result.class)
     @ResponseBody
     @RequestMapping(value = "problem/insert", method = RequestMethod.POST)
-    public Result problemList(
+    public Result addProblem(
                             @RequestParam(required = true) String summary,
                             @RequestParam(required = true) String channel,
                             @RequestParam(required = true) String informer
@@ -127,7 +128,7 @@ public class ManagerController extends BaseController {
     @ApiOperation(value = "处理问题", httpMethod = "POST", produces = "application/json", response = Result.class)
     @ResponseBody
     @RequestMapping(value = "problem/deal", method = RequestMethod.POST)
-    public Result problemList(
+    public Result dealProblem(
             @RequestParam(required = true) long id,
             @RequestParam(required = false) String detail,
             @RequestParam(required = false) String type,
@@ -192,5 +193,61 @@ public class ManagerController extends BaseController {
 
         PageInfo pageInfo = managerService.selectWorkPage(page,rows,sort,order,date_begin,date_end);
         return pageInfo;
+    }
+
+    /**
+     * 添加工作记录
+     *
+     * @param summary      起始页码
+     * @param type         类型
+     * @param level        优先级
+     * @return
+     */
+    @ApiOperation(value = "添加工作记录", httpMethod = "POST", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "work/insert", method = RequestMethod.POST)
+    public Result addWork(
+            @RequestParam(required = true) String summary,
+            @RequestParam(required = true) String type,
+            @RequestParam(required = true) String level
+    ) {
+        long id = managerService.addWork(summary,level,type);
+        if (id>0)return  Result.success(id);
+        else return Result.error();
+    }
+
+
+    /**
+     * 处理工作
+     *
+     * @param id      id
+     * @return
+     */
+    @ApiOperation(value = "处理工作", httpMethod = "POST", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "work/deal", method = RequestMethod.POST)
+    public Result dealWork(
+            @RequestParam(required = true) long id
+    ) {
+        ManagerWork managerWork = new ManagerWork();
+        managerWork.setId(id);
+        managerWork.setFinishdate(new Date(System.currentTimeMillis()));
+        if (managerService.dealWork(managerWork)>0)return  Result.success("处理完成");
+        else return Result.error();
+    }
+    /**
+     * 删除工作
+     *
+     * @param id      id
+     * @return
+     */
+    @ApiOperation(value = "删除工作", httpMethod = "POST", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "work/delete", method = RequestMethod.POST)
+    public Result deleteWork(
+            @RequestParam(required = true) long id
+    ) {
+        if (managerService.deleteWork(id)>0)return  Result.success("处理完成");
+        else return Result.error();
     }
 }

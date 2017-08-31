@@ -20,7 +20,40 @@
 <div id="manager_work_grid" style="padding: 10px">
 </div>
 
+<div id="manager_work_add_dialog" title="基础信息" >
+    <form id="manager_work_form">
+        <input type="hidden" name="id" id="id"/>
+        <div style="float: left;height: 200px;">
+            <p style="padding: 10px;">描&nbsp;&nbsp;&nbsp;述:<input name="manager-work-summary" id="manager-work-summary"
+                                                            style="width: 300px;height: 80px"
+                                                            data-options="required:true"
+                                                            multiline="true"
+                                                            class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px;">类&nbsp;&nbsp;&nbsp;型:<input name="manager-work-type" id="manager-work-type"
+                                                            style="width: 300px;height: 35px"
+                                                            data-options="
+                                                                valueField: 'id',
+                                                                textField: 'text',
+                                                                data: [{id: 'R',text: 'R-例行工作'},
+                                                                {id: 'A',text: 'A-权限问题'},
+                                                                {id: 'S',text: 'S-软件问题'},
+                                                                {id: 'H',text: 'H-硬件问题'},
+                                                                {id: 'I',text: 'I-IT用户申请'},
+                                                                {id: 'C',text: 'C-配置修改'},
+                                                                {id: 'O',text: 'O-其他问题'}]"
+                                                            class="easyui-combobox"/></p>
+            <p style="padding: 10px ;">优先级:<input name="manager-work-level" id="manager-work-level"
+                                                            style="width: 300px;height: 35px"
+                                                            data-options="
+                                                                valueField: 'id',
+                                                                textField: 'text',
+                                                                data: [{id: '2',text: '高'},{id: '1',text: '中'},{id: '0',text: '低'}]"
+                                                            class="easyui-combobox"/></p>
 
+
+        </div>
+    </form>
+</div>
 
 
 

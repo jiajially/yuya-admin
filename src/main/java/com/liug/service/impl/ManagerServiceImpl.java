@@ -72,16 +72,22 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public long addWork(String summary, String level, String type) {
-        return 0;
+        ManagerWork managerWork = new ManagerWork();
+        managerWork.setSummary(summary);
+        managerWork.setLevel(level);
+        managerWork.setType(type);
+        managerWork.setCreatedate(new Date(System.currentTimeMillis()));
+        return managerWorkMapper.insert(managerWork);
     }
 
     @Override
     public long dealWork(ManagerWork managerWork) {
-        return 0;
+        return managerWorkMapper.update(managerWork);
     }
 
     @Override
-    public ManagerWork getWorkById(long id) {
-        return null;
+    public long deleteWork(long id) {
+
+        return managerWorkMapper.deleteById(id);
     }
 }

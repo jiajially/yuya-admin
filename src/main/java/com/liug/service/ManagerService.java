@@ -25,6 +25,7 @@ public interface ManagerService {
 
     long dealWork(ManagerWork managerWork);
 
-    ManagerWork getWorkById(long id);
+    long deleteWork(long id);
+
 
 }
