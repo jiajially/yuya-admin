@@ -1,0 +1,142 @@
+<script type="text/javascript" th:src="@{/js/system/common.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script type="text/javascript" th:src="@{/js/auth/user.js}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+
+<div id="auth-user-tool-bar" style="padding: 10px 10px 0 10px">
+    <form id="auth-user-search-form">
+        <div class="easyui-linkbutton " id="auth-user-flash-btn" data-options="iconCls:'icon-reload'" style="width:70px">刷新
+        </div>
+        <div class="easyui-linkbutton " id="auth-user-save-btn" data-options="iconCls:'icon-add'" style="width:70px">新增</div>
+        <div class="easyui-linkbutton " id="auth-user-update-btn" data-options="iconCls:'icon-edit'" style="width:70px">修改
+        </div>
+        <div class="easyui-linkbutton " id="auth-user-delete-btn" data-options="iconCls:'icon-remove'" style="width:70px">删除
+        </div>
+        <div class="easyui-linkbutton " id="auth-user-detail-btn" data-options="iconCls:'icon-edit'" style="width:90px">
+            查看详情
+        </div>
+        <div class="easyui-linkbutton " id="auth-user-enable-btn" data-options="iconCls:'icon-add'" style="width:70px">启用
+        </div>
+        <div class="easyui-linkbutton " id="auth-user-forbidden-btn" data-options="iconCls:'icon-remove'" style="width:70px">
+            禁用
+        </div>
+        <div class="easyui-linkbutton " id="auth-user-password-btn" data-options="iconCls:'icon-remove'"
+             style="width:100px">重置密码
+        </div>
+        <span style="line-height: 26px; ">登录名:<input name="auth-user-search-loginName" class="easyui-textbox"
+                                                     style="line-height: 26px; "/></span>
+        <span style="line-height: 26px; ">中文名:<input name="auth-user-search-zhName" class="easyui-textbox"
+                                                     style="line-height: 26px; "/></span>
+        <span style="line-height: 26px; ">邮箱:<input name="auth-user-search-email" class="easyui-textbox"
+                                                    style="line-height: 26px; "/></span>
+        <span style="line-height: 26px; ">电话:<input name="auth-user-search-phone" class="easyui-textbox"
+                                                    style="line-height: 26px; "/></span>&nbsp;
+        <span style="line-height: 26px; ">地址:<input name="auth-user-search-address" class="easyui-textbox"
+                                                    style="line-height: 26px; "/></span>&nbsp;
+        <div class="easyui-linkbutton " id="auth-user-log-select-btn" data-options="iconCls:'icon-search'" style="width:70px">搜索
+        </div>
+    </form>
+</div>
+<div id="auth_user_grid" style="padding: 10px">
+
+</div>
+
+
+<div id="auth_user_edit_dialog">
+    <form id="auth_user_form">
+        <input type="hidden" name="id" id="id"/>
+        <div style="float: left;height: 290px;">
+            <p style="padding: 10px;">&nbsp;登录名:<input name="auth-user-loginName" id="auth-user-loginName" style="width: 300px;height: 35px"
+                                                       data-options="required:true"
+                                                       class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">&nbsp;密&nbsp;&nbsp;&nbsp;码:<input name="auth-user-password" type="password" id="auth-user-password"
+                                                             style="width: 300px;height: 35px"
+                                                             data-options="required:true,validType:['length[6,20]']"
+                                                             class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">&nbsp;中文名:<input name="auth-user-zhName" id="auth-user-zhName"
+                                                        style="width: 300px;height: 35px"
+                                                        data-options="required:true"
+                                                        class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">&nbsp;英文名:<input name="auth-user-enName" id="auth-user-enName"
+                                                        style="width: 300px;height: 35px"
+                                                        data-options="required:false"
+                                                        class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">&nbsp;性&nbsp;&nbsp;&nbsp;别:<select name="auth-user-sex" id="auth-user-sex"
+                                                              style="width: 300px;height: 35px"
+                                                              data-options="required:true,"
+                                                              class="easyui-combobox easyui-validatebox">
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+            </p>
+            <p style="padding: 10px ;">&nbsp;生&nbsp;&nbsp;&nbsp;日:<input name="auth-user-birth" class="easyui-datebox" id="auth-user-birth"
+                                                             style="width: 300px;height: 35px" type="text"
+                                                             data-options="required:false,editable:false"
+                                                            /></p>
+            <p style="padding: 10px ;">&nbsp;邮&nbsp;&nbsp;&nbsp;箱:<input name="auth-user-email" id="auth-user-email"
+                                                             style="width: 300px;height: 35px"
+                                                             data-options="required:false,validType:['email']"
+                                                             class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">&nbsp;电&nbsp;&nbsp;&nbsp;话:<input name="auth-user-phone" id="auth-user-phone"
+                                                             style="width: 300px;height: 35px"
+                                                             data-options="required:false,validType:['length[11,11]'],invalidMessage:'请输入11位手机号'"
+                                                             class="easyui-textbox easyui-validatebox"/></p>
+            <p style="padding: 10px ;">&nbsp;地&nbsp;&nbsp;&nbsp;址:<input name="auth-user-address" id="auth-user-address"
+                                                             style="width: 300px;height: 35px"
+                                                             data-options="required:false"
+                                                             class="easyui-textbox easyui-validatebox"/></p>
+        </div>
+        <!--
+        <div style="float: right;width: 200px;height: 100%">
+            <table id="user-permissions" class="easyui-datagrid" data-options="
+                url:'${pageContext.request.contextPath}/permission/list',
+                method:'get',
+                idField:'id',
+                view:groupview,
+                groupField:'sysPermissionGroupId',
+                groupFormatter: function (value, rows) {
+                return rows[0].sysPermissionGroupName;
+                },
+                fitColumns: false,
+                rownumbers: true,
+                fit: true,
+                ">
+                <thead frozen="true">
+                <tr>
+                    <th data-options="field:'ck', checkbox: true">选择</th>
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    <th data-options="field:'name',width:200">权限</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div style="float: right;width: 300px;height: 100%;">
+            <table id="jobs" class="easyui-treegrid"
+                   data-options="
+                url:'${pageContext.request.contextPath}/job/list',
+                method:'get',
+                idField: 'id',
+                nodeId:'id',
+                treeField: 'name',
+                rownumbers: true,
+                fit: true,
+                fitColumns: false,
+                singleSelect:false,
+            ">
+                <thead frozen="true">
+                <tr>
+                    <th data-options="field:'ck', checkbox: true">选择</th>
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    <th data-options="field:'name',width:260">职位</th>
+                </tr>
+                </thead>
+            </table>
+        </div>-->
+
+    </form>
+</div>
+

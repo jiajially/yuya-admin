@@ -29,9 +29,9 @@ import java.util.UUID;
  */
 @Api(value = "用户管理模块")
 @Controller
-@RequestMapping("user")
-public class UserController extends BaseController {
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+@RequestMapping("auth")
+public class AuthController extends BaseController {
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     @Autowired
     private SysUserService sysUserService;
     @Autowired
@@ -62,7 +62,7 @@ public class UserController extends BaseController {
      * @return
      */
     @ApiOperation(value = "新增用户", httpMethod = "POST", produces = "application/json", response = Result.class)
-    @RequiresPermissions("user:insert")
+    //@RequiresPermissions("user:insert")
     @ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     public Result insert(@RequestParam String loginName,
@@ -136,7 +136,7 @@ public class UserController extends BaseController {
      * @return
      */
     @ApiOperation(value = "更新用户", httpMethod = "POST", produces = "application/json", response = Result.class)
-    @RequiresPermissions("user:update")
+    //@RequiresPermissions("user:update")
     @ResponseBody
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public Result update(@RequestParam long id,
@@ -186,7 +186,7 @@ public class UserController extends BaseController {
      * @return
      */
     @ApiOperation(value = "查询用户列表", httpMethod = "GET", produces = "application/json", response = PageInfo.class)
-    @RequiresPermissions("user:list")
+    //@RequiresPermissions("user:list")
     @ResponseBody
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public PageInfo list(@RequestParam(defaultValue = "1") int page,

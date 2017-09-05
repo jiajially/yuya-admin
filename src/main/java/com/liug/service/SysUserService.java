@@ -32,5 +32,6 @@ public interface SysUserService {
 
     LoginInfo login(SysUser user, Serializable id, int platform);
 
+    LoginInfo login(String username,String password);
 
 }

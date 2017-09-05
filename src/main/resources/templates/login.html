@@ -2,8 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>yuya-admin</title>
-    <link type="image/x-icon" rel="shortcut icon" th:href="@{/image/favicon.ico}">
-    <link type="image/x-icon" rel="bookmark" th:href="@{/image/favicon.ico}">
+    <link type="image/x-icon" rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
+    <link type="image/x-icon" rel="bookmark" th:href="@{/image/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/easyui.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/icon.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/system/login.css}"/>
@@ -16,23 +16,14 @@
 </head>
 <body>
 <div id="login">
-    <div style="padding: 15px 50px 0 60px;">
+    <div style="padding: 15px 50px 0 60px;margin-left: -100px;margin-top: -20px">
         <p>
             账号:<input name="username" id="username" style="width: 300px;height: 35px" type="text" class="textbox"/>
         </p>
-        <p style="padding-top: 10px;padding-bottom: 15px">
+        <p style="padding-top: 50px;padding-bottom: 15px">
             密码:<input name="username" id="password" style="width: 300px;height: 35px" type="password" class="textbox"/>
         </p>
 
-        <div id="embed-captcha" style="padding-left:35px;width: 290px ;height: 188px;"></div>
-
-
-        <br><br>
-
-        <hr>
-
-
-        <div id="github" class="easyui-linkbutton">使用github登录</div>
     </div>
 </div>
 </body>

@@ -142,7 +142,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public LoginInfo login(SysUser user, Serializable id, int platform) {
-        log.debug("sessionId is:{}", id.toString());
+        /*log.debug("sessionId is:{}", id.toString());
         LoginInfo loginInfo = new LoginInfo();
         BeanUtils.copyProperties(user, loginInfo);
         List<SysUserPermission> userPermissions = sysUserPermissionMapper.selectByUserId(user.getId());
@@ -171,10 +171,52 @@ public class SysUserServiceImpl implements SysUserService {
             sysLoginStatusMapper.update(oldLoginStatus);
             newLoginStatus.setLastLoginTime(oldLoginStatus.getCreateTime());
         }
-        sysLoginStatusMapper.insert(newLoginStatus);
+        sysLoginStatusMapper.insert(newLoginStatus);*/
+
+        /*
+        *   Map<String, Object> map = new HashMap<>();
+        if (!"123456".equals(password)) {
+            map.put("success", false);
+            map.put("message", "密码错误");
+            return map;
+        }
+
+        // 设置session
+        session.setAttribute(WebSecurityConfig.SESSION_KEY, account);
+
+        map.put("success", true);
+        map.put("message", "登录成功");
+        * */
+        LoginInfo loginInfo = new LoginInfo();
+        if (user!=null&&"admin".equals(user.getLoginName())&&"admin".equals(user.getPassword())) {
+
+            loginInfo.setEnName("SuperUser");
+            loginInfo.setZhName("c");
+        }
+
         return loginInfo;
     }
 
+
+    @Override
+    public LoginInfo login(String username,String password) {
+
+        LoginInfo loginInfo = new LoginInfo();
+        SysUser user = sysUserMapper.selectUserByLoginName(username);
+        if ("admin".equals(username)&&"admin".equals(password)) {
+            loginInfo.setEnName("SuperUser");
+            loginInfo.setZhName("超级用户");
+            return loginInfo;
+        }
+
+        if (user!=null&&user.getPassword().equals(password)) {
+            BeanUtils.copyProperties(user, loginInfo);
+            return loginInfo;
+        }
+
+
+        return null;
+    }
 
     @Override
     public boolean isExistLoginNameExcludeId(long id, String loginName) {

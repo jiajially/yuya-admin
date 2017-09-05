@@ -1,5 +1,6 @@
 package com.liug.controller;
 
+import com.liug.common.config.WebSecurityConfig;
 import com.liug.common.util.ResponseCode;
 import com.liug.common.util.Result;
 import com.liug.common.util.StringUtil;
@@ -30,10 +31,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +71,22 @@ public class SystemController extends BaseController {
         return "system/index";
     }
 
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login(){
+        return "login";
+    }
+
+
+    @RequestMapping(value ="logout",method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        // 移除session
+        session.removeAttribute(WebSecurityConfig.SESSION_KEY);
+        return "redirect:/system/login";
+    }
+
+
+
     /**
      * 登录
      *
@@ -78,17 +97,18 @@ public class SystemController extends BaseController {
      */
     @ApiOperation(value = "登录", httpMethod = "POST", produces = "application/json", response = Result.class)
     @ResponseBody
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "doLogin", method = RequestMethod.POST)
     public Result login(@RequestParam String loginName,
                         @RequestParam String password,
                         @RequestParam int platform,
-                        HttpServletRequest request) throws Exception {
+                        //HttpServletRequest request
+                        HttpSession session) throws Exception {
         //极限验证二次服务验证
         //if (!verifyCaptcha(request)) {
           //  return Result.instance(ResponseCode.verify_captcha_error.getCode(), ResponseCode.verify_captcha_error.getMsg());
         //}
 
-        log.info(loginName);
+        /*log.info(loginName);
         SysUser user = sysUserService.selectByLoginName(loginName);
         if (user == null) {
             return Result.instance(ResponseCode.unknown_account.getCode(), ResponseCode.unknown_account.getMsg());
@@ -99,16 +119,34 @@ public class SystemController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         subject.login(new UsernamePasswordToken(loginName, password));
         LoginInfo loginInfo = sysUserService.login(user, subject.getSession().getId(), platform);
-        subject.getSession().setAttribute("loginInfo", loginInfo);
+        subject.getSession().setAttribute("loginInfo", loginInfo);*/
+        //SysUser user = sysUserService.selectByLoginName(loginName);
+        LoginInfo loginInfo = sysUserService.login(loginName,password);
+        // 设置session
+        session.setAttribute(WebSecurityConfig.SESSION_KEY, loginInfo);
         log.debug("登录成功");
         return Result.success(loginInfo);
     }
 
     /**
-     * 退出
+     * 获取当前登录session
      *
      * @return
      */
+    @ApiOperation(value = "获取当前登录session", httpMethod = "GET", produces = "application/json", response = Result.class)
+    @ResponseBody
+    @RequestMapping(value = "session", method = RequestMethod.GET)
+    public Result login(HttpSession session) throws Exception {
+        return Result.success(session.getAttribute(WebSecurityConfig.SESSION_KEY));
+    }
+
+
+
+    /**
+     * 退出
+     *
+     * @return
+
     @ApiOperation(value = "退出", httpMethod = "GET", produces = "application/json", response = Result.class)
     @ResponseBody
     @RequestMapping(value = "logout", method = RequestMethod.GET)
@@ -116,7 +154,7 @@ public class SystemController extends BaseController {
         SecurityUtils.getSubject().logout();
         return Result.success();
     }
-
+*/
     /**
      * 极限验证
      *

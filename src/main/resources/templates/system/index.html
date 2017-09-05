@@ -19,14 +19,14 @@
 <body class="easyui-layout">
 <div data-options="region:'north',border:false" style="height:40px; background:#198ec2;padding: 0;">
     <div style="height: 40px; float: left; line-height: 40px">
-        <span style="font-weight:bolder; font-size: large;padding-left: 10px;color: #ffffff">
-            哇哈哈监控平台（开发）
+        <span  style="font-weight:bolder; font-size: large;padding-left: 10px;color: #ffffff">
+            育芽监控平台（开发）
         </span>
     </div>
     <div style="float:right;height: 40px;padding: 0;">
     </div>
     <div style="float:right;height: 40px;padding-top: 0;">
-        <span style="color: #ffffff ;font-weight: bolder;">
+        <span id="user-span" style="color: #ffffff ;font-weight: bolder;margin-top: 5px">
             欢迎您:测试账户
         </span> &nbsp;&nbsp;
         <input id="logout-btn" class="easyui-menubutton logout" value="安全退出"/>
@@ -300,7 +300,19 @@
                 </div>
             </ul>
         </div>
+        <div title="权限管理" data-options="iconCls:'icon-tip'" style="padding: 0 0 0 15px;">
 
+            <ul style="list-style: none;padding: 0 0 0 0 ;">
+                <div style="padding: 5px 10px;">
+                    <li class="nav-list">
+                        <div class="easyui-linkbutton" data-options="iconCls:'icon-tip'" style="border: 0;"
+                             th:href="@{/auth/user}">用户管理
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
         <div title="关于系统" data-options="iconCls:'icon-tip',selected:true" style="padding: 0 0 0 15px;">
 
             <ul style="list-style: none;padding: 0 0 0 0 ;">
@@ -332,7 +344,7 @@
                 <hr style="height:2px;border:none;border-top:2px solid #999999;"  />
                 <div>
                     <pre>
-系统名称：哇哈哈监控管理系统
+系统名称：育芽监控管理系统
 
 系统环境：Liunx 4.14
 

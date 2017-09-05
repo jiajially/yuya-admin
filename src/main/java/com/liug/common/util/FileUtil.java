@@ -1,9 +1,6 @@
 package com.liug.common.util;
 
-import com.liug.YuYaAdminApplication;
-import com.liug.controller.IndexController;
 import org.springframework.util.ResourceUtils;
-import sun.jvm.hotspot.memory.Dictionary;
 
 import java.io.*;
 import java.util.ArrayList;

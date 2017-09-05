@@ -21,8 +21,8 @@ $(document).ready(function () {
 
         title: '系统登录',
         closable: false,
-        width: 500,
-        height: 200,
+        width: 400,
+        height: 300,
         cache: false,
         modal: true,
         resizable: false,
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
                     else {
                         $.ajax({
-                            url: getRootPath() + "/system/login",
+                            url: getRootPath() + "/system/doLogin",
                             type: "post",
                             dataType: "json",
                             data: {
@@ -57,6 +57,7 @@ $(document).ready(function () {
                             },
                             success: function (data) {
                                 if (data.code == 10000) {
+                                    setCookie("username",data.data.zhName,1);
                                     location.href = getRootPath() + "/system/welcome";
                                 } else if (data.code == 20001) {
                                     common_tool.messager_show(data.msg)
@@ -82,9 +83,9 @@ $(document).ready(function () {
     });
     $('#password').validatebox({
         required: true,
-        validType: 'length[6, 30]',
+        validType: 'length[5, 30]',
         missingMessage: '请输入密码',
-        invalidMessage: '请输入6-30位密码',
+        invalidMessage: '请输入5-30位密码',
     });
     if (!$("#username").validatebox("isValid")) {
         $("#username").focus();

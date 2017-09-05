@@ -34,19 +34,25 @@ index_tool = {
 };
 $(document).ready(function () {
     index_tool.load_homepage(5);
+
+    //alert(getCookie("username"));
+
+    var userSpan=document.getElementById ("user-span");
+    userSpan.innerHTML = "欢迎您:" + getCookie("username");
+
     $("#logout-btn").click(function () {
         $.messager.confirm('确认对话框', "您确认退出系统吗?", function (r) {
             if (r) {
+                clearCookie("username");
                 $.ajax({
                     data: {},
                     method: 'get',
                     url: getRootPath() + '/system/logout',
-                    async: false,
+                    async: true,
                     dataType: 'json',
-                    success: function (result) {
-                        location = getRootPath();
-                    },
+
                 });
+                window.location.reload();
             }
         });
     });
