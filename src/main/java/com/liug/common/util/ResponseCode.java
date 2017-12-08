@@ -8,7 +8,7 @@ public enum ResponseCode {
     error(20000, "服务器错误"),
     unknown_account(20001, "账户不存在"),
     forbidden_account(20002, "账户已禁用"),
-    password_incorrect(20003, "密码错误"),
+    password_incorrect(20003, "用户不存在或密码错误"),
     verify_captcha_error(20004, "验证码错误,请重新刷新并滑动验证码!"),
     unauthorized(20005, "无操作权限"),
     can_not_edit(20006, "该条记录无法编辑"),
@@ -22,9 +22,20 @@ public enum ResponseCode {
     login_name_already_exist(30005, "该登录名已存在"),
     code_already_exist(30006, "该编码已存在"),
     fullname_already_exist(30007, "该全称已存在"),
+
     host_valid_fail(40001, "主机验证失败"),
     host_already_exist(40002, "主机信息已存在"),
-    host_valid_enable_fail(40003, "主机信息尚未验证，不能启用");
+    host_valid_enable_fail(40003, "主机信息尚未验证，不能启用"),
+
+    file_exist(50001, "文件已存在"),
+    file_not_exist(50002, "文件不存在"),
+    file_upload_faild(50003, "文件上传失败"),
+
+
+
+    ;
+
+
 
 
     private int code;

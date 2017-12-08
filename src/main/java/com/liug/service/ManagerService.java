@@ -1,8 +1,10 @@
 package com.liug.service;
 
+import com.liug.common.util.Result;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
 import com.liug.model.entity.ManagerWork;
+import com.liug.model.entity.SapScript;
 
 import java.util.Date;
 
@@ -26,6 +28,12 @@ public interface ManagerService {
     long dealWork(ManagerWork managerWork);
 
     long deleteWork(long id);
+
+    Result selectSapScript();
+
+    Result selectSapScriptStatic();
+
+    Result generator(SapScript sapScript);
 
 
 }

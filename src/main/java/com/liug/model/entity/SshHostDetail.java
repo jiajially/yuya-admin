@@ -5,26 +5,37 @@ package com.liug.model.entity;
  * Created by liugang on 2017/7/31.
  */
 public class SshHostDetail {
-    Integer osId;
-    Integer swId;
+    Long osId;
+    Long swId;
     String osName;
     String swName;
     String osVersion;
     String swVersion;
 
-    public Integer getOsId() {
+    public SshHostDetail(){}
+
+    public SshHostDetail(SshHost sshHost){
+        osId=sshHost.getOsId();
+        swId=sshHost.getSwId();
+        osName=sshHost.getOs();
+        swName=sshHost.getSw();
+        osVersion=sshHost.getOsVersion();
+        swVersion=sshHost.getSwVersion();
+    }
+
+    public Long getOsId() {
         return osId;
     }
 
-    public void setOsId(Integer osId) {
+    public void setOsId(Long osId) {
         this.osId = osId;
     }
 
-    public Integer getSwId() {
+    public Long getSwId() {
         return swId;
     }
 
-    public void setSwId(Integer swId) {
+    public void setSwId(Long swId) {
         this.swId = swId;
     }
 

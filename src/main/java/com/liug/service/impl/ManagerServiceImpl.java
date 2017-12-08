@@ -1,11 +1,16 @@
 package com.liug.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.liug.common.util.Result;
 import com.liug.dao.ManagerProblemMapper;
 import com.liug.dao.ManagerWorkMapper;
+import com.liug.dao.SapScriptMapper;
+import com.liug.dao.SapScriptStaticMapper;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
 import com.liug.model.entity.ManagerWork;
+import com.liug.model.entity.SapScript;
+import com.liug.model.entity.SapScriptStatic;
 import com.liug.service.ManagerService;
 import com.liug.service.SshHostService;
 import org.slf4j.Logger;
@@ -29,6 +34,10 @@ public class ManagerServiceImpl implements ManagerService {
     private ManagerProblemMapper managerProblemMapper;
     @Autowired
     private ManagerWorkMapper managerWorkMapper;
+    @Autowired
+    private SapScriptMapper sapScriptMapper;
+    @Autowired
+    private SapScriptStaticMapper sapScriptStaticMapper;
 
     @Override
     public PageInfo selectProblemPage(int page, int rows, String sort,  String order ,Date begin, Date end) {
@@ -89,5 +98,35 @@ public class ManagerServiceImpl implements ManagerService {
     public long deleteWork(long id) {
 
         return managerWorkMapper.deleteById(id);
+    }
+
+    @Override
+    public Result selectSapScript() {
+        return Result.success(sapScriptMapper.selectAll());
+    }
+
+    @Override
+    public Result selectSapScriptStatic() {
+        return Result.success(sapScriptStaticMapper.selectAll());
+    }
+
+    @Override
+    public Result generator(SapScript sapScript) {
+        String content="";
+        content+="\n"+sapScriptStaticMapper.selectByCode("param").getContent();
+        content+="\n"+sapScriptStaticMapper.selectByCode("workspace").getContent();
+        content+="\n"+sapScriptStaticMapper.selectByCode("gui").getContent();
+        content+="\n"+sapScriptStaticMapper.selectByCode("word_create").getContent();
+        //获取tcode
+        if(sapScript.getTcode()!=null) {
+            String[] tcodes = sapScript.getTcode().split("\\*");
+            for (String tcode : tcodes) {
+                SapScriptStatic scriptStatic =sapScriptStaticMapper.selectByCode(tcode);
+                if (scriptStatic!=null) content+="\n"+scriptStatic.getContent();
+            }
+        }
+        content+="\n"+sapScriptStaticMapper.selectByCode("word_end").getContent();
+        content+="\n"+sapScriptStaticMapper.selectByCode("function").getContent();
+        return Result.success(content);
     }
 }

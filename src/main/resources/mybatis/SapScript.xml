@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liug.dao.SapScriptMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.SapScript">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="host" property="host" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="instanceNo" property="instanceNo" jdbcType="INTEGER"/>
+        <result column="sid" property="sid" jdbcType="VARCHAR"/>
+        <result column="router" property="router" jdbcType="VARCHAR"/>
+        <result column="client" property="client" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="language" property="language" jdbcType="VARCHAR"/>
+        <result column="tcode" property="tcode" jdbcType="VARCHAR"/>
+        <result column="timeout" property="timeout" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="formate" property="formate" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+    id,
+    summary,
+    host,
+    instanceno,
+    sid,
+    router,
+    client,
+    username,
+    password,
+    language,
+    tcode,
+    timeout,
+    title,
+    formate,
+    create_time,
+    uodate_time,
+    create_by,
+    status
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="summary !=null and summary.length() != 0">
+            AND summary = #{summary}
+        </if>
+        <if test="host !=null and host.length() != 0">
+            AND host = #{host}
+        </if>
+        <if test="instanceno !=null ">
+            AND instanceno = #{instanceno}
+        </if>
+        <if test="sid !=null and sid.length() != 0">
+            AND sid = #{sid}
+        </if>
+        <if test="router !=null and router.length() != 0">
+            AND router = #{router}
+        </if>
+        <if test="client !=null">
+            AND client = #{client}
+        </if>
+        <if test="username !=null and username.length() != 0">
+            AND username = #{username}
+        </if>
+        <if test="password !=null and password.length() != 0">
+            AND password = #{password}
+        </if>
+        <if test="language !=null and language.length() != 0">
+            AND language = #{language}
+        </if>
+        <if test="tcode !=null and tcode.length() != 0">
+            AND tcode = #{tcode}
+        </if>
+        <if test="timeout !=null">
+            AND timeout = #{timeout}
+        </if>
+        <if test="title !=null and title.length() != 0">
+            AND title = #{title}
+        </if>
+        <if test="formate !=null and formate.length() != 0">
+            AND formate = #{formate}
+        </if>
+
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="updateTime !=null ">
+            AND update_time = #{updateTime}
+        </if>
+        <if test="createBy !=null ">
+            AND create_by = #{createBy}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="com.liug.model.entity.SapScript" useGeneratedKeys="true" keyProperty="id">
+        insert into ssh_host
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="summary !=null and summary.length() != 0">
+                 summary,
+            </if>
+            <if test="host !=null and host.length() != 0">
+                 host,
+            </if>
+            <if test="instanceno !=null ">
+                 instanceno,
+            </if>
+            <if test="sid !=null and sid.length() != 0">
+                 sid,
+            </if>
+            <if test="router !=null and router.length() != 0">
+                 router,
+            </if>
+            <if test="client !=null">
+                 client,
+            </if>
+            <if test="username !=null and username.length() != 0">
+                 username,
+            </if>
+            <if test="password !=null and password.length() != 0">
+                 password,
+            </if>
+            <if test="language !=null and language.length() != 0">
+                 language,
+            </if>
+            <if test="tcode !=null and tcode.length() != 0">
+                 tcode,
+            </if>
+            <if test="timeout !=null">
+                 timeout,
+            </if>
+            <if test="title !=null and title.length() != 0">
+                 title,
+            </if>
+            <if test="formate !=null and formate.length() != 0">
+                 formate,
+            </if>
+
+            <if test="createTime !=null ">
+                 create_time,
+            </if>
+            <if test="updateTime !=null ">
+                 update_time,
+            </if>
+            <if test="createBy !=null ">
+                 create_by,
+            </if>
+            <if test="status !=null ">
+                 status ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id !=null ">
+                #{id},
+            </if>
+            <if test="summary !=null and summary.length() != 0">
+                #{summary},
+            </if>
+            <if test="host !=null and host.length() != 0">
+                #{host},
+            </if>
+            <if test="instanceno !=null ">
+                #{instanceno},
+            </if>
+            <if test="sid !=null and sid.length() != 0">
+                #{sid},
+            </if>
+            <if test="router !=null and router.length() != 0">
+               #{router},
+            </if>
+            <if test="client !=null">
+                #{client},
+            </if>
+            <if test="username !=null and username.length() != 0">
+                #{username},
+            </if>
+            <if test="password !=null and password.length() != 0">
+               #{password},
+            </if>
+            <if test="language !=null and language.length() != 0">
+                #{language},
+            </if>
+            <if test="tcode !=null and tcode.length() != 0">
+                #{tcode},
+            </if>
+            <if test="timeout !=null">
+                #{timeout},
+            </if>
+            <if test="title !=null and title.length() != 0">
+                #{title},
+            </if>
+            <if test="formate !=null and formate.length() != 0">
+                #{formate},
+            </if>
+
+            <if test="createTime !=null ">
+                #{createTime},
+            </if>
+            <if test="updateTime !=null ">
+                #{updateTime},
+            </if>
+            <if test="createBy !=null ">
+                #{createBy},
+            </if>
+            <if test="status !=null ">
+                 #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+    <!--<update id="update" parameterType="com.liug.model.entity.SapScript">
+        update ssh_host
+        <set>
+            <if test="osId !=null ">
+                os_id = #{osId},
+            </if>
+            <if test="swId !=null ">
+                sw_id = #{swId},
+            </if>
+            <if test="os !=null and os.length() !=0">
+                os = #{os},
+            </if>
+            <if test="sw !=null and sw.length() !=0">
+                sw = #{sw},
+            </if>
+            <if test="osVersion !=null and osVersion.length() !=0">
+                os_version = #{osVersion},
+            </if>
+            <if test="swVersion !=null and swVersion.length() !=0">
+                sw_version = #{swVersion},
+            </if>
+            <if test="host !=null and host.length() !=0">
+                host = #{host},
+            </if>
+            <if test="summary !=null and summary.length() !=0">
+                summary = #{summary},
+            </if>
+            <if test="port !=null">
+                port = #{port},
+            </if>
+            <if test="username !=null and username.length() !=0">
+                username = #{username},
+            </if>
+            <if test="password !=null and password.length() !=0">
+                password = #{password},
+            </if>
+            <if test="envPath !=null and envPath.length() != 0">
+                env_path = #{envPath},
+            </if>
+            <if test="isValid !=null">
+                is_valid = #{isValid},
+            </if>
+            <if test="isEnable !=null">
+                is_enable = #{isEnable},
+            </if>
+            <if test="createTime !=null">
+                create_time = #{createTime},
+            </if>
+            <if test="true">
+                update_time = current_timestamp,
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>-->
+
+    <update id="deleteById">
+        UPDATE sap_script
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="com.liug.model.entity.SapScript" resultType="com.liug.model.entity.SapScript">
+        select * from sap_script where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+
+
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SapScript">
+        SELECT *
+        FROM sap_script
+        WHERE id = #{id} AND status != 7
+    </select>
+
+
+    <select id="selectAll" resultType="com.liug.model.entity.SapScript">
+        SELECT *
+        FROM sap_script
+        WHERE status != 7
+    </select>
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM sap_script
+        WHERE status != 7
+    </select>
+    <select id="selectCountsExists" resultType="integer">
+        SELECT count(*)
+        FROM sap_script
+        WHERE status != 7
+        <if test="host != null and host.length() != 0">
+        AND host LIKE concat('%', #{host},'%')
+        </if>
+        <if test="username != null and username.length() != 0">
+            AND username LIKE concat('%', #{username},'%')
+        </if>
+        <if test="port != null">
+            AND port LIKE concat('%', #{port},'%')
+        </if>
+    </select>
+</mapper>

@@ -70,6 +70,10 @@ public class SshHostServiceImpl implements SshHostService {
         PageInfo pageInfo = new PageInfo(counts, sshHosts);
         return pageInfo;
     }
+    @Override
+    public List<SshHost> selectAllHost() {
+        return sshHostMapper.selectAll("id", "asc", null, null, null);
+    }
 
     @Override
     public List<SelectContnet> select() {

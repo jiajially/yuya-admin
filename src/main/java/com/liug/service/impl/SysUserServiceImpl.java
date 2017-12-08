@@ -1,6 +1,7 @@
 package com.liug.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.liug.common.util.MD5Util;
 import com.liug.dao.*;
 import com.liug.model.dto.LoginInfo;
 import com.liug.model.dto.PageInfo;
@@ -208,8 +209,8 @@ public class SysUserServiceImpl implements SysUserService {
             loginInfo.setZhName("超级用户");
             return loginInfo;
         }
-
-        if (user!=null&&user.getPassword().equals(password)) {
+        //验证密码,MD5加密校验
+        if (user!=null&&MD5Util.verify(password,user.getPassword())) {
             BeanUtils.copyProperties(user, loginInfo);
             return loginInfo;
         }

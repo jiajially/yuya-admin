@@ -20,6 +20,8 @@ public interface SshHostService {
 
     PageInfo selectPage(int page, int rows, String sort, String order, String host, String username, String envPath);
 
+    List<SshHost> selectAllHost();
+
     List<SelectContnet> select();
 
     SshHost selectById(long id);

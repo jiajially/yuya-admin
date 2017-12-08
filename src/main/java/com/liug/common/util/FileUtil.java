@@ -24,6 +24,30 @@ public class FileUtil {
         return _path;
     }
 
+    public static boolean createFile(String fileName,String contnet){
+        boolean res = false;
+        String fileNameTemp = "" + fileName;
+        File file = new File(fileNameTemp);
+        try{
+            if(!file.exists()){
+                file.createNewFile();
+                res = true;
+                FileWriter fileWriter = new FileWriter(fileNameTemp);
+                //使用缓冲区比不使用缓冲区效果更好，因为每趟磁盘操作都比内存操作要花费更多时间。
+                //通过BufferedWriter和FileWriter的连接，BufferedWriter可以暂存一堆数据，然后到满时再实际写入磁盘
+                //这样就可以减少对磁盘操作的次数。如果想要强制把缓冲区立即写入,只要调用writer.flush();这个方法就可以要求缓冲区马上把内容写下去
+                BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+                bufferedWriter.write(contnet);
+                bufferedWriter.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }finally {
+            return res;
+        }
+    }
+
     public static String loadFile(String path){
             String result = "";
             try {

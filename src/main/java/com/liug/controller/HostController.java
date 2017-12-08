@@ -94,9 +94,9 @@ public class HostController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     public Result insert(@RequestParam(required = true)String summary,
-                         @RequestParam(required = false)Integer osTypeId,
+                         @RequestParam(required = false)Long osTypeId,
                          @RequestParam(required = false)String osversion,
-                         @RequestParam(required = false)Integer swTypeId,
+                         @RequestParam(required = false)Long swTypeId,
                          @RequestParam(required = false)String swversion,
                          @RequestParam(required = false)String osName,
                          @RequestParam(required = false)String swName,
@@ -137,9 +137,9 @@ public class HostController extends BaseController {
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public Result update(@RequestParam(required = true)Long id,
                          @RequestParam(required = true)String summary,
-                         @RequestParam(required = false)Integer osTypeId,
+                         @RequestParam(required = false)Long osTypeId,
                          @RequestParam(required = false)String osversion,
-                         @RequestParam(required = false)Integer swTypeId,
+                         @RequestParam(required = false)Long swTypeId,
                          @RequestParam(required = false)String swversion,
                          @RequestParam(required = false)String osName,
                          @RequestParam(required = false)String swName,
@@ -207,9 +207,9 @@ public class HostController extends BaseController {
                             @RequestParam String username,
                             @RequestParam String password,
                             @RequestParam String summary,
-                            @RequestParam(required = false)Integer osTypeId,
+                            @RequestParam(required = false)Long osTypeId,
                             @RequestParam(required = false)String osversion,
-                            @RequestParam(required = false)Integer swTypeId,
+                            @RequestParam(required = false)Long swTypeId,
                             @RequestParam(required = false)String swversion,
                             @RequestParam(required = false)String osName,
                             @RequestParam(required = false)String swName) {

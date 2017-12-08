@@ -1,9 +1,11 @@
 package com.liug.controller;
 
 import com.liug.common.util.Result;
+import com.liug.dao.SapScriptStaticMapper;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
 import com.liug.model.entity.ManagerWork;
+import com.liug.model.entity.SapScriptStatic;
 import com.liug.service.ManagerService;
 import com.sun.org.apache.regexp.internal.RE;
 import io.swagger.annotations.Api;
@@ -34,6 +36,8 @@ public class ManagerController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(ManagerController.class);
     @Autowired
     private ManagerService managerService;
+    @Autowired
+    private SapScriptStaticMapper sapScriptStaticMapper;
 
 
     @ApiOperation(value = "problem", httpMethod = "GET", produces = "text/html")
@@ -249,5 +253,364 @@ public class ManagerController extends BaseController {
     ) {
         if (managerService.deleteWork(id)>0)return  Result.success("处理完成");
         else return Result.error();
+    }
+    /**
+     * 查
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "sapscript", method = RequestMethod.GET )
+    public Result sapscript() {
+
+        return managerService.selectSapScript();
+    }
+    /**
+     * 查
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "sapscriptstatic", method = RequestMethod.GET )
+    public Result sapscriptstatic() {
+
+/*        SapScriptStatic sapScriptStatic = new SapScriptStatic();
+        String t_code = "sm12";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm12\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]/usr/ctxtSEQG3-GCLIENT\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/txtSEQG3-GUNAME\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/txtSEQG3-GUNAME\").setFocus\n" +
+                "session.findById(\"wnd[0]/usr/txtSEQG3-GUNAME\").caretPosition = 3\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm13";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm13\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/txtSEL_CLIENT\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/txtSEL_USER\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/txtFROM_DATE\").text = yesterday_format\n" +
+                "session.findById(\"wnd[0]/usr/txtFROM_DATE\").setFocus\n" +
+                "session.findById(\"wnd[0]/usr/txtFROM_DATE\").caretPosition = 10\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm20";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm20\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-LOGIN\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-RFCLOGIN\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-RFCSTART\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-TASTART\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-REPOSTART\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-USERSTAMM\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-SONST\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/txtDY_START_DATE\").text = yesterday_format\n" +
+                "session.findById(\"wnd[0]/usr/txtDY_START_TIME\").text = \"00:00:00\"\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP/tabpAUDI/ssubTABAREA:SAPMSM20:0310/chkRSAUINFO-SONST\").setFocus\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "\n" +
+                "'session.findById(\"wnd[1]/tbar[0]/btn[0]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)\n");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm21";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm21\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/chkRB1\").selected = true\n" +
+                "session.findById(\"wnd[0]/usr/ctxtDATE_FR\").text = yesterday_format\n" +
+                "session.findById(\"wnd[0]/usr/ctxtTIME_FR\").text = \"00:00:00\"\n" +
+                "session.findById(\"wnd[0]/usr/chkRB1\").setFocus\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "session.findById(\"wnd[0]/usr/cntlCONTAINER_0100/shellcont/shell/shellcont[0]/shell\").setCurrentCell -1,\"ICON\"\n" +
+                "session.findById(\"wnd[0]/usr/cntlCONTAINER_0100/shellcont/shell/shellcont[0]/shell\").selectColumn \"ICON\"\n" +
+                "session.findById(\"wnd[0]/usr/cntlCONTAINER_0100/shellcont/shell/shellcont[0]/shell\").pressToolbarButton \"&SORT_ASC\"\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)\n");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm37";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm37\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/chkBTCH2170-SCHEDUL\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/chkBTCH2170-READY\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/chkBTCH2170-RUNNING\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/chkBTCH2170-FINISHED\").selected = false\n" +
+                "session.findById(\"wnd[0]/usr/txtBTCH2170-USERNAME\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/ctxtBTCH2170-FROM_DATE\").text = yesterday_format\n" +
+                "session.findById(\"wnd[0]/usr/ctxtBTCH2170-FROM_DATE\").setFocus\n" +
+                "session.findById(\"wnd[0]/usr/ctxtBTCH2170-FROM_DATE\").caretPosition = 10\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)\n");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm50";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm50\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell\").setCurrentCell -1,\"FAILURES_DISP\"\n" +
+                "session.findById(\"wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell\").selectColumn \"FAILURES_DISP\"\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[41]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)\n");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm51";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm51\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)\n");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm58";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm58\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/ctxtZEITRAUM-LOW\").text = yesterday_format\n" +
+                "session.findById(\"wnd[0]/usr/txtBENUTZER-LOW\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/txtBENUTZER-LOW\").setFocus\n" +
+                "session.findById(\"wnd[0]/usr/txtBENUTZER-LOW\").caretPosition = 1\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)\n");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sm66";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sm66\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/cntlGRID1/shellcont/shell\").setCurrentCell -1,\"CPU\"\n" +
+                "session.findById(\"wnd[0]/usr/cntlGRID1/shellcont/shell\").selectColumn \"CPU\"\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[40]\").press\n" +
+                "\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "smq2";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"smq2\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/txtCLIENT\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/txtQERROR\").text = \"X\"\n" +
+                "session.findById(\"wnd[0]/usr/txtQERROR\").setFocus\n" +
+                "session.findById(\"wnd[0]/usr/txtQERROR\").caretPosition = 1\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "st22";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"st22\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/ctxtS_DATUM-LOW\").text = yesterday_format\n" +
+                "session.findById(\"wnd[0]/usr/txtS_UNAME-LOW\").text = \"*\"\n" +
+                "session.findById(\"wnd[0]/usr/txtS_UNAME-LOW\").setFocus\n" +
+                "session.findById(\"wnd[0]/usr/txtS_UNAME-LOW\").caretPosition = 1\n" +
+                "session.findById(\"wnd[0]/usr/btnSTARTSEL\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "sxmb_moni";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"sxmb_moni\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/usr/cntlSPLITTER_CONTAINER_TR/shellcont/shell\").doubleClickNode \"MONI_SA\"\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode & \"_1\")\n" +
+                "CALL writeToWord(tcode & \"_1\")\n" +
+                "session.findById(\"wnd[0]/tbar[0]/btn[3]\").press\n" +
+                "session.findById(\"wnd[0]/usr/cntlSPLITTER_CONTAINER_TR/shellcont/shell\").selectedNode = \"MONI_LOG\"\n" +
+                "session.findById(\"wnd[0]/usr/cntlSPLITTER_CONTAINER_TR/shellcont/shell\").doubleClickNode \"MONI_LOG\"\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP_TABSTRIP/tabp'STRD'/ssub%_SUBSCREEN_TABSTRIP:RSXMB_SELECT_MESSAGES:0500/ctxtEXETIME\").text = \"00:00:00\"\n" +
+                "session.findById(\"wnd[0]/usr/cmbSTATTYPE\").setFocus\n" +
+                "session.findById(\"wnd[0]/usr/cmbSTATTYPE\").key = \"4\"\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP_TABSTRIP/tabp'STRD'/ssub%_SUBSCREEN_TABSTRIP:RSXMB_SELECT_MESSAGES:0500/ctxtEXEDATE\").text = yesterday_format\n" +
+                "session.findById(\"wnd[0]/usr/tabsTABSTRIP_TABSTRIP/tabp'STRD'/ssub%_SUBSCREEN_TABSTRIP:RSXMB_SELECT_MESSAGES:0500/ctxtEXEDATE\").caretPosition = 10\n" +
+                "session.findById(\"wnd[0]/tbar[1]/btn[8]\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode & \"_2\")\n" +
+                "CALL writeToWord(tcode  & \"_2\")");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "db02";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"db02\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode & \"_1\")\n" +
+                "CALL writeToWord(tcode & \"_1\")\n" +
+                "session.findById(\"wnd[0]\").resizeWorkingPane 156,33,false\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").expandNode \"       1008\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").topNode = \"       1009-\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").selectItem \"         47\",\"Task\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").ensureVisibleHorizontalItem \"         47\",\"Task\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").doubleClickItem \"         47\",\"Task\"\n" +
+                "\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode & \"_2\")\n" +
+                "CALL writeToWord(tcode & \"_2\")\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").expandNode \"       1005-\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").topNode = \"       1009-\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").selectItem \"         74\",\"Task\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").ensureVisibleHorizontalItem \"         74\",\"Task\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").doubleClickItem \"         74\",\"Task\"\n" +
+                "\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode & \"_3\")\n" +
+                "CALL writeToWord(tcode & \"_3\")\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").selectItem \"         71\",\"Task\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").ensureVisibleHorizontalItem \"         71\",\"Task\"\n" +
+                "session.findById(\"wnd[0]/shellcont[1]/shell/shellcont[1]/shell\").doubleClickItem \"         71\",\"Task\"\n" +
+                "session.findById(\"wnd[0]/usr/btn%_AUTOTEXT002\").press\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode & \"_4\")\n" +
+                "CALL writeToWord(tcode & \"_4\")\n" +
+                "session.findById(\"wnd[0]/tbar[0]/btn[3]\").press\n" +
+                "session.findById(\"wnd[0]/usr/btn%_AUTOTEXT003\").press\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode & \"_5\")\n" +
+                "CALL writeToWord(tcode & \"_5\")\n" +
+                "session.findById(\"wnd[0]/tbar[0]/btn[3]\").press\n" +
+                "''定制''");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "st03n";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"st03n\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]/shellcont/shell/shellcont[1]/shell\").selectedNode = \"B.999\"\n" +
+                "session.findById(\"wnd[0]/shellcont/shell/shellcont[1]/shell\").doubleClickNode \"B.999\"\n" +
+                "session.findById(\"wnd[1]/usr/btnBUTTON_1\").press\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode)\n" +
+                "CALL writeToWord(tcode)");
+        sapScriptStatic.setType("1");
+
+        sapScriptStaticMapper.insert(sapScriptStatic);
+        t_code = "st06";
+        sapScriptStatic.setCode(t_code);
+        sapScriptStatic.setSummary(t_code);
+        sapScriptStatic.setContent("\n" +
+                "tcode = \"st06\"\n" +
+                "CALL exec(tcode)\n" +
+                "''定制''\n" +
+                "session.findById(\"wnd[0]/shellcont/shellcont/shell/shellcont[0]/shellcont/shell/shellcont[0]/shell\").topNode = \"          1\"\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode& \"_1\")\n" +
+                "CALL writeToWord(tcode& \"_1\")\n" +
+                "session.findById(\"wnd[0]/shellcont/shellcont/shell/shellcont[0]/shellcont/shell/shellcont[1]/shell\").selectedNode = \"          7\"\n" +
+                "''定制''\n" +
+                "CALL wait()\n" +
+                "CALL saveToBmp(tcode& \"_2\")\n" +
+                "CALL writeToWord(tcode& \"_2\")\n");
+        sapScriptStatic.setType("1");
+*/
+
+        return managerService.selectSapScriptStatic();
     }
 }

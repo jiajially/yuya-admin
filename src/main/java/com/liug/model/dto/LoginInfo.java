@@ -11,6 +11,8 @@ import java.util.List;
  * @Author: liug
  * @Date: 2016-10-17 16:52
  * @Description:
+ *
+ * 用于展示登录的必要信息
  */
 public class LoginInfo implements Serializable {
 

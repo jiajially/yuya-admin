@@ -26,5 +26,6 @@ nbdist/
 shellResultTmp/
 src/main/resources/file/
 file/
+image/
 document/local/
 document/sys/
