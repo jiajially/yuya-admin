@@ -59,8 +59,8 @@ public class SapScript {
         return instanceno;
     }
 
-    public void setInstanceno(int instanceNo) {
-        this.instanceno = instanceNo;
+    public void setInstanceno(int instanceno) {
+        this.instanceno = instanceno;
     }
 
     public String getSid() {
@@ -181,7 +181,7 @@ public class SapScript {
                 "id=" + id +
                 ", summary='" + summary + '\'' +
                 ", host='" + host + '\'' +
-                ", instanceNo=" + instanceno +
+                ", instanceno=" + instanceno +
                 ", sid='" + sid + '\'' +
                 ", router='" + router + '\'' +
                 ", client=" + client +

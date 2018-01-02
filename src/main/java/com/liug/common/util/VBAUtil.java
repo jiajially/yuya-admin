@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 public class VBAUtil {
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
+
+    public static void main() {
         try {
             // --获取指定目录下，所有excel文件名
             List fileNameList = new ArrayList();
@@ -68,6 +66,23 @@ public class VBAUtil {
             bufferedWriter.close();
             fileWriter.close();
         } catch (IOException ioe) {
+        }
+    }
+
+
+    public static void execVBS(String path){
+        try {
+            File file = new File(path);
+            if (file.exists()) {
+                String[] cpCmd = new String[]{"wscript", path};
+                Process process = Runtime.getRuntime().exec(cpCmd);
+
+                //等待VBS执行完毕
+                process.waitFor();
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 }

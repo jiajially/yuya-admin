@@ -2,6 +2,7 @@ package com.liug.scheduler;
 
 
 import com.liug.common.ssh.Commond;
+import com.liug.common.ssh.SshResult;
 import com.liug.common.util.FileUtil;
 import com.liug.model.entity.SshHost;
 
@@ -86,7 +87,9 @@ public abstract class ScheduleJob {
      */
     public float getMemPercent(SshHost sshHost, String command){
         logger.debug(sshHost.toString());
-        return Float.valueOf(Commond.execute(true,sshHost,command).getContent());
+        SshResult result= Commond.execute(true,sshHost,command);
+        if (result.getExitStatus() !=-1 ) return Float.valueOf(Commond.execute(true,sshHost,command).getContent());
+        else return 0;
     }
 
 

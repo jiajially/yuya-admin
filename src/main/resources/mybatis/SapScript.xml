@@ -5,7 +5,7 @@
         <result column="id" property="id" jdbcType="BIGINT"/>
         <result column="host" property="host" jdbcType="VARCHAR"/>
         <result column="summary" property="summary" jdbcType="VARCHAR"/>
-        <result column="instanceNo" property="instanceNo" jdbcType="INTEGER"/>
+        <result column="instanceno" property="instanceno" jdbcType="INTEGER"/>
         <result column="sid" property="sid" jdbcType="VARCHAR"/>
         <result column="router" property="router" jdbcType="VARCHAR"/>
         <result column="client" property="client" jdbcType="INTEGER"/>
@@ -101,7 +101,7 @@
     </sql>
 
     <insert id="insert" parameterType="com.liug.model.entity.SapScript" useGeneratedKeys="true" keyProperty="id">
-        insert into ssh_host
+        insert into sap_script
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="summary !=null and summary.length() != 0">
                  summary,

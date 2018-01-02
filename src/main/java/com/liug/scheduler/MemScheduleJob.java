@@ -27,22 +27,28 @@ public class MemScheduleJob extends ScheduleJob {
     MonitorLogMapper monitorLogMapper;
 
     @Async
-    void doJob(Long hostId,Long jobId){
+    void doJob(Long hostId, Long jobId) {
         long start = System.currentTimeMillis();
-        logger.debug("内存监控开始>>>>>hostId:"+hostId+">>>>jobId:"+jobId);
+        logger.debug("内存监控开始>>>>>hostId:" + hostId + ">>>>jobId:" + jobId);
         //Step1 获取主机信息
         SshHost sshHost = sshHostMapper.selectById(hostId);
         //Step2 透过主机信息获取内存数据
         //内存占比获取脚本如下
         //free  | sed -n '2p' | awk '{print $3/$2}'
-        String result = String.valueOf(this.getMemPercent(sshHost,"free  | sed -n '2p' | awk '{print $3/$2}'"));
+        String result = "";
+        try {
+            result = String.valueOf(this.getMemPercent(sshHost, "free  | sed -n '2p' | awk '{print $3/$2}'"));
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
         MonitorLog monitorLog = new MonitorLog();
         monitorLog.setHostId(hostId);
         monitorLog.setJobId(jobId);
         monitorLog.setResult(result);
         monitorLogMapper.insert(monitorLog);
         long end = System.currentTimeMillis();
-        logger.debug("内存监控监控>>>>>hostId:"+hostId+">>>>jobId:"+jobId+">>>>耗时："+(end - start)+"ms");
+        logger.debug("内存监控监控>>>>>hostId:" + hostId + ">>>>jobId:" + jobId + ">>>>耗时：" + (end - start) + "ms");
     }
 
 

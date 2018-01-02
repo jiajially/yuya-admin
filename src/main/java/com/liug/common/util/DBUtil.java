@@ -139,7 +139,7 @@ public class DBUtil {
     }
 
 
-    public static void main(String[] args) {
+    public static void main() {
         List<Model> modelList = new ArrayList<Model>();
         Model m1 = new Model("id", "id", "#{id}", "Long", "BIGINT", 20);modelList.add(m1);
         Model m2 = new Model("summary", "summary", "#{summary}", "String", "VARCHAR", 5000);modelList.add(m2);

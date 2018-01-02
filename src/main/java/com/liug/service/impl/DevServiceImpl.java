@@ -183,6 +183,7 @@ public class DevServiceImpl implements DevService {
         SshResult sshResult= Commond.execute(sshHost,homePage.getCmd());
         homePage.setResult(sshResult.getContent());
         homePage.setUpdateTime(new Date(System.currentTimeMillis()));
+        homePage.setStatus(sshResult.getExitStatus());
         //执行插入
         return Result.success(homePageMapper.insert(homePage));
     }

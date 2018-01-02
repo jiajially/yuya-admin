@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class FileUtil {
 
-    public static String getProjectPath(){
+    public static String getProjectPath() {
         String _path = System.getProperty("user.dir");
         File directory = new File("");// 参数为空
         String courseFile = null;
@@ -20,57 +20,57 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        _path = _path==courseFile?_path:courseFile;
+        _path = _path == courseFile ? _path : courseFile;
         return _path;
     }
 
-    public static boolean createFile(String fileName,String contnet){
+    public static boolean createFile(String fileName, String contnet) {
         boolean res = false;
         String fileNameTemp = "" + fileName;
         File file = new File(fileNameTemp);
-        try{
-            if(!file.exists()){
+        try {
+            if (!file.exists()) {
                 file.createNewFile();
                 res = true;
                 FileWriter fileWriter = new FileWriter(fileNameTemp);
                 //使用缓冲区比不使用缓冲区效果更好，因为每趟磁盘操作都比内存操作要花费更多时间。
                 //通过BufferedWriter和FileWriter的连接，BufferedWriter可以暂存一堆数据，然后到满时再实际写入磁盘
                 //这样就可以减少对磁盘操作的次数。如果想要强制把缓冲区立即写入,只要调用writer.flush();这个方法就可以要求缓冲区马上把内容写下去
-                BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 bufferedWriter.write(contnet);
                 bufferedWriter.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
-        }finally {
+        } finally {
             return res;
         }
     }
 
-    public static String loadFile(String path){
-            String result = "";
-            try {
-                String encoding="GBK";
-                File file=new File(path);
-                if(file.isFile() && file.exists()){ //判断文件是否存在
-                    InputStreamReader read = new InputStreamReader(
-                            new FileInputStream(file),encoding);//考虑到编码格式
-                    BufferedReader bufferedReader = new BufferedReader(read);
-                    String lineTxt = null;
-                    while((lineTxt = bufferedReader.readLine()) != null){
-                        result += lineTxt+"\n";
-                    }
-                    read.close();
-                }else{
-                    result = "找不到指定的文件";
+    public static String loadFile(String path) {
+        String result = "";
+        try {
+            String encoding = "GBK";
+            File file = new File(path);
+            if (file.isFile() && file.exists()) { //判断文件是否存在
+                InputStreamReader read = new InputStreamReader(
+                        new FileInputStream(file), encoding);//考虑到编码格式
+                BufferedReader bufferedReader = new BufferedReader(read);
+                String lineTxt = null;
+                while ((lineTxt = bufferedReader.readLine()) != null) {
+                    result += lineTxt + "\n";
                 }
-            } catch (Exception e) {
-                result = "读取文件内容出错";
-                e.printStackTrace();
+                read.close();
+            } else {
+                result = "找不到指定的文件";
             }
+        } catch (Exception e) {
+            result = "读取文件内容出错";
+            e.printStackTrace();
+        }
 
-        return  result;
+        return result;
     }
 
     public static List<FileStruct> readfileList(String filepath) throws FileNotFoundException, IOException {
@@ -115,14 +115,21 @@ public class FileUtil {
     }
 
     //初始化文件目录
-    public static void initDictionary(){
-        File file_document = new File(getProjectPath()+"/document/local/");
+    public static void initDictionary(String dest) {
+
+        File file_document = new File(getProjectPath() + (dest == null ? "" : dest) + "/document/local/");
         if (!file_document.exists()) file_document.mkdirs();
-        file_document = new File(getProjectPath()+"/document/sys/");
+        file_document = new File(getProjectPath() + (dest == null ? "" : dest) +  "/document/sys/");
+        if (!file_document.exists()) file_document.mkdirs();
+        file_document = new File(getProjectPath() + (dest == null ? "" : dest) +  "/doc/");
+        if (!file_document.exists()) file_document.mkdirs();
+        file_document = new File(getProjectPath() + (dest == null ? "" : dest) +  "/picture/");
+        if (!file_document.exists()) file_document.mkdirs();
+        file_document = new File(getProjectPath() + (dest == null ? "" : dest) +  "/script/vbs/");
         if (!file_document.exists()) file_document.mkdirs();
     }
 
-    public static void main(){
+    public static void main() {
         try {
             System.out.println(readfileList("file/bu").size());
         } catch (Exception e) {

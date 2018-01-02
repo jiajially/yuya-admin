@@ -34,7 +34,12 @@ public class CpuScheduleJob extends ScheduleJob {
         //Step1 获取主机信息
         SshHost sshHost = sshHostMapper.selectById(hostId);
         //Step2 透过主机信息获取CPU数据
-        String result = String.valueOf(this.getCpuPercent(sshHost,"cat /proc/stat"));
+        String result="";
+        try {
+            result = String.valueOf(this.getCpuPercent(sshHost, "cat /proc/stat"));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
         MonitorLog monitorLog = new MonitorLog();
         monitorLog.setHostId(hostId);
         monitorLog.setJobId(jobId);

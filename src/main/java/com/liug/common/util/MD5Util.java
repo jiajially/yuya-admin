@@ -126,10 +126,10 @@ public class MD5Util {
         }
     }
 
-    public static void main(String []args){
+   /* public static void main(String []args){
         System.out.println(verify("19900914","d2072c69c742e0ea22f4af8852d622a85818600b0b679531"));
 
-    }
+    }*/
 
 
 

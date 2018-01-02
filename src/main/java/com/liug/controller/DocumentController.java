@@ -71,7 +71,7 @@ public class DocumentController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "initDir", method = RequestMethod.GET)
     public Result initDir() {
-       FileUtil.initDictionary();
+       FileUtil.initDictionary("");
         return Result.success();
     }
 
@@ -143,7 +143,7 @@ public class DocumentController extends BaseController {
     public void getFile(HttpServletResponse resp,@RequestParam("filename")String filename,@RequestParam("type")String type) throws UnsupportedEncodingException {
 
         // Get your file stream from wherever.
-        String path = "document/" + type + "/" +filename;
+        String path = "file/document/" + type + "/" +filename;
         File file = new File(path);
         resp.setHeader("content-type", "application/octet-stream");
         resp.setContentType("application/octet-stream");

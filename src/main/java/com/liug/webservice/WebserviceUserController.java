@@ -205,7 +205,7 @@ public class WebserviceUserController {
     //用户图片下载
     @RequestMapping("/download")
     @ResponseBody
-    public void downloadMcode(HttpServletResponse response,HttpServletRequest request){
+    public Result downloadMcode(HttpServletResponse response,HttpServletRequest request){
         try {
             String fileName = request.getParameter("fileName");
             String realPath = FileUtil.getProjectPath()+"/file/picture/";
@@ -234,6 +234,8 @@ public class WebserviceUserController {
             is.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            return Result.success();
         }
     }
 

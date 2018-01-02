@@ -136,7 +136,6 @@ public class Commond{
       manager.freeSession(host,session);
     }
     catch(Exception e){
-      System.out.println(e);
       result.setContent(e.getMessage());
       result.setExitStatus(-1);
     }finally {
