@@ -35,6 +35,8 @@ public interface ManagerService {
 
     Result generator(SapScript sapScript);
 
+    Result generator(SapScript sapScript, String path);
+
     Result save(SapScript sapScript);
 
 

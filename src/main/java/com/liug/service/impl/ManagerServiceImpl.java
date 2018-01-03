@@ -41,7 +41,7 @@ public class ManagerServiceImpl implements ManagerService {
     private SapScriptStaticMapper sapScriptStaticMapper;
 
     @Override
-    public PageInfo selectProblemPage(int page, int rows, String sort,  String order ,Date begin, Date end) {
+    public PageInfo selectProblemPage(int page, int rows, String sort, String order, Date begin, Date end) {
         logger.info("page = [" + page + "], rows = [" + rows + "], sort = [" + sort + "], order = [" + order + "], begin = [" + begin + "], end = [" + end + "]");
         int counts = managerProblemMapper.selectCounts();
         PageHelper.startPage(page, rows);
@@ -113,8 +113,14 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public Result generator(SapScript sapScript) {
-        String content="";
-        content+="\n"+sapScriptStaticMapper.selectByCode("param").getContent();
+
+        return generator(sapScript, "\\sap_script_test_v1\\");
+    }
+
+    @Override
+    public Result generator(SapScript sapScript, String path) {
+        String content = "";
+        content += "\n" + sapScriptStaticMapper.selectByCode("param").getContent();
         //设置参数
         /*
 SYSTEM_SID 			= "EC6"
@@ -132,55 +138,54 @@ LOGIN_PWD			= "yuya0571"
 
          */
 
-        content+="\n"+"SYSTEM_SID \t\t\t= \""+sapScript.getSid()+"\"";
-        content+="\n"+"WORKSAPCE\t\t\t= \"\\sap_script_test_v1\\\"";
-        content+="\n"+"USE_ROUTER \t\t\t= FALSE";
-        if (sapScript.getRouter()!=null) {
-            content+="\n"+"USE_ROUTER \t\t\t= TRUE";
-            content+="\n"+"ROUTER_HOST \t\t\t= \""+sapScript.getRouter().split(":")[0]+"\"";
-            content+="\n"+"ROUTER_PORT \t\t\t= \""+sapScript.getRouter().split(":")[1]+"\"";
+        content += "\n" + "SYSTEM_SID \t\t\t= \"" + sapScript.getSid() + "\"";
+        content += "\n" + "WORKSAPCE\t\t\t= " + "\"" + path + "\"";
+        content += "\n" + "USE_ROUTER \t\t\t= FALSE";
+        if (sapScript.getRouter() != null) {
+            content += "\n" + "USE_ROUTER \t\t\t= TRUE";
+            content += "\n" + "ROUTER_HOST \t\t\t= \"" + sapScript.getRouter().split(":")[0] + "\"";
+            content += "\n" + "ROUTER_PORT \t\t\t= \"" + sapScript.getRouter().split(":")[1] + "\"";
         }
-        content+="\n"+"HOST \t\t\t= \""+sapScript.getHost()+"\"";
+        content += "\n" + "HOST \t\t\t= \"" + sapScript.getHost() + "\"";
 
-        String instance_no_str = String.valueOf(sapScript.getInstanceno()).length()<=1?"0"+sapScript.getInstanceno():""+sapScript.getInstanceno();
-
-
-        content+="\n"+"INSTANCE_NO \t\t\t= \""+instance_no_str+"\"";
-        content+="\n"+"LOGIN_CLIENT \t\t\t= \""+sapScript.getClient()+"\"";
-        content+="\n"+"LOGIN_USR \t\t\t= \""+sapScript.getUsername()+"\"";
-        content+="\n"+"LOGIN_PWD \t\t\t= \""+sapScript.getPassword()+"\"";
+        String instance_no_str = String.valueOf(sapScript.getInstanceno()).length() <= 1 ? "0" + sapScript.getInstanceno() : "" + sapScript.getInstanceno();
 
 
+        content += "\n" + "INSTANCE_NO \t\t\t= \"" + instance_no_str + "\"";
+        content += "\n" + "LOGIN_CLIENT \t\t\t= \"" + sapScript.getClient() + "\"";
+        content += "\n" + "LOGIN_USR \t\t\t= \"" + sapScript.getUsername() + "\"";
+        content += "\n" + "LOGIN_PWD \t\t\t= \"" + sapScript.getPassword() + "\"";
 
-        content+="\n"+sapScriptStaticMapper.selectByCode("workspace").getContent();
-        content+="\n"+sapScriptStaticMapper.selectByCode("gui").getContent();
-        content+="\n"+sapScriptStaticMapper.selectByCode("word_create").getContent();
+
+        content += "\n" + sapScriptStaticMapper.selectByCode("workspace").getContent();
+        content += "\n" + sapScriptStaticMapper.selectByCode("gui").getContent();
+        content += "\n" + sapScriptStaticMapper.selectByCode("word_create").getContent();
         //获取tcode
-        if(sapScript.getTcode()!=null) {
+        if (sapScript.getTcode() != null) {
             String[] tcodes = sapScript.getTcode().split("\\*");
             for (String tcode : tcodes) {
-                SapScriptStatic scriptStatic =sapScriptStaticMapper.selectByCode(tcode);
-                if (scriptStatic!=null) content+="\n"+scriptStatic.getContent();
+                SapScriptStatic scriptStatic = sapScriptStaticMapper.selectByCode(tcode);
+                if (scriptStatic != null) content += "\n" + scriptStatic.getContent();
             }
         }
-        content+="\n"+"\n" + "CALL exec(\"\")";
-        content+="\n"+sapScriptStaticMapper.selectByCode("word_end").getContent();
-        content+="\n"+sapScriptStaticMapper.selectByCode("function").getContent();
+        content += "\n" + "\n" + "CALL exec(\"\")";
+        content += "\n" + sapScriptStaticMapper.selectByCode("word_end").getContent();
+        content += "\n" + sapScriptStaticMapper.selectByCode("function").getContent();
         //logger.info(sapScript.toString());
         //sapScriptMapper.insert(sapScript);
         return Result.success(content);
     }
+
     @Override
     public Result save(SapScript sapScript) {
         //logger.info(sapScript.toString());
         Result result = Result.instance(ResponseCode.error);
-        try{
+        try {
 
             result = Result.success(sapScriptMapper.insert(sapScript));
-        }catch (Exception e){
+        } catch (Exception e) {
             result = Result.instance(ResponseCode.error);
-        }
-        finally {
+        } finally {
             return result;
         }
 

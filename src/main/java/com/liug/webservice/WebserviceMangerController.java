@@ -263,7 +263,7 @@ public class WebserviceMangerController {
     @ResponseBody
     public Result execSapScriptByID(@RequestParam String id) {
         SapScript sapScript = sapScriptMapper.selectById(Long.valueOf(id));
-        String content = (String) managerService.generator(sapScript).getData();
+        String content = (String) managerService.generator(sapScript,"\\file\\script\\vbs\\result\\").getData();
         String fileName = "tmp" + System.currentTimeMillis() + ".vbs";
         FileOutputStream fileOutputStream;
         File file = new File(FileUtil.getProjectPath() + "/file/script/vbs/" + fileName);
