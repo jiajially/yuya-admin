@@ -18,6 +18,8 @@ public interface SshTaskMapper {
     //查询全部
     List<SshTask> selectAll(@Param("sort") String sort, @Param("order") String order, @Param("name") String name, @Param("hostname") String hostname, @Param("cmd") String cmd);
 
+    List<SshTask> selectByScriptId(@Param("sort") String sort, @Param("order") String order, @Param("scriptId") String scriptId);
+
     //查询数量
     int selectCounts();
 

@@ -12,6 +12,7 @@ import com.liug.model.entity.SshScript;
 import com.liug.service.ManagerService;
 import com.liug.service.SshHostService;
 import com.liug.service.SshScriptService;
+import com.liug.service.SshTaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +49,10 @@ public class WebserviceMangerController {
 
     @Autowired
     private SshScriptService sshScriptService;
+
+
+    @Autowired
+    private SshTaskService sshTaskService;
 
     @Autowired
     private SapScriptMapper sapScriptMapper;
@@ -125,6 +132,19 @@ public class WebserviceMangerController {
         PageInfo pageInfo = sshScriptService.selectPage(1, 1000000, "host", "asc", name, hostname, cmd);
         return Result.success(pageInfo.getRows());
     }
+
+    /**
+     * 查询指令脚本执行记录
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "sshscript/log", method = RequestMethod.GET)
+    public Result scriptLogList(@RequestParam String scriptId) {
+        Result result = sshTaskService.selectPage("id", "asc", scriptId);
+        return result;
+    }
+
 
 
     /**
@@ -372,5 +392,101 @@ public class WebserviceMangerController {
         return Result.success();
     }
 
+    /**
+     * sap result fileList
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/sapscript/filelist", method = RequestMethod.GET)
+    public Result sapFileList() {
+        List<FileStruct> fileStructList = null;
+        try {
+            fileStructList = FileUtil.readfileList(FileUtil.getProjectPath()+"/file/script/vbs");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Result.success(fileStructList);
+    }
 
+    @RequestMapping(value = "/sapscript/file/download", method = RequestMethod.GET)
+    public Result getFile(HttpServletResponse resp, @RequestParam("filename")String filename) throws UnsupportedEncodingException {
+
+        String path = FileUtil.getProjectPath() + "//file/script/vbs/" + filename;
+        File file = new File(path);
+        resp.setHeader("content-type", "application/octet-stream");
+        resp.setContentType("application/octet-stream");
+        resp.setHeader("Content-Disposition", "attachment;filename=" +
+                URLEncoder.encode(filename,"utf-8"));
+        byte[] buff = new byte[1024];
+        BufferedInputStream bis = null;
+        OutputStream os = null;
+        try {
+            os = resp.getOutputStream();
+            bis = new BufferedInputStream(new FileInputStream(file));
+            int i = bis.read(buff);
+            while (i != -1) {
+                os.write(buff, 0, buff.length);
+                os.flush();
+                i = bis.read(buff);
+            }
+            os.close();
+        } catch (IOException e) {
+            //e.printStackTrace();
+        } finally {
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return Result.success();
+        }
+    }
+
+    @RequestMapping(value = "/sshscript/log/download", method = RequestMethod.GET)
+    @ResponseBody
+    public Result downloadSshScriptLogByID(HttpServletResponse response, @RequestParam("id")Long id) {
+        try {
+
+
+            String content =sshTaskService.selectById(id).getResult();
+
+            String fileName = "tmp" + System.currentTimeMillis() + ".log";
+            //下载机器码文件
+            response.setHeader("conent-type", "application/octet-stream");
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment; filename=" + new String(fileName.getBytes("ISO-8859-1"), "UTF-8"));
+
+            OutputStream os = response.getOutputStream();
+            BufferedOutputStream bos = new BufferedOutputStream(os);
+
+            InputStream is = new ByteArrayInputStream(content.getBytes("UTF-8"));
+
+            BufferedInputStream bis = new BufferedInputStream(is);
+
+            int length = 0;
+            byte[] temp = new byte[1 * 1024 * 10];
+
+            while ((length = bis.read(temp)) != -1) {
+                bos.write(temp, 0, length);
+            }
+            bos.flush();
+            bis.close();
+            bos.close();
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return Result.success();
+        }
+    }
 }

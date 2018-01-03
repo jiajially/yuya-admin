@@ -5,6 +5,7 @@ import com.liug.common.util.FileUtil;
 import com.liug.common.util.Result;
 import com.liug.common.util.VBAUtil;
 import com.liug.dao.SapScriptMapper;
+import com.liug.model.entity.Document;
 import com.liug.model.entity.HomePage;
 import com.liug.model.entity.SapScript;
 import com.liug.model.entity.SysUser;
@@ -22,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,27 +62,6 @@ public class WebserviceRoutineController {
             List<String> file = FileUtil.getFileNameList(path, "file");
             List<String> file_routine = FileUtil.getFileNameList(path, "routine");
             List<FileStruct> file_all = FileUtil.readfileList(path);
-
-            for (String s_f : file) {
-                for (String s_fr : file_routine) {
-                    if (s_f.split("\\.")[0].equals(s_fr.split("\\.")[0])) {
-                        report r = new report();
-                        JSONObject object = JSONObject.fromObject(FileUtil.loadFile(path + "/" + s_fr, "UTF-8"));
-                        r.setName(object.getString("name"));
-                        r.setSummary(object.getString("summary")); Calendar cd = Calendar.getInstance();
-
-                        cd.setTimeInMillis(new File(FileUtil.getProjectPath() + "/file/system/" + system + "/report/"+s_f).lastModified());
-                        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        r.setCreateTime(sdf.format(cd.getTime()));
-
-                        r.setCreator(object.getString("creator"));
-                        r.setCheck(true);
-                        reports.add(r);
-                    }
-                }
-            }
-
-
             for (FileStruct struct : file_all) {
                 if (struct.getName().split("\\.").length == 2) {
                     String suffix = struct.getName().split("\\.")[1];
@@ -89,8 +69,8 @@ public class WebserviceRoutineController {
                         report r = new report();
                         r.setName(struct.getName());
                         Calendar cd = Calendar.getInstance();
-                        cd.setTimeInMillis(new File(FileUtil.getProjectPath() + "/file/system/" + system + "/report/"+struct.getName()).lastModified());
-                        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        cd.setTimeInMillis(new File(FileUtil.getProjectPath() + "/file/system/" + system + "/report/" + struct.getName()).lastModified());
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         r.setCreateTime(sdf.format(cd.getTime()));
                         r.setSummary("未检验");
                         r.setCheck(false);
@@ -99,6 +79,28 @@ public class WebserviceRoutineController {
 
                 }
             }
+            for (String s_f : file) {
+                for (String s_fr : file_routine) {
+                    if (s_f.split("\\.")[0].equals(s_fr.split("\\.")[0])) {
+                        report r = new report();
+                        JSONObject object = JSONObject.fromObject(FileUtil.loadFile(path + "/" + s_fr, "UTF-8"));
+                        r.setName(object.getString("name"));
+                        r.setSummary(object.getString("summary"));
+                        Calendar cd = Calendar.getInstance();
+
+                        cd.setTimeInMillis(new File(FileUtil.getProjectPath() + "/file/system/" + system + "/report/" + s_f).lastModified());
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        r.setCreateTime(sdf.format(cd.getTime()));
+
+                        r.setCreator(object.getString("creator"));
+                        r.setCheck(true);
+                        r.setId(s_f.split("\\.")[0]);
+                        r.setSuffix(object.getString("suffix"));
+                        reports.add(r);
+                    }
+                }
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,12 +109,21 @@ public class WebserviceRoutineController {
     }
 
     class report {
-        Long id;
+        String id;
         String name;
         String summary;
         String creator;
         String createTime;
+        String suffix;
         boolean check;
+
+        public String getSuffix() {
+            return suffix;
+        }
+
+        public void setSuffix(String suffix) {
+            this.suffix = suffix;
+        }
 
         public boolean isCheck() {
             return check;
@@ -122,11 +133,11 @@ public class WebserviceRoutineController {
             this.check = check;
         }
 
-        public Long getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(Long id) {
+        public void setId(String id) {
             this.id = id;
         }
 
@@ -227,10 +238,101 @@ public class WebserviceRoutineController {
      */
     @ResponseBody
     @RequestMapping(value = "report/setscript", method = RequestMethod.GET)
-    public Result setscript(@RequestParam String system,@RequestParam String sapscript) {
+    public Result setscript(@RequestParam String system, @RequestParam String sapscript) {
         JSONObject obj = new JSONObject();
         obj.put("sapscript", sapscript);
-        return  Result.success(FileUtil.createFileForce(FileUtil.getProjectPath() + "/file/system/"+system+"/report/script",obj.toString()));
+        return Result.success(FileUtil.createFileForce(FileUtil.getProjectPath() + "/file/system/" + system + "/report/script", obj.toString()));
     }
 
+
+    @RequestMapping(value = "report/download", method = RequestMethod.GET)
+    public Result getFile(HttpServletResponse resp, @RequestParam("filename") String filename, @RequestParam("ofilename") String ofilename) throws UnsupportedEncodingException {
+
+        String path = FileUtil.getProjectPath() + "/file/system/ecc/report/" + filename;
+        File file = new File(path);
+        resp.setHeader("content-type", "application/octet-stream");
+        resp.setContentType("application/octet-stream");
+        resp.setHeader("Content-Disposition", "attachment;filename=" +
+                URLEncoder.encode(ofilename, "utf-8"));
+        byte[] buff = new byte[1024];
+        BufferedInputStream bis = null;
+        OutputStream os = null;
+        try {
+            os = resp.getOutputStream();
+            bis = new BufferedInputStream(new FileInputStream(file));
+            int i = bis.read(buff);
+            while (i != -1) {
+                os.write(buff, 0, buff.length);
+                os.flush();
+                i = bis.read(buff);
+            }
+            os.close();
+        } catch (IOException e) {
+            //e.printStackTrace();
+        } finally {
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return Result.success();
+        }
+    }
+
+
+    /**
+     * check
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "report/check", method = RequestMethod.GET)
+    public Result check(@RequestParam String system,
+                        @RequestParam String filename,
+                        @RequestParam String summary,
+                        @RequestParam String name,
+                        @RequestParam String suffix,
+                        @RequestParam String creator,
+                        @RequestParam boolean check
+    ) {
+
+        String id = String.valueOf(System.currentTimeMillis());
+        File file = new File(FileUtil.getProjectPath() + "/file/system/ecc/report/" + filename);
+        if (check) {
+            file = new File(FileUtil.getProjectPath() + "/file/system/ecc/report/" + filename + ".file");
+            File routine = new File(FileUtil.getProjectPath() + "/file/system/ecc/report/" + filename+ ".routine");
+            if(routine.exists())routine.delete();
+        }
+        if (file.exists()) {
+            //写审核信息
+            JSONObject obj = new JSONObject();
+            obj.put("name", name);
+            obj.put("summary", summary);
+            obj.put("suffix", suffix);
+            obj.put("creator", creator);
+            Calendar cd = Calendar.getInstance();
+            cd.setTimeInMillis(System.currentTimeMillis());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            obj.put("createTime", sdf.format(cd.getTime()));
+            FileUtil.createFileForce(FileUtil.getProjectPath() + "/file/system/" + system + "/report/" + id + ".routine", obj.toString());
+
+            //更名 .file
+            File newfile = new File(FileUtil.getProjectPath() + "/file/system/" + system + "/report/" + id + ".file");
+            if (newfile.exists()) newfile.delete();
+            file.renameTo(newfile);
+
+            return Result.success();
+        } else {
+            return Result.error();
+        }
+    }
 }

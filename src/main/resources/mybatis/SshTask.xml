@@ -224,6 +224,21 @@
         </if>
     </select>
 
+    <select id="selectByScriptId" resultType="com.liug.model.entity.SshTask">
+        SELECT *
+        FROM ssh_task_log_host
+        WHERE status != 7
+        <if test="scriptId != null and scriptId.length() != 0">
+            AND script_id =#{scriptId}
+        </if>
+        <if test="sort!=''">
+            ORDER BY ${sort}
+        </if>
+        <if test="order!=''">
+            ${order}
+        </if>
+    </select>
+
     <select id="selectSshTask" resultType="com.liug.model.entity.SshScript">
         SELECT *
         FROM ssh_script_task

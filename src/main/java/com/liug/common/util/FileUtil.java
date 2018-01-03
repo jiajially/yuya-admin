@@ -3,6 +3,7 @@ package com.liug.common.util;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,7 +154,6 @@ public class FileUtil {
                 System.out.println("name=" + file.getName());
 
             } else if (file.isDirectory()) {
-                System.out.println("文件夹");
                 String[] filelist = file.list();
                 for (int i = 0; i < filelist.length; i++) {
                     File readfile = new File(filepath + "/" + filelist[i]);
@@ -163,6 +163,11 @@ public class FileUtil {
                         fileStruct.setName(readfile.getName());
                         fileStruct.setPath(readfile.getPath());
                         fileStruct.setId(i);
+
+                        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        fileStruct.setLastModifyTime(sdf.format(readfile.lastModified()));
+
+
                         /*System.out.println("path=" + readfile.getPath());
                         System.out.println("absolutepath="
                                 + readfile.getAbsolutePath());

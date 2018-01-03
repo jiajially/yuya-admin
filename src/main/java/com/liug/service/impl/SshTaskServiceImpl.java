@@ -1,6 +1,7 @@
 package com.liug.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.liug.common.util.Result;
 import com.liug.dao.SshTaskMapper;
 import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.SshTask;
@@ -37,6 +38,12 @@ public class SshTaskServiceImpl implements SshTaskService {
         List<SshTask> sysTasks = sshTaskMapper.selectAll(sort, order,name, hostname, cmd);
         PageInfo pageInfo = new PageInfo(counts, sysTasks);
         return pageInfo;
+    }
+
+    @Override
+    public Result selectPage(String sort, String order, String scriptId) {
+        List<SshTask> sysTasks = sshTaskMapper.selectByScriptId(sort, order,scriptId);
+        return Result.success(sysTasks);
     }
 
     @Override

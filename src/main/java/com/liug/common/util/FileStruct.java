@@ -8,6 +8,15 @@ public class FileStruct {
     String name;
     String path;
     String absolutePath;
+    String lastModifyTime;
+
+    public String getLastModifyTime() {
+        return lastModifyTime;
+    }
+
+    public void setLastModifyTime(String lastModifyTime) {
+        this.lastModifyTime = lastModifyTime;
+    }
 
     public long getId() {
         return id;
