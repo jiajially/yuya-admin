@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.liug.dao.CustomReportScheduleMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.CustomReportSchedule">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="host" property="host" jdbcType="BIGINT"/>
+        <result column="report" property="report" jdbcType="BIGINT"/>
+        <result column="rate" property="rate" jdbcType="TINYINT"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="plan_time" property="planTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+id
+host
+report
+rate
+start_time
+plan_time
+create_time
+create_by
+status
+</sql>
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="host !=null ">
+            AND host = #{host}
+        </if>
+        <if test="report !=null ">
+            AND report = #{report}
+        </if>
+        <if test="rate !=null ">
+            AND rate = #{rate}
+        </if>
+        <if test="startTime !=null ">
+            AND start_time = #{startTime}
+        </if>
+        <if test="planTime !=null ">
+            AND plan_time = #{planTime}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="createBy !=null ">
+            AND create_by = #{createBy}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+    <insert id="insert" parameterType="com.liug.model.entity.CustomReportSchedule" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into custom_report_schedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="host !=null ">
+                host,
+            </if>
+            <if test="report !=null ">
+                report,
+            </if>
+            <if test="rate !=null ">
+                rate,
+            </if>
+            <if test="startTime !=null ">
+                start_time,
+            </if>
+            <if test="planTime !=null ">
+                plan_time,
+            </if>
+            <if test="createTime !=null ">
+                create_time,
+            </if>
+            <if test="createBy !=null ">
+                create_by,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="host !=null ">
+                #{host},
+            </if>
+            <if test="report !=null ">
+                #{report},
+            </if>
+            <if test="rate !=null ">
+                #{rate},
+            </if>
+            <if test="startTime !=null ">
+                #{startTime},
+            </if>
+            <if test="planTime !=null ">
+                #{planTime},
+            </if>
+            <if test="createTime !=null ">
+                #{createTime},
+            </if>
+            <if test="createBy !=null ">
+                #{createBy},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.liug.model.entity.CustomReportSchedule">
+        update custom_report_schedule
+        <set>
+            <if test="host !=null ">
+                host = #{host},
+            </if>
+            <if test="report !=null ">
+                report = #{report},
+            </if>
+            <if test="rate !=null ">
+                rate = #{rate},
+            </if>
+            <if test="startTime !=null ">
+                start_time = #{startTime},
+            </if>
+            <if test="planTime !=null ">
+                plan_time = #{planTime},
+            </if>
+            <if test="createTime !=null ">
+                create_time = #{createTime},
+            </if>
+            <if test="createBy !=null ">
+                create_by = #{createBy},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE custom_report_schedule
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.CustomReportSchedule">
+        SELECT *
+        FROM custom_report_schedule
+        WHERE id = #{id} AND status != 7
+    </select>
+    <select id="selectByReportId" parameterType="long" resultType="com.liug.model.entity.CustomReportSchedule">
+        SELECT *
+        FROM custom_report_schedule
+        WHERE report = #{reportId} AND status != 7
+    </select>
+
+    <select id="selectBySid" parameterType="long" resultType="com.liug.model.entity.CustomReportSchedule">
+        SELECT *
+        FROM custom_report_by_sid
+        WHERE sid = #{sid} AND status != 7
+        ORDER BY rate DESC , report DESC,host ASC ,create_time ASC
+    </select>
+    <select id="selectAll" parameterType="long" resultType="com.liug.model.entity.CustomReportSchedule">
+        SELECT *
+        FROM custom_report_schedule
+        WHERE status != 7
+    </select>
+</mapper>

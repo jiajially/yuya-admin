@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.liug.dao.MantisProjectSummaryMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.MantisProjectSummary">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="together" property="together" jdbcType="INTEGER"/>
+        <result column="notsovled" property="notsovled" jdbcType="INTEGER"/>
+        <result column="sovled" property="sovled" jdbcType="INTEGER"/>
+        <result column="closed" property="closed" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="sql_column">
+id
+name
+together
+notsovled
+sovled
+closed
+</sql>
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="name !=null and name.length() != 0">
+            AND name = #{name}
+        </if>
+        <if test="together !=null ">
+            AND together = #{together}
+        </if>
+        <if test="notsovled !=null ">
+            AND notsovled = #{notsovled}
+        </if>
+        <if test="sovled !=null ">
+            AND sovled = #{sovled}
+        </if>
+        <if test="closed !=null ">
+            AND closed = #{closed}
+        </if>
+    </sql>
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.MantisProjectSummary">
+        SELECT *
+        FROM mantis_project_summary
+        WHERE id = #{id}
+    </select>
+    <select id="selectAll" parameterType="long" resultType="com.liug.model.entity.MantisProjectSummary">
+        SELECT *
+        FROM mantis_project_summary
+    </select>
+</mapper>

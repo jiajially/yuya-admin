@@ -20,7 +20,15 @@ public interface DocumentService {
 
     long addOnline(String summary,String url);
 
+    long addOnline(String summary,String url, String tag);
+
     Result addLocal(MultipartFile file);
+
+    Result addSystemDetail(MultipartFile file, String summary, String tag);
+
+    Result addLocalDetail(MultipartFile file, String summary, String tag);
+
+    Result addFileDetail(MultipartFile file, String summary, String tag, int type);
 
     Result addSys(MultipartFile file);
 

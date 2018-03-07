@@ -15,7 +15,7 @@ public class Shell{
 
   public static String execToFile(SshHost host,String cmd) throws JSchException {
 
-    String _fileName = FileUtil.getProjectPath()+"/shellResultTmp/"+System.currentTimeMillis()+"."+"rst";
+    String _fileName = FileUtil.getProjectPath()+"/file/shellResultTmp/"+System.currentTimeMillis()+"."+"rst";
     File tmp = new File(_fileName);
     if(!tmp.getParentFile().exists()) {
       //System.out.println("目标文件所在目录不存在，准备创建它！");

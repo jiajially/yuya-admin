@@ -2,6 +2,7 @@ package com.liug.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.liug.common.util.MD5Util;
+import com.liug.common.util.StringUtil;
 import com.liug.dao.*;
 import com.liug.model.dto.LoginInfo;
 import com.liug.model.dto.PageInfo;
@@ -21,6 +22,7 @@ import org.springframework.util.StringUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author: liug
@@ -32,6 +34,8 @@ public class SysUserServiceImpl implements SysUserService {
     private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private MantisUserTableMapper mantisUserTableMapper;
     @Autowired
     private SysUserRoleOrganizationMapper sysUserRoleOrganizationMapper;
     @Autowired
@@ -46,13 +50,15 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public long insertUser(SysUser user, String jobIds, String permissionIds) {
         sysUserMapper.insert(user);
-        String[] jobIdArray = jobIds.split(",");
-        for (String jobid : jobIdArray) {
-            SysUserRoleOrganization userRoleOrganization = new SysUserRoleOrganization();
-            userRoleOrganization.setSysUserId(user.getId());
-            userRoleOrganization.setSysRoleOrganizationId(Long.valueOf(jobid));
-            userRoleOrganization.setIsFinal(1);
-            sysUserRoleOrganizationMapper.insert(userRoleOrganization);
+        if (StringUtils.hasText(jobIds)) {
+            String[] jobIdArray = jobIds.split(",");
+            for (String jobid : jobIdArray) {
+                SysUserRoleOrganization userRoleOrganization = new SysUserRoleOrganization();
+                userRoleOrganization.setSysUserId(user.getId());
+                userRoleOrganization.setSysRoleOrganizationId(Long.valueOf(jobid));
+                userRoleOrganization.setIsFinal(1);
+                sysUserRoleOrganizationMapper.insert(userRoleOrganization);
+            }
         }
         if (StringUtils.hasText(permissionIds)) {
             String[] permissionIdArray = permissionIds.split(",");
@@ -64,6 +70,15 @@ public class SysUserServiceImpl implements SysUserService {
                 sysUserPermissionMapper.insert(userPermission);
             }
         }
+        return user.getId();
+    }
+
+    @Override
+    public long insertUser(SysUser user) {
+        sysUserMapper.insert(user);
+        String salt = UUID.randomUUID().toString().replaceAll("-", "");
+        user.setPasswordSalt(salt);
+        user.setPassword(StringUtil.createPassword(user.getPassword(), salt, 2));
         return user.getId();
     }
 
@@ -189,7 +204,7 @@ public class SysUserServiceImpl implements SysUserService {
         map.put("message", "登录成功");
         * */
         LoginInfo loginInfo = new LoginInfo();
-        if (user!=null&&"admin".equals(user.getLoginName())&&"admin".equals(user.getPassword())) {
+        if (user != null && "admin".equals(user.getLoginName()) && "admin".equals(user.getPassword())) {
 
             loginInfo.setEnName("SuperUser");
             loginInfo.setZhName("c");
@@ -200,23 +215,38 @@ public class SysUserServiceImpl implements SysUserService {
 
 
     @Override
-    public LoginInfo login(String username,String password) {
+    public LoginInfo login(String username, String password, boolean isMantis) {
 
         LoginInfo loginInfo = new LoginInfo();
         SysUser user = sysUserMapper.selectUserByLoginName(username);
-        if ("admin".equals(username)&&"admin".equals(password)) {
+        MantisUserTable mantisUserTable = mantisUserTableMapper.selectByUsername(username);
+        if ("admin".equals(username) && "admin".equals(password)) {
             loginInfo.setEnName("SuperUser");
             loginInfo.setZhName("超级用户");
             return loginInfo;
         }
-        //验证密码,MD5加密校验
-        if (user!=null&&MD5Util.verify(password,user.getPassword())) {
-            BeanUtils.copyProperties(user, loginInfo);
-            return loginInfo;
+        if (!isMantis) {
+            //验证密码,MD5加密校验
+            if (user != null && MD5Util.verify(password, user.getPassword())) {
+                BeanUtils.copyProperties(user, loginInfo);
+                return loginInfo;
+            }
+        } else {
+            if (mantisUserTable != null && MD5Util.verifyMantis(password, mantisUserTable.getPassword())) {
+                loginInfo.setZhName(mantisUserTable.getRealname());
+                loginInfo.setEnName(mantisUserTable.getUsername());
+                loginInfo.setEmail(mantisUserTable.getEmail());
+                return loginInfo;
+            }
         }
 
 
         return null;
+    }
+
+    @Override
+    public LoginInfo login(String username, String password) {
+        return login(username, password, false);
     }
 
     @Override

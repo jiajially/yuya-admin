@@ -28,16 +28,17 @@ public class CpuScheduleJob extends ScheduleJob {
     MonitorLogMapper monitorLogMapper;
 
     @Async
-    void doJob(Long hostId,Long jobId){
+    void doJob(Long hostId, Long jobId) {
         long start = System.currentTimeMillis();
-        logger.debug("CPU监控开始>>>>>hostId:"+hostId+">>>>jobId:"+jobId);
+        logger.debug("CPU监控开始>>>>>hostId:" + hostId + ">>>>jobId:" + jobId);
         //Step1 获取主机信息
         SshHost sshHost = sshHostMapper.selectById(hostId);
+        if (sshHost == null || !sshHost.isEnable() || !sshHost.isValid()) return;
         //Step2 透过主机信息获取CPU数据
-        String result="";
+        String result = "";
         try {
             result = String.valueOf(this.getCpuPercent(sshHost, "cat /proc/stat"));
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
         }
         MonitorLog monitorLog = new MonitorLog();
@@ -46,9 +47,8 @@ public class CpuScheduleJob extends ScheduleJob {
         monitorLog.setResult(result);
         monitorLogMapper.insert(monitorLog);
         long end = System.currentTimeMillis();
-        logger.debug("CPU监控监控>>>>>hostId:"+hostId+">>>>jobId:"+jobId+">>>>耗时："+(end - start)+"ms");
+        logger.debug("CPU监控监控>>>>>hostId:" + hostId + ">>>>jobId:" + jobId + ">>>>耗时：" + (end - start) + "ms");
     }
-
 
 
 }

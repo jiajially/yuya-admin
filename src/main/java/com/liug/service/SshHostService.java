@@ -22,13 +22,14 @@ public interface SshHostService {
 
     List<SshHost> selectAllHost();
 
-    List<SelectContnet> select();
+    List<SelectContnet> select(boolean isAll);
 
     SshHost selectById(long id);
 
     long deleteById(long id);
 
     SshResult validHost(SshHost sshHost, SshHostDetail sshHostDetail);
+    SshResult validHost(SshHost sshHost);
 
     long enableHost(long id,boolean isEnable);
 

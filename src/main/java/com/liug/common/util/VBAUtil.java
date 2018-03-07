@@ -1,16 +1,14 @@
 package com.liug.common.util;
 
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class VBAUtil {
 
     public static void main() {
-        try {
+        /*try {
             // --获取指定目录下，所有excel文件名
             List fileNameList = new ArrayList();
             String dirName = "D://vbs";
@@ -54,8 +52,36 @@ public class VBAUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }*/
+        try {
+
+            String[] cpCmd = new String[]{"ping","192.168.0.125"};
+            ProcessBuilder pbuilder = new ProcessBuilder(cpCmd);
+            pbuilder.redirectErrorStream(true);
+            Process process = pbuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            int result = process.waitFor();
+            System.out.println(result);
+        } catch (
+                IOException e)
+
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (
+                InterruptedException e)
+
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+
     }
+
     public static void writerLine(String path, String contents) {
         try {
             FileWriter fileWriter = new FileWriter(path, true);
@@ -70,7 +96,7 @@ public class VBAUtil {
     }
 
 
-    public static void execVBS(String path){
+    public static void execVBS(String path) {
         try {
             File file = new File(path);
             if (file.exists()) {
@@ -80,6 +106,20 @@ public class VBAUtil {
                 //等待VBS执行完毕
                 process.waitFor();
             }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void execCMD(String cmd) {
+        try {
+
+            Process process = Runtime.getRuntime().exec(cmd);
+
+            //等待VBS执行完毕
+            process.waitFor();
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

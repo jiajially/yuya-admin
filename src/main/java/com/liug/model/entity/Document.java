@@ -13,7 +13,16 @@ public class Document {
     String suffix;
     String url;
     Date createtime;
+    String tag;
     int status;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public Long getId() {
         return id;

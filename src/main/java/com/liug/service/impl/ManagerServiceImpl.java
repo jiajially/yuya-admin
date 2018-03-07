@@ -3,15 +3,9 @@ package com.liug.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.liug.common.util.ResponseCode;
 import com.liug.common.util.Result;
-import com.liug.dao.ManagerProblemMapper;
-import com.liug.dao.ManagerWorkMapper;
-import com.liug.dao.SapScriptMapper;
-import com.liug.dao.SapScriptStaticMapper;
+import com.liug.dao.*;
 import com.liug.model.dto.PageInfo;
-import com.liug.model.entity.ManagerProblem;
-import com.liug.model.entity.ManagerWork;
-import com.liug.model.entity.SapScript;
-import com.liug.model.entity.SapScriptStatic;
+import com.liug.model.entity.*;
 import com.liug.service.ManagerService;
 import com.liug.service.SshHostService;
 import org.slf4j.Logger;
@@ -20,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +37,8 @@ public class ManagerServiceImpl implements ManagerService {
     private SapScriptMapper sapScriptMapper;
     @Autowired
     private SapScriptStaticMapper sapScriptStaticMapper;
+    @Autowired
+    private SapSystemHostMapper sapSystemHostMapper;
 
     @Override
     public PageInfo selectProblemPage(int page, int rows, String sort, String order, Date begin, Date end) {
@@ -116,6 +116,34 @@ public class ManagerServiceImpl implements ManagerService {
 
         return generator(sapScript, "\\sap_script_test_v1\\");
     }
+    @Override
+    public Result download(InputStream is , OutputStream os){
+        try {
+
+            //OutputStream os = response.getOutputStream();
+            BufferedOutputStream bos = new BufferedOutputStream(os);
+
+            //InputStream is = new ByteArrayInputStream(content.getBytes("GB2312"));
+
+            BufferedInputStream bis = new BufferedInputStream(is);
+
+
+            int length = 0;
+            byte[] temp = new byte[1 * 1024 * 10];
+
+            while ((length = bis.read(temp)) != -1) {
+                bos.write(temp, 0, length);
+            }
+            bos.flush();
+            bis.close();
+            bos.close();
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return Result.success();
+        }
+    }
 
     @Override
     public Result generator(SapScript sapScript, String path) {
@@ -171,7 +199,7 @@ LOGIN_PWD			= "yuya0571"
         content += "\n" + "\n" + "CALL exec(\"\")";
         content += "\n" + sapScriptStaticMapper.selectByCode("word_end").getContent();
         content += "\n" + sapScriptStaticMapper.selectByCode("function").getContent();
-        //logger.info(sapScript.toString());
+        //logger.info(content              );
         //sapScriptMapper.insert(sapScript);
         return Result.success(content);
     }
@@ -189,5 +217,16 @@ LOGIN_PWD			= "yuya0571"
             return result;
         }
 
+    }
+
+    @Override
+    public Result addSapsystemHost(SapSystemHost sapSystemHost) {
+        List<SapSystemHost> sapSystemHostList = sapSystemHostMapper.selectAll();
+        for (SapSystemHost dbSapSystemHost:sapSystemHostList) {
+            if(dbSapSystemHost.getHostId().equals(sapSystemHost.getHostId())&&dbSapSystemHost.getSapsystemId().equals(sapSystemHost.getSapsystemId())){
+                return Result.error("该系统下的主机信息已存在");
+            }
+        }
+        return Result.success(sapSystemHostMapper.insert(sapSystemHost));
     }
 }

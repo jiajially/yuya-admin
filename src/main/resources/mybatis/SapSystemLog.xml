@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.liug.dao.SapSystemLogMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.SapSystemLog">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sid" property="sid" jdbcType="BIGINT"/>
+        <result column="operation" property="operation" jdbcType="TINYINT"/>
+        <result column="operator" property="operator" jdbcType="BIGINT"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+id
+sid
+operation
+operator
+content
+create_time
+status
+</sql>
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="sid !=null ">
+            AND sid = #{sid}
+        </if>
+        <if test="operation !=null ">
+            AND operation = #{operation}
+        </if>
+        <if test="operator !=null ">
+            AND operator = #{operator}
+        </if>
+        <if test="content !=null and content.length() != 0">
+            AND content = #{content}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+    <insert id="insert" parameterType="com.liug.model.entity.SapSystemLog" useGeneratedKeys="true" keyProperty="id">
+        insert into sap_system_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sid !=null ">
+                sid,
+            </if>
+            <if test="operation !=null ">
+                operation,
+            </if>
+            <if test="operator !=null ">
+                operator,
+            </if>
+            <if test="content !=null and content.length() != 0">
+                content,
+            </if>
+            <if test="createTime !=null ">
+                create_time,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sid !=null ">
+                #{sid},
+            </if>
+            <if test="operation !=null ">
+                #{operation},
+            </if>
+            <if test="operator !=null ">
+                #{operator},
+            </if>
+            <if test="content !=null and content.length() != 0">
+                #{content},
+            </if>
+            <if test="createTime !=null ">
+                #{createTime},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.liug.model.entity.SapSystemLog">
+        update sap_system_log
+        <set>
+            <if test="sid !=null ">
+                sid = #{sid},
+            </if>
+            <if test="operation !=null ">
+                operation = #{operation},
+            </if>
+            <if test="operator !=null ">
+                operator = #{operator},
+            </if>
+            <if test="content !=null and content.length() != 0">
+                content = #{content},
+            </if>
+            <if test="createTime !=null ">
+                create_time = #{createTime},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE sap_system_log
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SapSystemLog">
+        SELECT *
+        FROM sap_system_log
+        WHERE id = #{id} AND status != 7
+    </select>
+    <select id="selectBySapsystemId" parameterType="long" resultType="com.liug.model.entity.SapSystemLog">
+        SELECT *
+        FROM sap_system_log
+        WHERE sid = #{sapsystemId} AND status != 7
+    </select>
+    <select id="selectAll" parameterType="long" resultType="com.liug.model.entity.SapSystemLog">
+        SELECT *
+        FROM sap_system_log
+        WHERE status != 7
+    </select>
+</mapper>

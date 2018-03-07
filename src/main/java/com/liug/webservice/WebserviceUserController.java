@@ -1,9 +1,6 @@
 package com.liug.webservice;
 
-import com.liug.common.util.FileUtil;
-import com.liug.common.util.MD5Util;
-import com.liug.common.util.ResponseCode;
-import com.liug.common.util.Result;
+import com.liug.common.util.*;
 import com.liug.controller.BaseController;
 import com.liug.model.dto.LoginInfo;
 import com.liug.model.dto.UserPermission;
@@ -24,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -44,10 +42,10 @@ public class WebserviceUserController {
     @Autowired
     private SystemService systemService;
     //用于存放用户登录后的唯一标识信息
-    private static Map<String,SysUser> loginCodeMap = new HashMap<String,SysUser>();
+    private static Map<String, LoginInfo> loginCodeMap = new HashMap<String, LoginInfo>();
 
     /**
-     *  用户登录
+     * 用户登录
      *
      * @return
      */
@@ -55,41 +53,76 @@ public class WebserviceUserController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public Result login(@RequestParam String loginName, @RequestParam String password, HttpServletRequest request) {
         //验证登录
-        LoginInfo loginInfo = sysUserService.login(loginName,password);
+        LoginInfo loginInfo = sysUserService.login(loginName, password);
+        //验证登录
+        LoginInfo loginInfo_mantis = sysUserService.login(loginName, password, true);
 
-        if (loginInfo!=null)
-        {
+        if (loginInfo == null) {
+            //若系统账户不存在，则查询mantis账户
+            if (loginInfo_mantis != null) {
+                //mantis账户存在，先转移账户基本信息到系统用户表
+                SysUser user = new SysUser();
+                user.setEnName(loginInfo_mantis.getEnName());
+                user.setLoginName(loginName);
+                user.setZhName(loginInfo_mantis.getZhName());
+                user.setEmail(loginInfo_mantis.getEmail());
+                String salt = MD5Util.generateSalt();
+                user.setPasswordSalt(salt);
+                user.setPassword(MD5Util.generate(password, salt));
+                Long userId = sysUserService.insertUser(user, "", "");
+                loginInfo = loginInfo_mantis;
+                loginInfo.setId(userId);
+            }
+        }
+
+        if (loginInfo != null) {
             //success 返回md5值
-            String loginCode = generateLoginCode(loginName,request);
-            loginCodeMap.put(loginCode,sysUserService.selectByLoginName(loginName));
+            String loginCode = generateLoginCode(loginName, request);
+            loginCodeMap.put(loginCode, loginInfo);
             //登录成功只返回loginCode
             return Result.success(loginCode);
-        }
-        else {
-            return Result.instance(ResponseCode.password_incorrect.getCode(),ResponseCode.password_incorrect.getMsg());
+        } else {
+            return Result.instance(ResponseCode.password_incorrect.getCode(), ResponseCode.password_incorrect.getMsg());
         }
 
     }
 
 
+    /**
+     * 用户登录
+     *
+     * @return
+     * @ResponseBody
+     * @RequestMapping(value = "mantis/redi", method = RequestMethod.GET)
+     * public String loginWithMantis(HttpServletResponse response,HttpServletRequest request) {
+     * try {
+     * response.sendRedirect("http://service.yuya-info.com/mantis/login.php?return=index.php&username=yuanyf&password=123123");
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }finally {
+     * return "";
+     * }
+     * }
+     */
 
-    private String generateLoginCode(String loginName,HttpServletRequest request){
+
+    private String generateLoginCode(String loginName, HttpServletRequest request) {
         //准备盐 用于生成loginCode
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
         Browser browser = userAgent.getBrowser();
         OperatingSystem os = userAgent.getOperatingSystem();
 
-        String host = request.getRemoteHost()==null?"none":request.getRemoteHost();
-        String browser_id =""+browser.getId();
-        String os_id = ""+os.getId();
+        String host = request.getRemoteHost() == null ? "none" : request.getRemoteHost();
+        String browser_id = "" + browser.getId();
+        String os_id = "" + os.getId();
 
-        String factor = host.replace(".","").replace(":","") + browser_id + os_id;
-        return MD5Util.generate(loginName+factor,MD5Util.generateSalt());
+        String factor = host.replace(".", "").replace(":", "") + browser_id + os_id;
+        return MD5Util.generate(loginName + factor, MD5Util.generateSalt());
     }
 
     /**
-     *  loginStatus
-     *  验证是否登录，登录后可以获取用户信息
+     * loginStatus
+     * 验证是否登录，登录后可以获取用户信息
      *
      * @return
      */
@@ -98,13 +131,13 @@ public class WebserviceUserController {
     public Result loginCodeExists(@RequestParam String loginCode) {
 
         //表示用户当前已登录
-        if(loginCodeMap.containsKey(loginCode)){
+        if (loginCodeMap.containsKey(loginCode)) {
             //获取用户基本信息
-            SysUser currentUser = loginCodeMap.get(loginCode);
-            return Result.success(currentUser);
-        }else {
+            LoginInfo loginInfo = loginCodeMap.get(loginCode);
+            return Result.success(loginInfo);
+        } else {
             //未登录
-            return Result.instance(ResponseCode.unauthenticated.getCode(),ResponseCode.unauthenticated.getMsg());
+            return Result.instance(ResponseCode.unauthenticated.getCode(), ResponseCode.unauthenticated.getMsg());
         }
 
 
@@ -164,20 +197,16 @@ public class WebserviceUserController {
     @ResponseBody
     public Result upload(@RequestParam("file") MultipartFile file, @RequestParam("id") String id) {
         // 文件上传后的路径，文件保存名为用户ID
-        String filePath = FileUtil.getProjectPath()+"/file/picture/";
+        String filePath = FileUtil.getProjectPath() + "/file/picture/";
         if (file.isEmpty()) {
-            return Result.instance(ResponseCode.file_not_exist.getCode(),ResponseCode.file_not_exist.getMsg());
-        }else if(id==null){
-            return Result.instance(ResponseCode.unknown_account.getCode(),ResponseCode.unknown_account.getMsg());
+            return Result.instance(ResponseCode.file_not_exist.getCode(), ResponseCode.file_not_exist.getMsg());
+        } else if (id == null) {
+            return Result.instance(ResponseCode.unknown_account.getCode(), ResponseCode.unknown_account.getMsg());
         }
 
         // 获取文件名
         String fileName = file.getOriginalFilename();
         String suffix = "png";
-        if (fileName.split(".").length==2) {
-            suffix =fileName.split(".")[1];
-            String destFileName =id + "." + suffix;
-        }
         log.info("上传的文件名为：" + fileName);
         // 获取文件的后缀名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
@@ -185,7 +214,7 @@ public class WebserviceUserController {
         log.info(filePath);
         // 解决中文问题，liunx下中文路径，图片显示问题
         // fileName = UUID.randomUUID() + suffixName;
-        File dest = new File(filePath + fileName);
+        File dest = new File(filePath + id + suffixName);
         // 检测是否存在目录
         if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdirs();
@@ -205,8 +234,8 @@ public class WebserviceUserController {
     //用户图片下载
     @RequestMapping("/download")
     @ResponseBody
-    public Result downloadMcode(HttpServletResponse response,HttpServletRequest request){
-        try {
+    public Result downloadMcode(HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+        /*try {
             String fileName = request.getParameter("fileName");
             String realPath = FileUtil.getProjectPath()+"/file/picture/";
             //下载机器码文件
@@ -236,9 +265,21 @@ public class WebserviceUserController {
             e.printStackTrace();
         }finally {
             return Result.success();
+        }*/
+        String fileName = request.getParameter("fileName");
+        String realPath = FileUtil.getProjectPath() + "/file/picture/";
+        //下载机器码文件
+        response.setHeader("conent-type", "application/octet-stream");
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=" + new String(fileName.getBytes("ISO-8859-1"), "UTF-8"));
+        try {
+            FileUtil.fileDownloader(new BufferedInputStream(new FileInputStream(realPath + fileName)), response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return Result.success();
         }
     }
-
 
 
 }

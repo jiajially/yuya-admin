@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.liug.dao.SapSystemHostMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.SapSystemHost">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="hostname" property="hostname" jdbcType="VARCHAR"/>
+        <result column="host_id" property="hostId" jdbcType="BIGINT"/>
+        <result column="hardware" property="hardware" jdbcType="VARCHAR"/>
+        <result column="hardware_id" property="hardwareId" jdbcType="BIGINT"/>
+        <result column="sapsystem" property="sapsystem" jdbcType="VARCHAR"/>
+        <result column="sapsystem_id" property="sapsystemId" jdbcType="BIGINT"/>
+        <result column="cpu" property="cpu" jdbcType="VARCHAR"/>
+        <result column="mem" property="mem" jdbcType="VARCHAR"/>
+        <result column="disk" property="disk" jdbcType="VARCHAR"/>
+        <result column="dbinfo" property="dbinfo" jdbcType="VARCHAR"/>
+        <result column="dbsize" property="dbsize" jdbcType="VARCHAR"/>
+        <result column="sapproduct" property="sapproduct" jdbcType="VARCHAR"/>
+        <result column="kernel" property="kernel" jdbcType="VARCHAR"/>
+        <result column="sapcomponents" property="sapcomponents" jdbcType="VARCHAR"/>
+        <result column="install_time" property="installTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="contact" property="contact" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="creator" property="creator" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="sql_column">
+id
+hostname
+host_id
+hardware
+hardware_id
+sapsystem
+sapsystem_id
+cpu
+mem
+disk
+dbinfo
+dbsize
+sapproduct
+kernel
+sapcomponents
+install_time
+create_time
+update_time
+contact
+type
+status
+creator
+</sql>
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="hostname !=null and hostname.length() != 0">
+            AND hostname = #{hostname}
+        </if>
+        <if test="hostId !=null ">
+            AND host_id = #{hostId}
+        </if>
+        <if test="hardware !=null and hardware.length() != 0">
+            AND hardware = #{hardware}
+        </if>
+        <if test="hardwareId !=null ">
+            AND hardware_id = #{hardwareId}
+        </if>
+        <if test="sapsystem !=null and sapsystem.length() != 0">
+            AND sapsystem = #{sapsystem}
+        </if>
+        <if test="sapsystemId !=null ">
+            AND sapsystem_id = #{sapsystemId}
+        </if>
+        <if test="cpu !=null and cpu.length() != 0">
+            AND cpu = #{cpu}
+        </if>
+        <if test="mem !=null and mem.length() != 0">
+            AND mem = #{mem}
+        </if>
+        <if test="disk !=null and disk.length() != 0">
+            AND disk = #{disk}
+        </if>
+        <if test="dbinfo !=null and dbinfo.length() != 0">
+            AND dbinfo = #{dbinfo}
+        </if>
+        <if test="dbsize !=null and dbsize.length() != 0">
+            AND dbsize = #{dbsize}
+        </if>
+        <if test="sapproduct !=null and sapproduct.length() != 0">
+            AND sapproduct = #{sapproduct}
+        </if>
+        <if test="kernel !=null and kernel.length() != 0">
+            AND kernel = #{kernel}
+        </if>
+        <if test="sapcomponents !=null and sapcomponents.length() != 0">
+            AND sapcomponents = #{sapcomponents}
+        </if>
+        <if test="installTime !=null ">
+            AND install_time = #{installTime}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="updateTime !=null ">
+            AND update_time = #{updateTime}
+        </if>
+        <if test="contact !=null and contact.length() != 0">
+            AND contact = #{contact}
+        </if>
+        <if test="type !=null ">
+            AND type = #{type}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+        <if test="creator !=null ">
+            AND creator = #{creator}
+        </if>
+    </sql>
+    <insert id="insert" parameterType="com.liug.model.entity.SapSystemHost" useGeneratedKeys="true" keyProperty="id">
+        insert into sap_system_host
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hostname !=null and hostname.length() != 0">
+                hostname,
+            </if>
+            <if test="hostId !=null ">
+                host_id,
+            </if>
+            <if test="hardware !=null and hardware.length() != 0">
+                hardware,
+            </if>
+            <if test="hardwareId !=null ">
+                hardware_id,
+            </if>
+            <if test="sapsystem !=null and sapsystem.length() != 0">
+                sapsystem,
+            </if>
+            <if test="sapsystemId !=null ">
+                sapsystem_id,
+            </if>
+            <if test="cpu !=null and cpu.length() != 0">
+                cpu,
+            </if>
+            <if test="mem !=null and mem.length() != 0">
+                mem,
+            </if>
+            <if test="disk !=null and disk.length() != 0">
+                disk,
+            </if>
+            <if test="dbinfo !=null and dbinfo.length() != 0">
+                dbinfo,
+            </if>
+            <if test="dbsize !=null and dbsize.length() != 0">
+                dbsize,
+            </if>
+            <if test="sapproduct !=null and sapproduct.length() != 0">
+                sapproduct,
+            </if>
+            <if test="kernel !=null and kernel.length() != 0">
+                kernel,
+            </if>
+            <if test="sapcomponents !=null and sapcomponents.length() != 0">
+                sapcomponents,
+            </if>
+            <if test="installTime !=null ">
+                install_time,
+            </if>
+            <if test="createTime !=null ">
+                create_time,
+            </if>
+            <if test="updateTime !=null ">
+                update_time,
+            </if>
+            <if test="contact !=null and contact.length() != 0">
+                contact,
+            </if>
+            <if test="type !=null ">
+                type,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+            <if test="creator !=null ">
+                creator,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hostname !=null and hostname.length() != 0">
+                #{hostname},
+            </if>
+            <if test="hostId !=null ">
+                #{hostId},
+            </if>
+            <if test="hardware !=null and hardware.length() != 0">
+                #{hardware},
+            </if>
+            <if test="hardwareId !=null ">
+                #{hardwareId},
+            </if>
+            <if test="sapsystem !=null and sapsystem.length() != 0">
+                #{sapsystem},
+            </if>
+            <if test="sapsystemId !=null ">
+                #{sapsystemId},
+            </if>
+            <if test="cpu !=null and cpu.length() != 0">
+                #{cpu},
+            </if>
+            <if test="mem !=null and mem.length() != 0">
+                #{mem},
+            </if>
+            <if test="disk !=null and disk.length() != 0">
+                #{disk},
+            </if>
+            <if test="dbinfo !=null and dbinfo.length() != 0">
+                #{dbinfo},
+            </if>
+            <if test="dbsize !=null and dbsize.length() != 0">
+                #{dbsize},
+            </if>
+            <if test="sapproduct !=null and sapproduct.length() != 0">
+                #{sapproduct},
+            </if>
+            <if test="kernel !=null and kernel.length() != 0">
+                #{kernel},
+            </if>
+            <if test="sapcomponents !=null and sapcomponents.length() != 0">
+                #{sapcomponents},
+            </if>
+            <if test="installTime !=null ">
+                #{installTime},
+            </if>
+            <if test="createTime !=null ">
+                #{createTime},
+            </if>
+            <if test="updateTime !=null ">
+                #{updateTime},
+            </if>
+            <if test="contact !=null and contact.length() != 0">
+                #{contact},
+            </if>
+            <if test="type !=null ">
+                #{type},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+            <if test="creator !=null ">
+                #{creator},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.liug.model.entity.SapSystemHost">
+        update sap_system_host
+        <set>
+            <if test="hostname !=null and hostname.length() != 0">
+                hostname = #{hostname},
+            </if>
+            <if test="hostId !=null ">
+                host_id = #{hostId},
+            </if>
+            <if test="hardware !=null and hardware.length() != 0">
+                hardware = #{hardware},
+            </if>
+            <if test="hardwareId !=null ">
+                hardware_id = #{hardwareId},
+            </if>
+            <if test="sapsystem !=null and sapsystem.length() != 0">
+                sapsystem = #{sapsystem},
+            </if>
+            <if test="sapsystemId !=null ">
+                sapsystem_id = #{sapsystemId},
+            </if>
+            <if test="cpu !=null and cpu.length() != 0">
+                cpu = #{cpu},
+            </if>
+            <if test="mem !=null and mem.length() != 0">
+                mem = #{mem},
+            </if>
+            <if test="disk !=null and disk.length() != 0">
+                disk = #{disk},
+            </if>
+            <if test="dbinfo !=null and dbinfo.length() != 0">
+                dbinfo = #{dbinfo},
+            </if>
+            <if test="dbsize !=null and dbsize.length() != 0">
+                dbsize = #{dbsize},
+            </if>
+            <if test="sapproduct !=null and sapproduct.length() != 0">
+                sapproduct = #{sapproduct},
+            </if>
+            <if test="kernel !=null and kernel.length() != 0">
+                kernel = #{kernel},
+            </if>
+            <if test="sapcomponents !=null and sapcomponents.length() != 0">
+                sapcomponents = #{sapcomponents},
+            </if>
+            <if test="installTime !=null ">
+                install_time = #{installTime},
+            </if>
+            <if test="createTime !=null ">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime !=null ">
+                update_time = current_timestamp,
+            </if>
+            <if test="contact !=null and contact.length() != 0">
+                contact = #{contact},
+            </if>
+            <if test="type !=null ">
+                type = #{type},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+            <if test="creator !=null ">
+                creator = #{creator},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE sap_system_host
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SapSystemHost">
+        SELECT *
+        FROM sap_system_host
+        WHERE id = #{id} AND status != 7
+    </select>
+    <select id="selectBySapsystemId" parameterType="long" resultType="com.liug.model.entity.SapSystemHost">
+        SELECT *
+        FROM sap_system_host
+        WHERE sapsystem_id = #{sapsystemId} AND status != 7
+    </select>
+    <select id="selectAll" parameterType="long" resultType="com.liug.model.entity.SapSystemHost">
+        SELECT *
+        FROM sap_system_host
+        WHERE status != 7
+    </select>
+</mapper>

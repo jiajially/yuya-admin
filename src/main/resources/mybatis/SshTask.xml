@@ -199,13 +199,13 @@
 
     <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SshTask">
         SELECT *
-        FROM ssh_task_log_host
+        FROM ssh_task_log
         WHERE id = #{id} AND status != 7
     </select>
 
     <select id="selectAll" resultType="com.liug.model.entity.SshTask">
         SELECT *
-        FROM ssh_task_log_host
+        FROM ssh_task_log
         WHERE status != 7
         <if test="hostname != null and hostname.length() != 0">
             AND hostname LIKE concat('%', #{hostname},'%')
@@ -226,7 +226,7 @@
 
     <select id="selectByScriptId" resultType="com.liug.model.entity.SshTask">
         SELECT *
-        FROM ssh_task_log_host
+        FROM ssh_task_log
         WHERE status != 7
         <if test="scriptId != null and scriptId.length() != 0">
             AND script_id =#{scriptId}
@@ -266,7 +266,7 @@
     </select>
     <select id="selectCounts" resultType="integer">
         SELECT count(*)
-        FROM ssh_task_log_host
+        FROM ssh_task_log
         WHERE status != 7
     </select>
 </mapper>

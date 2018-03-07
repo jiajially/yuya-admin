@@ -46,7 +46,7 @@ status
             AND uodate_time = #{uodateTime}
         </if>
         <if test="createBy !=null ">
-            AND create_by = #{sss}
+            AND create_by = #{createBy}
         </if>
         <if test="status !=null ">
             AND status = #{status}
@@ -100,7 +100,7 @@ status
                 #{uodateTime},
             </if>
             <if test="createBy !=null ">
-                #{sss},
+                #{createBy},
             </if>
             <if test="status !=null ">
                 #{status},
@@ -129,7 +129,7 @@ status
                 uodate_time = #{uodateTime},
             </if>
             <if test="createBy !=null ">
-                create_by = #{sss},
+                create_by = #{createBy},
             </if>
             <if test="status !=null ">
                 status = #{status},
@@ -139,6 +139,7 @@ status
     </update>
     <update id="deleteById">
         UPDATE sap_script_static
+
         SET status = 7
         WHERE id = #{id}
     </update>

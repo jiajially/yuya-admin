@@ -18,6 +18,14 @@ public class LoginInfo implements Serializable {
 
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     // login_name :登陆名
     private String loginName;
 

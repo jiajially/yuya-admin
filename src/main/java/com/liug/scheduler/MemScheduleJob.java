@@ -32,6 +32,7 @@ public class MemScheduleJob extends ScheduleJob {
         logger.debug("内存监控开始>>>>>hostId:" + hostId + ">>>>jobId:" + jobId);
         //Step1 获取主机信息
         SshHost sshHost = sshHostMapper.selectById(hostId);
+        if (sshHost == null || !sshHost.isEnable() || !sshHost.isValid()) return;
         //Step2 透过主机信息获取内存数据
         //内存占比获取脚本如下
         //free  | sed -n '2p' | awk '{print $3/$2}'

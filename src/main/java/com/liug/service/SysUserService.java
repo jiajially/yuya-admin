@@ -12,6 +12,8 @@ import java.io.Serializable;
  */
 public interface SysUserService {
 
+    long insertUser(SysUser user);
+
     long insertUser(SysUser user, String jobIds, String permissionIds);
 
     boolean isExistLoginName(String loginName);
@@ -32,6 +34,8 @@ public interface SysUserService {
 
     LoginInfo login(SysUser user, Serializable id, int platform);
 
-    LoginInfo login(String username,String password);
+    LoginInfo login(String username, String password, boolean isMantis);
+
+    LoginInfo login(String username, String password);
 
 }

@@ -41,6 +41,8 @@ public class Config {
     @Autowired
     private CheckScheduleJob checkScheduleJob;
     @Autowired
+    private CustomReportScheduleJob customReportScheduleJob;
+    @Autowired
     private SshHostMapper sshHostMapper;
 
     @Scheduled(cron = "* * * * * ?") // 每秒执行一次
@@ -55,6 +57,9 @@ public class Config {
     }
 
     void scriptExec(SshScript sshScript){
+        SshHost sshHost = sshHostMapper.selectById(sshScript.getHostId());
+        if (sshHost == null || !sshHost.isEnable() || !sshHost.isValid()) return;
+
         SshResult sshResult= Commond.execute(sshScript.getSshHost(),sshScript.getCmd());
         int _tmpStatus = 2;
         if (sshResult.getExitStatus()==0)_tmpStatus = 1;
@@ -62,7 +67,7 @@ public class Config {
 
     }
 
-    @Scheduled(cron = "0 * * * * ?") // 每分钟执行一次
+    //@Scheduled(cron = "0 * * * * ?") // 每分钟执行一次
     public void schedulerMonitor() {
         List<MonitorJob> monitorJobs = monitorJobMapper.selectAll();
         for (MonitorJob monitorJob:monitorJobs) {
@@ -78,6 +83,11 @@ public class Config {
     @Scheduled(cron = "0 * * * * ?") // 每分钟执行一次
     public void schedulerCheck() {
         checkScheduleJob.doJob();
+    }
+
+    @Scheduled(cron =  "* * * * * ?") // 每s执行一次
+    public void schedulerCustomReport() {
+        customReportScheduleJob.doJob();
     }
 
 

@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,7 +55,7 @@ public class DBUtil {
                 String tmp = "";
                 if (m.type.equals("String")) tmp = "and " + m.column + ".length() != 0";
                 content += "\n" + " <if test=\"" + m.column + " !=null " + tmp + "\">\n" +
-                        "            " + m.column_db + ",\n"+
+                        "            " + m.column_db + ",\n" +
                         "        </if>";
             }
         }
@@ -66,7 +67,7 @@ public class DBUtil {
                 String tmp = "";
                 if (m.type.equals("String")) tmp = "and " + m.column + ".length() != 0";
                 content += "\n" + " <if test=\"" + m.column + " !=null " + tmp + "\">\n" +
-                        "            " + m.column_xml  + ",\n" +
+                        "            " + m.column_xml + ",\n" +
                         "        </if>";
             }
         }
@@ -84,14 +85,14 @@ public class DBUtil {
                     if (m.type.equals("String")) tmp = "and " + m.column + ".length() != 0";
 
                     content += "\n" + " <if test=\"" + m.column + " !=null " + tmp + "\">\n" +
-                            "            " + m.column_db + " = current_timestamp,"  + "\n" +
+                            "            " + m.column_db + " = current_timestamp," + "\n" +
                             "        </if>";
-                }else{
+                } else {
                     String tmp = "";
                     if (m.type.equals("String")) tmp = "and " + m.column + ".length() != 0";
 
                     content += "\n" + " <if test=\"" + m.column + " !=null " + tmp + "\">\n" +
-                            "            " + m.column_db + " = " + m.column_xml + ","  + "\n" +
+                            "            " + m.column_db + " = " + m.column_xml + "," + "\n" +
                             "        </if>";
                 }
             }
@@ -126,11 +127,11 @@ public class DBUtil {
     }
 
 
-    static String createModel(List<Model> modelList,String table) {
+    static String createModel(List<Model> modelList, String table) {
         String content = "";
         content += "\n" + "package com.liug.model.entity;";
         content += "\n" + "import java.util.Date;";
-        content += "\n" + "public class "+table+" {";
+        content += "\n" + "public class " + table + " {";
         for (Model m : modelList) {
             content += "\n" + m.type + " " + m.column + ";";
         }
@@ -141,54 +142,78 @@ public class DBUtil {
 
     public static void main() {
         List<Model> modelList = new ArrayList<Model>();
-        Model m1 = new Model("id", "id", "#{id}", "Long", "BIGINT", 20);modelList.add(m1);
-        Model m2 = new Model("summary", "summary", "#{summary}", "String", "VARCHAR", 5000);modelList.add(m2);
-        Model m3 = new Model("type", "type", "#{type}", "String", "VARCHAR", 500);modelList.add(m3);
-        Model m4 = new Model("code", "code", "#{code}", "String", "VARCHAR", 500);modelList.add(m4);
-        Model m5 = new Model("content", "content", "#{content}", "String", "VARCHAR", 500);modelList.add(m5);
-        Model m6 = new Model("createTime", "create_time", "#{createTime}", "Date", "TIMESTAMP", 500);modelList.add(m6);
-        Model m7 = new Model("uodateTime", "uodate_time", "#{uodateTime}", "Date", "TIMESTAMP", 500);modelList.add(m7);
-        Model m8 = new Model("createBy", "create_by", "#{sss}", "Integer", "BIGINT", 20);modelList.add(m8);
-        Model m9 = new Model("status", "status", "#{status}", "Integer", "TINYINT", 4);modelList.add(m9);
+        /*
+        * CREATE TABLE `custom_report_script` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `report_id` bigint(20) not null,
+  `type` tinyint(4) DEFAULT '0',
+  `orderno` tinyint(4) DEFAULT '0',
+  `title` varchar(500) DEFAULT NULL,
+  `script_content` text DEFAULT NULL,
+  `fomattor` varchar(500) DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `create_by` bigint(20) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+        *
+        *
+        * */
+
+        Long id;
+        Long sid;
+        Integer operation;
+        Long operator;
+        String content;
+        Date create_time;
+        Integer status;
+        modelList.add(new Model("id", "id", "#{id}", "Long", "BIGINT", 20));
+        modelList.add(new Model("sid", "sid", "#{sid}", "Long", "BIGINT", 20));
+        modelList.add(new Model("operation", "operation", "#{operation}", "Integer", "TINYINT", 4));
+        modelList.add(new Model("operator", "operator", "#{operator}", "Long", "BIGINT", 20));
+        modelList.add(new Model("content", "content", "#{content}", "String", "VARCHAR", 5000));
+        modelList.add(new Model("createTime", "create_time", "#{createTime}", "Date", "TIMESTAMP", 500));
+        modelList.add(new Model("status", "status", "#{status}", "Integer", "TINYINT", 4));
 
 
-        String table = "SapScriptStatic";
-        String table_db = "sap_script_static";
+
+        String table = "SapSystemLog";
+        String table_db = "sap_system_log";
         String root = FileUtil.getProjectPath();
-        //createFile(root+"/src/main/java/com/liug/model/entity/"+table+".java",createModel(modelList,table));
-        FileUtil.createFile(root+"/src/main/resources/mybatis/"+table+".xml",createXml(modelList,table,table_db));
-        //createFile(root+"/src/main/java/com/liug/dao/"+table+"Mapper.java",createMapper(table));
+        FileUtil.createFileForce(root + "/src/main/java/com/liug/model/entity/" + table + ".java", createModel(modelList, table));
+        FileUtil.createFileForce(root + "/src/main/resources/mybatis/" + table + ".xml", createXml(modelList, table, table_db));
+        FileUtil.createFileForce(root + "/src/main/java/com/liug/dao/" + table + "Mapper.java", createMapper(table));
 
     }
 
 
-
     static String createMapper(String table) {
-        String content ="";
-        content += "\n" +"package com.liug.dao;\n" +
+        String content = "";
+        content += "\n" + "package com.liug.dao;\n" +
                 "\n" +
-                "import com.liug.model.entity."+table+";\n" +
+                "import com.liug.model.entity." + table + ";\n" +
                 "import org.apache.ibatis.annotations.Mapper;\n" +
                 "import org.apache.ibatis.annotations.Param;\n" +
                 "import org.springframework.stereotype.Repository;\n" +
                 "\n" +
                 "import java.util.Date;\n" +
                 "import java.util.List;";
-        content += "\n"+"@Repository\n" +
+        content += "\n" + "@Repository\n" +
                 "@Mapper\n" +
-                "public interface "+table+"Mapper {";
-        content += "\n"+"//查询全部\n" +
-                "    List<"+table+"> selectAll();";
-        content += "\n"+"//通过id进行查询\n" +
-                "    "+table+" selectById(@Param(\"id\") Long id);";
-        content += "\n"+"//新增\n" +
-                "    Long insert("+table+" model);";
-        content += "\n"+"//修改\n" +
-                "    Long update("+table+" model);";
-        content += "\n"+"//通过id删除\n" +
+                "public interface " + table + "Mapper {";
+        content += "\n" + "//查询全部\n" +
+                "    List<" + table + "> selectAll();";
+        content += "\n" + "//通过id进行查询\n" +
+                "    " + table + " selectById(@Param(\"id\") Long id);";
+        content += "\n" + "//新增\n" +
+                "    Long insert(" + table + " model);";
+        content += "\n" + "//修改\n" +
+                "    Long update(" + table + " model);";
+        content += "\n" + "//通过id删除\n" +
                 "    Long deleteById(@Param(\"id\") Long id);";
-        content += "\n"+"}";
-        return  content;
+        content += "\n" + "}";
+        return content;
 
     }
 

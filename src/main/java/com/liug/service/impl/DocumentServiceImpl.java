@@ -54,6 +54,16 @@ public class DocumentServiceImpl implements DocumentService {
         document.setType("1");
         return documentMapper.insert(document);
     }
+    @Override
+    public long addOnline(String summary, String url,String tag) {
+        if (!url.startsWith("http")) url = "http://" + url;
+        Document document = new Document();
+        document.setUrl(url);
+        document.setSummary(summary);
+        document.setType("1");
+        document.setTag(tag);
+        return documentMapper.insert(document);
+    }
 
     @Override
     public Result addLocal(MultipartFile file) {
@@ -61,6 +71,31 @@ public class DocumentServiceImpl implements DocumentService {
         Document document;
         if (result.getCode() == Result.success().getCode()) {
             document = (Document) result.getData();
+            documentMapper.insert(document);
+        }
+
+        return result;
+    }
+
+    @Override
+    public Result addSystemDetail(MultipartFile file, String summary, String tag) {
+        return addFileDetail(file,summary,tag,0);
+    }
+
+    @Override
+    public Result addLocalDetail(MultipartFile file, String summary, String tag) {
+        return addFileDetail(file,summary,tag,2);
+    }
+
+
+    @Override
+    public Result addFileDetail(MultipartFile file, String summary, String tag, int type) {
+        Result result = saveFile(file, type);
+        Document document;
+        if (result.getCode() == Result.success().getCode()) {
+            document = (Document) result.getData();
+            document.setSummary(summary==null?document.getSummary():summary);
+            document.setTag(tag==null?document.getTag():tag);
             documentMapper.insert(document);
         }
 

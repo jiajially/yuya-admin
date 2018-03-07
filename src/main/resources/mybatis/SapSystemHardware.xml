@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.liug.dao.SapSystemHardwareMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.SapSystemHardware">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="brand" property="brand" jdbcType="VARCHAR"/>
+        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+id
+brand
+model
+summary
+status
+</sql>
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="brand !=null and brand.length() != 0">
+            AND brand = #{brand}
+        </if>
+        <if test="model !=null and model.length() != 0">
+            AND model = #{model}
+        </if>
+        <if test="summary !=null and summary.length() != 0">
+            AND summary = #{summary}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+    <insert id="insert" parameterType="com.liug.model.entity.SapSystemHardware" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into sap_system_hardware
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="brand !=null and brand.length() != 0">
+                brand,
+            </if>
+            <if test="model !=null and model.length() != 0">
+                model,
+            </if>
+            <if test="summary !=null and summary.length() != 0">
+                summary,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="brand !=null and brand.length() != 0">
+                #{brand},
+            </if>
+            <if test="model !=null and model.length() != 0">
+                #{model},
+            </if>
+            <if test="summary !=null and summary.length() != 0">
+                #{summary},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.liug.model.entity.SapSystemHardware">
+        update sap_system_hardware
+        <set>
+            <if test="brand !=null and brand.length() != 0">
+                brand = #{brand},
+            </if>
+            <if test="model !=null and model.length() != 0">
+                model = #{model},
+            </if>
+            <if test="summary !=null and summary.length() != 0">
+                summary = #{summary},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE sap_system_hardware
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SapSystemHardware">
+        SELECT *
+        FROM sap_system_hardware
+        WHERE id = #{id} AND status != 7
+    </select>
+    <select id="selectAll" parameterType="long" resultType="com.liug.model.entity.SapSystemHardware">
+        SELECT *
+        FROM sap_system_hardware
+        WHERE status != 7
+    </select>
+</mapper>

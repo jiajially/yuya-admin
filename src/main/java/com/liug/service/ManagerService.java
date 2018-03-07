@@ -5,7 +5,10 @@ import com.liug.model.dto.PageInfo;
 import com.liug.model.entity.ManagerProblem;
 import com.liug.model.entity.ManagerWork;
 import com.liug.model.entity.SapScript;
+import com.liug.model.entity.SapSystemHost;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 
 /**
@@ -35,9 +38,15 @@ public interface ManagerService {
 
     Result generator(SapScript sapScript);
 
+    Result download(InputStream is, OutputStream os);
+
     Result generator(SapScript sapScript, String path);
 
     Result save(SapScript sapScript);
+
+    //Result SapScriptAsync();
+
+    Result addSapsystemHost(SapSystemHost sapSystemHost);
 
 
 }

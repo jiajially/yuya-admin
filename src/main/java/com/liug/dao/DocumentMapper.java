@@ -21,11 +21,22 @@ public interface DocumentMapper {
     int selectCounts(@Param("type") String type, @Param("begin") Date begin, @Param("end") Date end);
 
     //通过id进行查询
+    List<Document> selectBySid(@Param("sid") Long sid);
+
+    //通过id进行查询
     Document selectById(@Param("id") Long id);
+
     //通过id进行删除
     long deleteById(@Param("id") Long id);
+
+    //通过id进行删除link
+    long deleteDocumentSid(@Param("documentId") Long id,@Param("sid") Long sid);
+
     //新增
     Long insert(Document check);
+
+    //新增Sid连接
+    Long insertDocumentSid(@Param("documentId")Long documentId,@Param("sid")Long sid);
 
     //查询数据库文件数量
     int fileCount(@Param("type") String type, @Param("summary") String summary);

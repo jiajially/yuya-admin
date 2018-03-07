@@ -76,7 +76,7 @@ public class SshHostServiceImpl implements SshHostService {
     }
 
     @Override
-    public List<SelectContnet> select() {
+    public List<SelectContnet> select(boolean isAll) {
         List<SshHost> sshHosts = sshHostMapper.selectAll("host", "asc", null, null, null);
         List<SelectContnet> selectContnets = new ArrayList<SelectContnet>();
         for (SshHost sshHost:sshHosts) {
@@ -87,6 +87,7 @@ public class SshHostServiceImpl implements SshHostService {
                     sshHost.getUsername()+"@"+sshHost.getHost()+":"+sshHost.getPort()
                     +")"
             );
+            if(isAll){selectContnets.add(selectContnet);continue;}
             if(sshHost.isEnable()&&sshHost.isValid()) selectContnets.add(selectContnet);
         }
         return selectContnets;
@@ -132,6 +133,26 @@ public class SshHostServiceImpl implements SshHostService {
                     sshHostMapper.insert(sshHost);
                 }
                 logger.debug(sshHost.toString());
+            }
+        }
+        return sshResult;
+    }
+
+    @Override
+    public SshResult validHost(SshHost sshHost) {
+
+        SshResult sshResult = new SshResult();
+        //验证数据重复性
+        int _existsCounts = sshHostMapper.selectCountsExists(sshHost.getHost(),sshHost.getPort(),sshHost.getUsername());
+        if (sshHost.getId()<0&&_existsCounts > 0)sshResult.setExitStatus(ResponseCode.host_already_exist.getCode());
+        else {
+            //通过SSH获取PATH参数
+            sshResult = Commond.getEnvPath(sshHost);
+            logger.info(sshResult.toString());
+            if (sshResult.getExitStatus() == 1) {
+                //验证成功,设置host参数
+                sshHost.setEnvPath(sshResult.getContent());
+                sshHost.setValid(true);
             }
         }
         return sshResult;

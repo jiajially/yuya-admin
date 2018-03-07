@@ -1,0 +1,24 @@
+
+**** Error file opened at 20180206 144825 China Standard Time Rel. 3.0.17 (2017-07-17) [721.913]
+Error:  >Tue Feb 06 14:48:25,831<    RfcException:
+	message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=ABAP_AS_WITH_POOL ASHOST=sapprd02.zmd.com.cn SYSNR=00 SAPROUTER=saprouter.zmd.com.cn PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host
+ERROR       hostname 'saprouter.zmd.com.cn/H/sapprd02.zmd.com.cn' unknown
+TIME        Tue Feb  6 14:48:25 2018
+RELEASE     721
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -2
+MODULE      niuxi.c
+LINE        1759
+DETAIL      NiPGetHostByName: 'saprouter.zmd.com.cn/H/sapprd02.zmd.com.cn'
+            not found
+SYSTEM CALL getaddrinfo
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+

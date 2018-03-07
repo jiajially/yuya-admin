@@ -77,7 +77,7 @@ public class HostController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "select", method = RequestMethod.GET)
     public List<SelectContnet> select() {
-        List<SelectContnet> selectContnets = sshHostService.select();
+        List<SelectContnet> selectContnets = sshHostService.select(false);
         return selectContnets;
     }
 

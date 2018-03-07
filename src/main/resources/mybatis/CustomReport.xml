@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.liug.dao.CustomReportMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.CustomReport">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="grouping" property="grouping" jdbcType="VARCHAR"/>
+        <result column="keywords" property="keywords" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+id
+type
+name
+grouping
+keywords
+create_time
+create_by
+status
+</sql>
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="type !=null ">
+            AND type = #{type}
+        </if>
+        <if test="name !=null and name.length() != 0">
+            AND name = #{name}
+        </if>
+        <if test="grouping !=null and grouping.length() != 0">
+            AND grouping = #{grouping}
+        </if>
+        <if test="keywords !=null and keywords.length() != 0">
+            AND keywords = #{keywords}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="createBy !=null ">
+            AND create_by = #{createBy}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+    <insert id="insert" parameterType="com.liug.model.entity.CustomReport" useGeneratedKeys="true" keyProperty="id">
+        insert into custom_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type !=null ">
+                type,
+            </if>
+            <if test="name !=null and name.length() != 0">
+                name,
+            </if>
+            <if test="grouping !=null and grouping.length() != 0">
+                grouping,
+            </if>
+            <if test="keywords !=null and keywords.length() != 0">
+                keywords,
+            </if>
+            <if test="createTime !=null ">
+                create_time,
+            </if>
+            <if test="createBy !=null ">
+                create_by,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type !=null ">
+                #{type},
+            </if>
+            <if test="name !=null and name.length() != 0">
+                #{name},
+            </if>
+            <if test="grouping !=null and grouping.length() != 0">
+                #{grouping},
+            </if>
+            <if test="keywords !=null and keywords.length() != 0">
+                #{keywords},
+            </if>
+            <if test="createTime !=null ">
+                #{createTime},
+            </if>
+            <if test="createBy !=null ">
+                #{createBy},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.liug.model.entity.CustomReport">
+        update custom_report
+        <set>
+            <if test="type !=null ">
+                type = #{type},
+            </if>
+            <if test="name !=null and name.length() != 0">
+                name = #{name},
+            </if>
+            <if test="grouping !=null and grouping.length() != 0">
+                grouping = #{grouping},
+            </if>
+            <if test="keywords !=null and keywords.length() != 0">
+                keywords = #{keywords},
+            </if>
+            <if test="createTime !=null ">
+                create_time = #{createTime},
+            </if>
+            <if test="createBy !=null ">
+                create_by = #{createBy},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE custom_report
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.CustomReport">
+        SELECT *
+        FROM custom_report
+        WHERE id = #{id} AND status != 7
+    </select>
+    <select id="selectAll" parameterType="long" resultType="com.liug.model.entity.CustomReport">
+        SELECT *
+        FROM custom_report
+        WHERE status != 7
+    </select>
+</mapper>

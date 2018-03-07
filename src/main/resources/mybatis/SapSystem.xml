@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.liug.dao.SapSystemMapper">
+    <resultMap id="baseResultMap" type="com.liug.model.entity.SapSystem">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sid" property="sid" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="grouping" property="grouping" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="sql_column">
+id
+sid
+company
+grouping
+address
+create_time
+create_by
+status
+</sql>
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="sid !=null and sid.length() != 0">
+            AND sid = #{sid}
+        </if>
+        <if test="company !=null and company.length() != 0">
+            AND company = #{company}
+        </if>
+        <if test="grouping !=null and grouping.length() != 0">
+            AND grouping = #{grouping}
+        </if>
+        <if test="address !=null and address.length() != 0">
+            AND address = #{address}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="createBy !=null ">
+            AND create_by = #{createBy}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+    <insert id="insert" parameterType="com.liug.model.entity.SapSystem" useGeneratedKeys="true" keyProperty="id">
+        insert into sap_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sid !=null and sid.length() != 0">
+                sid,
+            </if>
+            <if test="company !=null and company.length() != 0">
+                company,
+            </if>
+            <if test="grouping !=null and grouping.length() != 0">
+                grouping,
+            </if>
+            <if test="address !=null and address.length() != 0">
+                address,
+            </if>
+            <if test="createTime !=null ">
+                create_time,
+            </if>
+            <if test="createBy !=null ">
+                create_by,
+            </if>
+            <if test="status !=null ">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sid !=null and sid.length() != 0">
+                #{sid},
+            </if>
+            <if test="company !=null and company.length() != 0">
+                #{company},
+            </if>
+            <if test="grouping !=null and grouping.length() != 0">
+                #{grouping},
+            </if>
+            <if test="address !=null and address.length() != 0">
+                #{address},
+            </if>
+            <if test="createTime !=null ">
+                #{createTime},
+            </if>
+            <if test="createBy !=null ">
+                #{createBy},
+            </if>
+            <if test="status !=null ">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.liug.model.entity.SapSystem">
+        update sap_system
+        <set>
+            <if test="sid !=null and sid.length() != 0">
+                sid = #{sid},
+            </if>
+            <if test="company !=null and company.length() != 0">
+                company = #{company},
+            </if>
+            <if test="grouping !=null and grouping.length() != 0">
+                grouping = #{grouping},
+            </if>
+            <if test="address !=null and address.length() != 0">
+                address = #{address},
+            </if>
+            <if test="createTime !=null ">
+                create_time = #{createTime},
+            </if>
+            <if test="createBy !=null ">
+                create_by = #{createBy},
+            </if>
+            <if test="status !=null ">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status !=7
+    </update>
+    <update id="deleteById">
+        UPDATE sap_system
+        SET status = 7
+        WHERE id = #{id}
+    </update>
+    <select id="selectById" parameterType="long" resultType="com.liug.model.entity.SapSystem">
+        SELECT *
+        FROM sap_system
+        WHERE id = #{id} AND status != 7
+    </select>
+    <select id="selectAll" parameterType="long" resultType="com.liug.model.entity.SapSystem">
+        SELECT *
+        FROM sap_system
+        WHERE status != 7
+        ORDER BY grouping,sid
+    </select>
+</mapper>

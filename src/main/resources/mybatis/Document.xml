@@ -7,6 +7,7 @@
         <result column="type" property="type" jdbcType="TINYINT"/>
         <result column="suffix" property="suffix" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="tag" property="tag" jdbcType="VARCHAR"/>
         <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
     </resultMap>
@@ -16,6 +17,7 @@
      type,
      suffix,
      url,
+     tag,
      createtime,
      status
     </sql>
@@ -35,6 +37,9 @@
         </if>
         <if test="url !=null and url.length() != 0">
             AND url = #{url}
+        </if>
+        <if test="tag !=null and tag.length() != 0">
+            AND tag = #{tag}
         </if>
         <if test="createtime !=null">
             AND createtime = #{createtime}
@@ -59,6 +64,9 @@
             <if test="url !=null and url.length() != 0">
                 url,
             </if>
+            <if test="tag !=null and tag.length() != 0">
+                tag,
+            </if>
             <if test="createtime !=null">
                 createtime,
             </if>
@@ -79,11 +87,37 @@
             <if test="url !=null and url.length() != 0">
                 #{url},
             </if>
+            <if test="tag !=null and tag.length() != 0">
+                #{tag},
+            </if>
             <if test="createtime !=null">
                 #{createtime},
             </if>
             <if test="status !=null ">
                 #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+
+    <insert id="insertDocumentSid" parameterType="long" >
+        insert into document_sid
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="documentId !=null">
+                document_id,
+            </if>
+
+            <if test="sid !=null">
+                sid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="documentId !=null">
+                #{documentId},
+            </if>
+            <if test="sid !=null">
+                #{sid},
             </if>
         </trim>
     </insert>
@@ -104,6 +138,9 @@
             <if test="url !=null and url.length() != 0">
                 url = #{url},
             </if>
+            <if test="tag !=null and tag.length() != 0">
+                tag = #{tag},
+            </if>
             <if test="createtime !=null">
                 createtime = #{createtime},
             </if>
@@ -118,6 +155,10 @@
         SET status = 7
         WHERE id = #{id}
     </update>
+    <delete id="deleteDocumentSid">
+        DELETE FROM document_sid
+        WHERE document_id = #{documentId} AND sid = #{sid}
+    </delete>
 
     <select id="select" parameterType="com.liug.model.entity.Document" resultType="com.liug.model.entity.Document">
         select * from document where
@@ -130,6 +171,12 @@
         SELECT *
         FROM document
         WHERE id = #{id} AND status != 7
+    </select>
+
+    <select id="selectBySid" parameterType="long" resultType="com.liug.model.entity.Document">
+        SELECT *
+        FROM document_by_sid
+        WHERE sid = #{sid} AND status != 7
     </select>
 
     <select id="selectAll" resultType="com.liug.model.entity.Document">

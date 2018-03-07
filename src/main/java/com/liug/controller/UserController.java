@@ -1,5 +1,6 @@
 package com.liug.controller;
 
+import com.liug.common.util.MD5Util;
 import com.liug.common.util.ResponseCode;
 import com.liug.common.util.Result;
 import com.liug.common.util.StringUtil;
@@ -95,9 +96,9 @@ public class UserController extends BaseController {
         user.setAddress(address);
         user.setBirth(birth);
         user.setIsFinal(isFinal);
-        String salt = UUID.randomUUID().toString().replaceAll("-", "");
+        String salt = MD5Util.generateSalt();
         user.setPasswordSalt(salt);
-        user.setPassword(StringUtil.createPassword(password, salt, 2));
+        user.setPassword(MD5Util.generate(password, salt));
         long id = sysUserService.insertUser(user, jobIds, permissionIds);
         return Result.success(id);
     }
